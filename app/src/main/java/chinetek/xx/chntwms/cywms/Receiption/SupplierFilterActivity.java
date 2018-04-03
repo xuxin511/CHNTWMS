@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -18,10 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import chinetek.xx.chntwms.R;
 import chinetek.xx.chntwms.base.BaseActivity;
 import chinetek.xx.chntwms.base.BaseApplication;
 import chinetek.xx.chntwms.base.ToolBarTitle;
+import chinetek.xx.chntwms.cywms.R;
 
 @ContentView(R.layout.activity_supplier_filter)
 public class SupplierFilterActivity extends BaseActivity {

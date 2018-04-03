@@ -29,12 +29,12 @@ import chinetek.xx.chntwms.cywms.InnerMove.InnerMoveScan;
 import chinetek.xx.chntwms.cywms.Intentory.InventoryBillChoice;
 import chinetek.xx.chntwms.cywms.MaterialChange.MaterialChangeReceiptBillChoice;
 import chinetek.xx.chntwms.cywms.OffShelf.OffShelfBillChoice;
+import chinetek.xx.chntwms.cywms.Qc.QCBillChoice;
 import chinetek.xx.chntwms.cywms.Query.QueryMain;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.cywms.Receiption.ReceiptBillChoice;
 import chinetek.xx.chntwms.cywms.Review.ReviewBillChoice;
 import chinetek.xx.chntwms.cywms.UpShelf.UpShelfBillChoice;
-import chinetek.xx.chntwms.model.User.MenuInfo;
-import chinetek.xx.chntwms.util.function.CommonUtil;
 
 
 @ContentView(R.layout.activity_main)
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
     protected void initViews() {
         super.initViews();
         BaseApplication.context = context;
-        BaseApplication.toolBarTitle = new ToolBarTitle(getString(R.string.app_name)+"-"+BaseApplication.userInfo.getWarehouseName(),false);
+        BaseApplication.toolBarTitle = new ToolBarTitle(getString(R.string.app_name),false);//+"-"+BaseApplication.userInfo.getWarehouseName()
         x.view().inject(this);
         List<Map<String, Object>> data_list = getData();
         adapter = new GridViewItemAdapter(context,data_list);
@@ -62,7 +62,9 @@ public class MainActivity extends BaseActivity {
         LinearLayout linearLayout=(LinearLayout) gridView.getAdapter().getView(position,view,null);
         TextView textView=(TextView)linearLayout.getChildAt(1);
         Intent intent = new Intent();
-     if(textView.getText().toString().equals("收货"))
+        if(textView.getText().toString().equals("不合格扫描"))
+            intent.setClass(context, QCBillChoice.class);
+        else if(textView.getText().toString().equals("收货"))
             intent.setClass(context, ReceiptBillChoice.class);
         else if(textView.getText().toString().equals("上架"))
             intent.setClass(context, UpShelfBillChoice.class);
@@ -106,121 +108,144 @@ public class MainActivity extends BaseActivity {
         List<Map<String, Object>> data_list = new ArrayList<Map<String, Object>>();
         ArrayList<Integer>  itemIconList=new ArrayList<>();
         ArrayList<String>  itemNamesList=new ArrayList<>();
-        List<MenuInfo> menuInfos=BaseApplication.userInfo.getLstMenu();
-        if(menuInfos!=null) {
-            for (int i = 0; i < menuInfos.size(); i++) {
-                String nodUrl = menuInfos.get(i).getNodeUrl();
-                if(!CommonUtil.isNumeric(nodUrl)) continue;
-                int Node = Integer.parseInt(nodUrl);
-                switch (Node) {
-                    case 1:
-                        itemIconList.add(R.drawable.qc);
-                        itemNamesList.add("质检");
-                        break;
-                    case 2:
-                        itemIconList.add(R.drawable.receiption);
-                        itemNamesList.add("收货");
-                        break;
-                    case 3:
-                        itemIconList.add(R.drawable.upshelves);
-                        itemNamesList.add("上架");
-                        break;
-                    case 4:
-                        itemIconList.add(R.drawable.offshelf);
-                        itemNamesList.add("下架");
-                        break;
-                    case 5:
-                        itemIconList.add(R.drawable.review);
-                        itemNamesList.add("发货复核");
-                        break;
-                    case 6:
-                        itemIconList.add(R.drawable.innermove);
-                        itemNamesList.add("移库");
-                        break;
-                    case 7:
-                        itemIconList.add(R.drawable.inventory);
-                        itemNamesList.add("盘点");
-                        itemIconList.add(R.drawable.intentoryfinc);
-                        itemNamesList.add("财务盘点");
-                        break;
-                    case 8:
-                        itemIconList.add(R.drawable.query);
-                        itemNamesList.add("查询");
-                        break;
-                    case 9:
-                        itemIconList.add(R.drawable.combinepallet);
-                        itemNamesList.add("组托");
-                        break;
-                    case 10:
-                        itemIconList.add(R.drawable.dismantlepallet);
-                        itemNamesList.add("拆托");
-                        break;
-                    case 11:
-                        itemIconList.add(R.drawable.dismounting);
-                        itemNamesList.add("装箱拆箱");
-                        break;
-                    case 12:
-                        itemIconList.add(R.drawable.materiel);
-                        itemNamesList.add("物料转换");
-                        break;
-                    case 13:
-                        itemIconList.add(R.drawable.fillprint);
-                        itemNamesList.add("标签补打");
-                        break;
-                    case 14:
-                        itemIconList.add(R.drawable.adjustment);
-                        itemNamesList.add("库存调整");
-                        break;
-                    case 15:
-                        itemIconList.add(R.drawable.receiption);
-                        itemNamesList.add("发料接收");
-                        break;
-                    case 16:
-                        itemIconList.add(R.drawable.returnmaterial);
-                        itemNamesList.add("退料入库");
-                        break;
-                    case 17:
-                        itemIconList.add(R.drawable.receiptsemiproduct);
-                        itemNamesList.add("交接入库");
-                        break;
-                    case 18:
-                        itemIconList.add(R.drawable.packagematerial);
-                        itemNamesList.add("领料出库");
-                        break;
-                    case 19:
-                        itemIconList.add(R.drawable.semiproduct);
-                        itemNamesList.add("退料出库");
-                        break;
-                    case 20:
-                        itemIconList.add(R.drawable.deliveryproduct);
-                        itemNamesList.add("装车扫描");
-                        break;
-                    case 21:
-                        itemIconList.add(R.drawable.productmanage);
-                        itemNamesList.add("生产记录");
-                        break;
-                    case 22:
-                        itemIconList.add(R.drawable.receiptproduct);
-                        itemNamesList.add("产线生产");
-                        break;
-                    case 25:
-                        itemIconList.add(R.drawable.adjustment);
-                        itemNamesList.add("调拨出库");
-                        break;
-                    case 26:
-                        itemIconList.add(R.drawable.qc);
-                        itemNamesList.add("制成检");
-                        break;
-                    case 27:
-                        itemIconList.add(R.drawable.combinepallet);
-                        itemNamesList.add("供应商组托");
-                        break;
-                    case 33:
-                        itemIconList.add(R.drawable.innermove);
-                        itemNamesList.add("第三方移库");
-                        break;
-                }
-            }
+        itemIconList.add(R.drawable.receiption);
+        itemNamesList.add("收货");
+        itemIconList.add(R.drawable.qc);
+        itemNamesList.add("不合格扫描");
+        itemIconList.add(R.drawable.upshelves);
+        itemNamesList.add("上架");
+        itemIconList.add(R.drawable.offshelf);
+        itemNamesList.add("下架");
+        itemIconList.add(R.drawable.review);
+        itemNamesList.add("发货复核");
+        itemIconList.add(R.drawable.innermove);
+        itemNamesList.add("移库");
+        itemIconList.add(R.drawable.combinepallet);
+        itemNamesList.add("组托");
+        itemIconList.add(R.drawable.dismantlepallet);
+        itemNamesList.add("拆托");
+        itemIconList.add(R.drawable.dismounting);
+        itemNamesList.add("装箱拆箱");
+        itemIconList.add(R.drawable.query);
+        itemNamesList.add("查询");
+        itemIconList.add(R.drawable.inventory);
+        itemNamesList.add("盘点");
+
+//        List<MenuInfo> menuInfos=BaseApplication.userInfo.getLstMenu();
+//        if(menuInfos!=null) {
+//            for (int i = 0; i < menuInfos.size(); i++) {
+//                String nodUrl = menuInfos.get(i).getNodeUrl();
+//                if(!CommonUtil.isNumeric(nodUrl)) continue;
+//                int Node = Integer.parseInt(nodUrl);
+//                switch (Node) {
+//                    case 1:
+//                        itemIconList.add(R.drawable.qc);
+//                        itemNamesList.add("质检");
+//                        break;
+//                    case 2:
+//                        itemIconList.add(R.drawable.receiption);
+//                        itemNamesList.add("收货");
+//                        break;
+//                    case 3:
+//                        itemIconList.add(R.drawable.upshelves);
+//                        itemNamesList.add("上架");
+//                        break;
+//                    case 4:
+//                        itemIconList.add(R.drawable.offshelf);
+//                        itemNamesList.add("下架");
+//                        break;
+//                    case 5:
+//                        itemIconList.add(R.drawable.review);
+//                        itemNamesList.add("发货复核");
+//                        break;
+//                    case 6:
+//                        itemIconList.add(R.drawable.innermove);
+//                        itemNamesList.add("移库");
+//                        break;
+//                    case 7:
+//                        itemIconList.add(R.drawable.inventory);
+//                        itemNamesList.add("盘点");
+//                        itemIconList.add(R.drawable.intentoryfinc);
+//                        itemNamesList.add("财务盘点");
+//                        break;
+//                    case 8:
+//                        itemIconList.add(R.drawable.query);
+//                        itemNamesList.add("查询");
+//                        break;
+//                    case 9:
+//                        itemIconList.add(R.drawable.combinepallet);
+//                        itemNamesList.add("组托");
+//                        break;
+//                    case 10:
+//                        itemIconList.add(R.drawable.dismantlepallet);
+//                        itemNamesList.add("拆托");
+//                        break;
+//                    case 11:
+//                        itemIconList.add(R.drawable.dismounting);
+//                        itemNamesList.add("装箱拆箱");
+//                        break;
+//                    case 12:
+//                        itemIconList.add(R.drawable.materiel);
+//                        itemNamesList.add("物料转换");
+//                        break;
+//                    case 13:
+//                        itemIconList.add(R.drawable.fillprint);
+//                        itemNamesList.add("标签补打");
+//                        break;
+//                    case 14:
+//                        itemIconList.add(R.drawable.adjustment);
+//                        itemNamesList.add("库存调整");
+//                        break;
+//                    case 15:
+//                        itemIconList.add(R.drawable.receiption);
+//                        itemNamesList.add("发料接收");
+//                        break;
+//                    case 16:
+//                        itemIconList.add(R.drawable.returnmaterial);
+//                        itemNamesList.add("退料入库");
+//                        break;
+//                    case 17:
+//                        itemIconList.add(R.drawable.receiptsemiproduct);
+//                        itemNamesList.add("交接入库");
+//                        break;
+//                    case 18:
+//                        itemIconList.add(R.drawable.packagematerial);
+//                        itemNamesList.add("领料出库");
+//                        break;
+//                    case 19:
+//                        itemIconList.add(R.drawable.semiproduct);
+//                        itemNamesList.add("退料出库");
+//                        break;
+//                    case 20:
+//                        itemIconList.add(R.drawable.deliveryproduct);
+//                        itemNamesList.add("装车扫描");
+//                        break;
+//                    case 21:
+//                        itemIconList.add(R.drawable.productmanage);
+//                        itemNamesList.add("生产记录");
+//                        break;
+//                    case 22:
+//                        itemIconList.add(R.drawable.receiptproduct);
+//                        itemNamesList.add("产线生产");
+//                        break;
+//                    case 25:
+//                        itemIconList.add(R.drawable.adjustment);
+//                        itemNamesList.add("调拨出库");
+//                        break;
+//                    case 26:
+//                        itemIconList.add(R.drawable.qc);
+//                        itemNamesList.add("制成检");
+//                        break;
+//                    case 27:
+//                        itemIconList.add(R.drawable.combinepallet);
+//                        itemNamesList.add("供应商组托");
+//                        break;
+//                    case 33:
+//                        itemIconList.add(R.drawable.innermove);
+//                        itemNamesList.add("第三方移库");
+//                        break;
+//                }
+//            }
             //cion和iconName的长度是相同的，这里任选其一都可以
             for (int i = 0; i < itemIconList.size(); i++) {
                 Map<String, Object> map = new HashMap<String, Object>();
@@ -228,7 +253,7 @@ public class MainActivity extends BaseActivity {
                 map.put("text", itemNamesList.get(i));
                 data_list.add(map);
             }
-        }
+        //}
 
         return data_list;
     }

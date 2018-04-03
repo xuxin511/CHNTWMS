@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -25,11 +23,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import chinetek.xx.chntwms.R;
 import chinetek.xx.chntwms.adapter.wms.Intentory.InventoryItemAdapter;
 import chinetek.xx.chntwms.base.BaseActivity;
 import chinetek.xx.chntwms.base.BaseApplication;
 import chinetek.xx.chntwms.base.ToolBarTitle;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.ReturnMsgModelList;
 import chinetek.xx.chntwms.model.URLModel;
 import chinetek.xx.chntwms.model.WMS.Inventory.Check_Model;
@@ -107,21 +105,21 @@ public class InventoryBillChoice extends BaseActivity implements SwipeRefreshLay
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(model==1)
-            getMenuInflater().inflate(R.menu.menu_linemanagel, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_filter) {
-            Intent intent=new Intent(context,IntentoryAdd.class);
-            startActivityLeft(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        if(model==1)
+//            getMenuInflater().inflate(R.menu.menu_linemanagel, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.action_filter) {
+//            Intent intent=new Intent(context,IntentoryAdd.class);
+//            startActivityLeft(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     /**
      * Listview item点击事件

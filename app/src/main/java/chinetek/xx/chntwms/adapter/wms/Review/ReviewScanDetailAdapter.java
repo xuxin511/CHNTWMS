@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.WMS.Review.OutStockDetailInfo_Model;
 
 

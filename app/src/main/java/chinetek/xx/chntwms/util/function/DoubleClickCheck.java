@@ -2,7 +2,7 @@ package chinetek.xx.chntwms.util.function;
 
 import android.content.Context;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.util.dialog.MessageBox;
 
 

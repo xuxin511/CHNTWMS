@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.WMS.Inventory.Check_Model;
 
 

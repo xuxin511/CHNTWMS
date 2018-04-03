@@ -27,11 +27,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import chinetek.xx.chntwms.R;
 import chinetek.xx.chntwms.adapter.wms.Receiption.ReceiptBillChioceItemAdapter;
 import chinetek.xx.chntwms.base.BaseActivity;
 import chinetek.xx.chntwms.base.BaseApplication;
 import chinetek.xx.chntwms.base.ToolBarTitle;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.Material.BarCodeInfo;
 import chinetek.xx.chntwms.model.Receiption.Receipt_Model;
 import chinetek.xx.chntwms.model.ReturnMsgModelList;
@@ -178,11 +178,6 @@ public class ReceiptBillChoice extends BaseActivity implements SwipeRefreshLayou
             }
         }
 
-//        if(item.getItemId() ==R.id.action_QCfilter){
-//            Intent intent = new Intent(context, QCMaterialChoice.class);
-//            intent.putExtra("ErpVourcherNo","");
-//            startActivityLeft(intent);
-//        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -8,8 +8,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import chinetek.xx.chntwms.R;
 import chinetek.xx.chntwms.base.BaseApplication;
+import chinetek.xx.chntwms.cywms.R;
 
 
 /**

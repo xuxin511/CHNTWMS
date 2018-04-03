@@ -7,11 +7,11 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import chinetek.xx.chntwms.R;
 import chinetek.xx.chntwms.adapter.wms.Receiption.ReceiptBillDetailAdapter;
 import chinetek.xx.chntwms.base.BaseActivity;
 import chinetek.xx.chntwms.base.BaseApplication;
 import chinetek.xx.chntwms.base.ToolBarTitle;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.Receiption.ReceiptDetail_Model;
 
 /*

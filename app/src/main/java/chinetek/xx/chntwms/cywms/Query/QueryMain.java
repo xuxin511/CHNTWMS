@@ -16,11 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import chinetek.xx.chntwms.R;
 import chinetek.xx.chntwms.adapter.GridViewItemAdapter;
 import chinetek.xx.chntwms.base.BaseActivity;
 import chinetek.xx.chntwms.base.BaseApplication;
 import chinetek.xx.chntwms.base.ToolBarTitle;
+import chinetek.xx.chntwms.cywms.R;
 
 @ContentView(R.layout.activity_query_main)
 public class QueryMain extends BaseActivity {
@@ -47,8 +47,7 @@ public class QueryMain extends BaseActivity {
         int[] itemIcon = new int[]{ R.drawable.material,R.drawable.stock, R.drawable.batch,
                 R.drawable.supplier
         };//,"工单"
-        String[] itemNames = new String[]{"物料","库位", "批次",
-                "供应商"
+        String[] itemNames = new String[]{"物料","库位", "批次"
         };
         //cion和iconName的长度是相同的，这里任选其一都可以
         for(int i=0;i<itemIcon.length;i++){
@@ -77,13 +76,7 @@ public class QueryMain extends BaseActivity {
                 BaseApplication.toolBarTitle = new ToolBarTitle( getString(R.string.query_Bathtitle), true);
                 intent.putExtra("Type",3);
                 break;
-            case 3:
-                BaseApplication.toolBarTitle = new ToolBarTitle( getString(R.string.query_Suppliertitle), true);
-                intent.putExtra("Type",4);
-                break;
-            case 4:
-                BaseApplication.toolBarTitle = new ToolBarTitle( getString(R.string.query_WorkNotitle), true);
-                break;
+
         }
             startActivityLeft(intent);
     }

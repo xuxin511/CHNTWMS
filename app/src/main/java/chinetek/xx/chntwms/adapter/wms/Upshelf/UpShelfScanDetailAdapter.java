@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.WMS.Stock.AreaInfo_Model;
 import chinetek.xx.chntwms.model.WMS.UpShelf.InStockTaskDetailsInfo_Model;
 

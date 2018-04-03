@@ -25,7 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.URLModel;
 
 import static chinetek.xx.chntwms.base.BaseApplication.context;
@@ -209,7 +209,7 @@ public class UpdateVersionService {
         double versionCode = 0.0;
         try {
             // 获取软件版本号，对应AndroidManifest.xml下android:versionCode
-            versionCode = Double.parseDouble(context.getPackageManager().getPackageInfo("com.xx.chinetek.cywms", 0).versionName);
+            versionCode = Double.parseDouble(context.getPackageManager().getPackageInfo("chinetek.xx.chntwms", 0).versionName);
             //Toast.makeText(context, "当前版本是: " + versionCode, Toast.LENGTH_SHORT).show();
         } catch (NameNotFoundException e) {
             e.printStackTrace();

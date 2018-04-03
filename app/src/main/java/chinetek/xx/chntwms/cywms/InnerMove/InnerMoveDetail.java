@@ -9,10 +9,10 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 
-import chinetek.xx.chntwms.R;
 import chinetek.xx.chntwms.adapter.wms.Receiption.ReceiptBillDetailAdapter;
 import chinetek.xx.chntwms.base.BaseActivity;
 import chinetek.xx.chntwms.base.BaseApplication;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.Material.BarCodeInfo;
 
 @ContentView(R.layout.activity_inner_move_detail)

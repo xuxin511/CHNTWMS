@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.Pallet.PalletDetail_Model;
 
 

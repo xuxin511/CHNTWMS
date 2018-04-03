@@ -28,8 +28,8 @@
     <string name="UpShelf_title">上架</string>
     <string name="UpShelfscan_subtitle">上架扫描</string>
     <string name="UpShelfscan_billdetail">上架单据明细</string>
-    <string name="QC_title">质检</string>
-    <string name="QC_subtitle">质检扫描</string>
+    <string name="QC_title">质检单选择</string>
+    <string name="QC_subtitle">不合格扫描</string>
     <string name="QC_Material_subtitle">质检物料选择</string>
     <string name="query_title">查询</string>
     <string name="query_Materialtitle">物料</string>
@@ -156,7 +156,7 @@
     <string name="OffshelfPickNumber">拣货数量：</string>
     <string name="MoveNumber">移库数量：</string>
     <string name="ChanggeNumber">转换数量：</string>
-    <string name="TakeSampleNumber">取样数量：</string>
+    <string name="TakeSampleNumber">不合格数量：</string>
     <string name="SplitNumber">拆零数量：</string>
     <string name="ProductCompleteNumber">完工数量：</string>
     <string name="NextScanMaterial">拣货物料：</string>
@@ -188,7 +188,7 @@
     <string name="activity_Receipt_Scan_ReceiveQty">已收数量：</string>
     <string name="activity_Receipt_Scan_RemainQty">可收数量：</string>
     <string name="activity_Receipt_Scan_ScanQty">已扫数量：</string>
-    <string name="activity_QC_Scan_ScanQty">已取数量：</string>
+    <string name="activity_QC_Scan_ScanQty">已扫数量：</string>
     <string name="activity_Receipt_Scan_Detail">单据明细</string>
     <string name="activity_UpShelf_Qty">上架数量：</string>
     <string name="activity_UpShelf_ScanQty">已扫数量：</string>
@@ -217,7 +217,7 @@
     <string name="activity_adjust_stock">调整库位：</string>
     <string name="activity_pallet_barcode">托盘条码：</string>
     <string name="activity_pallet_PalletNum">累计箱数/件数：</string>
-    <string name="activity_pallet_PalletPrint">托盘标签打印</string>
+    <string name="activity_pallet_PalletPrint">组托</string>
     <string name="activity_MaterialChange_In">入库单号：</string>
     <string name="activity_MaterialChange_Out">出库单号：</string>
     <string name="activity_login_WareHousChoice">仓库选择：</string>

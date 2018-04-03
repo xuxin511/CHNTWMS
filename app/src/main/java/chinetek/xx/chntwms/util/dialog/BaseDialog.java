@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 
 
 /**

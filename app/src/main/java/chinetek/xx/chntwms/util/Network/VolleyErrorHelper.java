@@ -14,7 +14,8 @@ import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
 import java.util.Map;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
+
 
 /**
  * Created by GHOST on 2017/6/12.

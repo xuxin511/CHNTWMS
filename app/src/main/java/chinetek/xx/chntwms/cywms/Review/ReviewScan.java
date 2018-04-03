@@ -30,11 +30,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import chinetek.xx.chntwms.Pallet.CombinPalletDetail;
-import chinetek.xx.chntwms.R;
 import chinetek.xx.chntwms.adapter.wms.Review.ReviewScanDetailAdapter;
 import chinetek.xx.chntwms.base.BaseActivity;
 import chinetek.xx.chntwms.base.BaseApplication;
 import chinetek.xx.chntwms.base.ToolBarTitle;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.cywms.Truck.TruckLoad;
 import chinetek.xx.chntwms.model.Base_Model;
 import chinetek.xx.chntwms.model.ReturnMsgModel;

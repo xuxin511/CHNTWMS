@@ -1,4 +1,4 @@
-package chinetek.xx.chntwms.adapter.wms.Upshelf;
+package chinetek.xx.chntwms.adapter.wms.QC;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,23 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import chinetek.xx.chntwms.cywms.R;
-import chinetek.xx.chntwms.model.Receiption.SupplierModel;
-import chinetek.xx.chntwms.model.WMS.UpShelf.InStockTaskInfo_Model;
+import chinetek.xx.chntwms.model.WMS.Stock.StockInfo_Model;
 
 
 /**
  * Created by GHOST on 2017/1/13.
  */
 
-public class UpshelfBillChioceItemAdapter extends BaseAdapter {
+public class QCInStockItemAdapter extends BaseAdapter {
     private Context context; // 运行上下文
-    private List<InStockTaskInfo_Model> inStockTaskInfoModels; // 信息集合
+    private ArrayList<StockInfo_Model> StockInfo_Models; // 信息集合
     private LayoutInflater listContainer; // 视图容器
-    private int selectItem = -1;
-    private ArrayList<SupplierModel> mUnfilteredData;
 
 
     public final class ListItemView { // 自定义控件集合
@@ -36,25 +32,22 @@ public class UpshelfBillChioceItemAdapter extends BaseAdapter {
         public TextView txtdepartment;
     }
 
-    public UpshelfBillChioceItemAdapter(Context context, List<InStockTaskInfo_Model> inStockTaskInfoModels) {
+    public QCInStockItemAdapter(Context context, ArrayList<StockInfo_Model> StockInfo_Models) {
         this.context = context;
         listContainer = LayoutInflater.from(context); // 创建视图容器并设置上下文
-        this.inStockTaskInfoModels = inStockTaskInfoModels;
-
+        this.StockInfo_Models = StockInfo_Models;
     }
 
-    public void setSelectItem(int selectItem) {
-        this.selectItem = selectItem;
-    }
+
 
     @Override
     public int getCount() {
-        return inStockTaskInfoModels==null?0: inStockTaskInfoModels.size();
+        return StockInfo_Models==null?0: StockInfo_Models.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return inStockTaskInfoModels.get(position);
+        return StockInfo_Models.get(position);
     }
 
     @Override
@@ -71,7 +64,7 @@ public class UpshelfBillChioceItemAdapter extends BaseAdapter {
             listItemView = new ListItemView();
 
             // 获取list_item布局文件的视图
-            convertView = listContainer.inflate(R.layout.item_billchoice_listview,null);
+            convertView = listContainer.inflate(R.layout.item_qcinstock_listview,null);
             listItemView.txtTaskNo = (TextView) convertView.findViewById(R.id.txtTaskNo);
             listItemView.txtERPVoucherNo = (TextView) convertView.findViewById(R.id.txtERPVoucherNo);
             listItemView.txtStrVoucherType = (TextView) convertView.findViewById(R.id.txtStrVoucherType);
@@ -81,17 +74,13 @@ public class UpshelfBillChioceItemAdapter extends BaseAdapter {
         } else {
             listItemView = (ListItemView) convertView.getTag();
         }
-        InStockTaskInfo_Model inStockTaskInfoModel=inStockTaskInfoModels.get(selectID);
-        listItemView.txtTaskNo.setText(inStockTaskInfoModel.getErpVoucherNo());
-        listItemView.txtERPVoucherNo.setText(inStockTaskInfoModel.getTaskNo());
-        listItemView.txtStrVoucherType.setText(inStockTaskInfoModel.getStrVoucherType());
-        listItemView.txtCompany.setText("");//inStockTaskInfoModel.getStrongHoldName()
-        listItemView.txtdepartment.setText(inStockTaskInfoModel.getDepartmentName());
-        if (selectItem == position) {
-            convertView.setBackgroundColor(context.getResources().getColor(R.color.mediumseagreen));
-        }else{
-            convertView.setBackgroundResource(R.color.trans);
-        }
+        StockInfo_Model stockInfoModel=StockInfo_Models.get(selectID);
+        listItemView.txtTaskNo.setText(stockInfoModel.getMaterialDesc());
+        listItemView.txtERPVoucherNo.setText(stockInfoModel.getMaterialNo());
+        listItemView.txtStrVoucherType.setText("数："+stockInfoModel.getQty());
+        listItemView.txtCompany.setText(stockInfoModel.getStrongHoldName());
+        listItemView.txtdepartment.setText("批："+stockInfoModel.getBatchNo());
+
         return convertView;
     }
 

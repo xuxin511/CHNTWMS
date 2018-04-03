@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.Receiption.SupplierModel;
 import chinetek.xx.chntwms.model.WMS.Review.OutStock_Model;
 
@@ -85,7 +85,7 @@ public class ReviewBillChioceItemAdapter extends BaseAdapter {
         listItemView.txtTaskNo.setText(outStockModel.getErpVoucherNo());
         listItemView.txtERPVoucherNo.setText(outStockModel.getVoucherNo());
         listItemView.txtStrVoucherType.setText(outStockModel.getStrVoucherType());
-        listItemView.txtCompany.setText(outStockModel.getStrongHoldName());
+        listItemView.txtCompany.setText("");//outStockModel.getStrongHoldName()
         listItemView.txtdepartment.setText(outStockModel.getDepartmentName());
         if (selectItem == position) {
             convertView.setBackgroundColor(context.getResources().getColor(R.color.mediumseagreen));

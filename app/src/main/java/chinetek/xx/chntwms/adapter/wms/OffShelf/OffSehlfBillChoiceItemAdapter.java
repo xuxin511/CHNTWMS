@@ -8,10 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.WMS.OffShelf.OutStockTaskInfo_Model;
 
 /**
@@ -117,7 +118,7 @@ public class OffSehlfBillChoiceItemAdapter extends BaseAdapter {
         listItemView.txtTaskNo.setText(outStockTaskInfoModel.getErpVoucherNo());
         listItemView.txtERPVoucherNo.setText(outStockTaskInfoModel.getTaskNo());
         listItemView.txtStrVoucherType.setText(outStockTaskInfoModel.getStrVoucherType());
-        listItemView.txtCompany.setText("据点："+outStockTaskInfoModel.getStrongHoldName());
+        listItemView.txtCompany.setText("");//"据点："+outStockTaskInfoModel.getStrongHoldName()
         listItemView.txtdepartment.setText("部门："+outStockTaskInfoModel.getDepartmentName());
         listItemView.txtPcikName.setText("拣货人:"+outStockTaskInfoModel.getPickUserName());
         listItemView.txtFloorName.setText("楼层："+outStockTaskInfoModel.getFloorName());

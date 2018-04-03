@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="chinetek.xx.chntwms.base.BaseApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
@@ -16,6 +17,8 @@
         <activity android:name="chinetek.xx.chntwms.MainActivity" />
         <activity android:name="chinetek.xx.chntwms.Setting" />
         <activity android:name=".Receiption.ReceiptBillChoice" />
+        <activity android:name=".Qc.QCBillChoice" />
+        <activity android:name=".Qc.QCScan" />
         <activity android:name=".Receiption.SupplierFilterActivity" />
         <activity android:name=".Receiption.ReceiptionScan" />
         <activity android:name=".Receiption.ReceiptionBillDetail" />

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.Receiption.Receipt_Model;
 
 
@@ -89,7 +89,7 @@ public class ReceiptBillChioceItemAdapter extends BaseAdapter {
       //  listItemView.txtSupplierName.setText(receiptModel.getSupplierName());
         listItemView.txtERPVoucherNo.setText(receiptModel.getVoucherNo());
         listItemView.txtStrVoucherType.setText(receiptModel.getStrVoucherType());
-        listItemView.txtCompany.setText(receiptModel.getStrongHoldName());
+        listItemView.txtCompany.setText("");//receiptModel.getStrongHoldName()
         listItemView.txtdepartment.setText(receiptModel.getDepartmentName());
         listItemView.txtSupplierCode.setText(receiptModel.getSupplierNo());
         listItemView.txtSupplier.setText(receiptModel.getSupplierName());

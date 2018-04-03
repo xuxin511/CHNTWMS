@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 
 
 /**
@@ -71,7 +71,7 @@ public class ToolBarHelper {
         /*获取主题中定义的toolbar的高度*/
         //int toolBarSize =80;
          //int toolBarSize = (int) typedArray.getDimension(0, (int) mContext.getResources().getDimension(R.dimen.abc_action_button_min_width_overflow_material));
-         int toolBarSize = (int) typedArray.getDimension(0, 80);
+         int toolBarSize = (int) typedArray.getDimension(0, 110);
         typedArray.recycle();
         /*如果是悬浮状态，则不需要设置间距*/
         params.topMargin = toolBarSize;//overly ? 0 : toolBarSize;

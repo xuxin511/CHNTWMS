@@ -17,7 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.math.BigDecimal;
 
-import chinetek.xx.chntwms.R;
+import chinetek.xx.chntwms.cywms.R;
 import chinetek.xx.chntwms.model.CheckNumRefMaterial;
 import chinetek.xx.chntwms.util.UpdateVersionService;
 import chinetek.xx.chntwms.util.dialog.ToastUtil;
