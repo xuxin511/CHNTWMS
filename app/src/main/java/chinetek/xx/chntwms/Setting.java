@@ -3,6 +3,7 @@ package chinetek.xx.chntwms;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,9 +32,7 @@ import chinetek.xx.chntwms.model.URLModel;
 import chinetek.xx.chntwms.util.Network.RequestHandler;
 import chinetek.xx.chntwms.util.SharePreferUtil;
 import chinetek.xx.chntwms.util.dialog.LoadingDialog;
-import chinetek.xx.chntwms.util.dialog.MessageBox;
 import chinetek.xx.chntwms.util.dialog.ToastUtil;
-import chinetek.xx.chntwms.util.function.CommonUtil;
 
 
 @ContentView(R.layout.activity_setting)
@@ -47,14 +46,14 @@ public class Setting extends BaseActivity {
     EditText edtPort;
     @ViewInject(R.id.edt_TimeOut)
     EditText edtTimeOut;
-    @ViewInject(R.id.edt_PrintIP)
-    EditText edtPrintIP;
-    @ViewInject(R.id.edt_ElecIP)
-    EditText edtElecIP;
-    @ViewInject(R.id.rb_WMS)
-    RadioButton rbWMS;
-    @ViewInject(R.id.rb_Product)
-    RadioButton rbProduct;
+//    @ViewInject(R.id.edt_PrintIP)
+//    EditText edtPrintIP;
+//    @ViewInject(R.id.edt_ElecIP)
+//    EditText edtElecIP;
+//    @ViewInject(R.id.rb_WMS)
+//    RadioButton rbWMS;
+//    @ViewInject(R.id.rb_Product)
+//    RadioButton rbProduct;
 
     final  int LogUploadIndex=1;
 
@@ -73,13 +72,13 @@ public class Setting extends BaseActivity {
         SharePreferUtil.ReadShare(context);
         edtIPAdress.setText(URLModel.IPAdress);
         edtPort.setText(URLModel.Port+"");
-        edtPrintIP.setText(URLModel.PrintIP);
-        edtElecIP.setText(URLModel.ElecIP);
+//        edtPrintIP.setText(URLModel.PrintIP);
+//        edtElecIP.setText(URLModel.ElecIP);
 //        edtIPAdress.setEnabled(false);
 //        edtPort.setEnabled(false);
-        if(URLModel.isWMS) rbWMS.setChecked(true); else rbProduct.setChecked(true);
+//        if(URLModel.isWMS) rbWMS.setChecked(true); else rbProduct.setChecked(true);
         edtTimeOut.setText(RequestHandler.SOCKET_TIMEOUT/1000+"");
-        CommonUtil.setEditFocus(edtPrintIP);
+//        CommonUtil.setEditFocus(edtPrintIP);
     }
 
     @Override
@@ -149,21 +148,21 @@ public class Setting extends BaseActivity {
     @Event(R.id.btn_SaveSetting)
     private void btnSetting(View view){
         String IPAdress=edtIPAdress.getText().toString().trim();
-        String PrintIp=edtPrintIP.getText().toString().trim();
-        String ElecIP=edtElecIP.getText().toString().trim();
+//        String PrintIp=edtPrintIP.getText().toString().trim();
+//        String ElecIP=edtElecIP.getText().toString().trim();
         Integer Port=Integer.parseInt(edtPort.getText().toString().trim());
         Integer TimeOut=Integer.parseInt(edtTimeOut.getText().toString().trim())*1000;
-        if(CommonUtil.MatcherIP(ElecIP)){//CommonUtil.MatcherIP(IPAdress) &&
-            SharePreferUtil.SetShare(context,IPAdress,PrintIp,ElecIP,Port,TimeOut,rbWMS.isChecked());
+//        if(CommonUtil.MatcherIP(ElecIP)){//CommonUtil.MatcherIP(IPAdress) &&
+            SharePreferUtil.SetShare(context,IPAdress,"","",Port,TimeOut,true);
             new AlertDialog.Builder(context).setTitle("提示").setCancelable(false).setMessage(getResources().getString(R.string.SaveSuccess)).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                    closeActiviry();
                 }
             }).show();
-        }else{
-            MessageBox.Show(context,getResources().getString(R.string.Error_Setting_IPAdressError));
-            CommonUtil.setEditFocus(edtIPAdress);
-        }
+//        }else{
+//            MessageBox.Show(context,getResources().getString(R.string.Error_Setting_IPAdressError));
+//            CommonUtil.setEditFocus(edtIPAdress);
+//        }
     }
 }

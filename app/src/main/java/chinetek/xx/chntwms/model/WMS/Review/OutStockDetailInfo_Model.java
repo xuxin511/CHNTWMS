@@ -15,7 +15,7 @@ import chinetek.xx.chntwms.model.WMS.Stock.StockInfo_Model;
  */
 
 public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
-    private Float OutStockID;
+    private int OutStockID;
     private String MaterialNo;
     private String MaterialDesc;
     private String RowNo;
@@ -31,10 +31,10 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
     private String Costcenter;
     private String Wbselem;
     private String FromStorageLoc;
-    private Float ReviewStatus;
+    private int ReviewStatus;
     private String CloseOweUser;
     private String CloseOweRemark;
-    private Float IsOweClose;
+    private int IsOweClose;
     private String OweRemark;
     private String OweRemarkUser;
     private Boolean OKSelect;
@@ -59,6 +59,107 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
     private String IsSpcBatch;
     private  Boolean IsReviewFinish=false; //行是否复核完毕
     private int OustockStatus=0;//：0：StockInfo_Model不存在未组托条码  1：StockInfo_Model存在未组托条码
+    public String ErpReviceNo;
+    public String SubIarrSID;
+    public String WareHouseNo;
+    public Float CanReviewQty;
+
+    public String PostWareHouseNo;   // 过账仓库
+
+
+    public String CustomerCode;
+
+    public String getCustomerCode() {
+        return CustomerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        CustomerCode = customerCode;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        CustomerName = customerName;
+    }
+
+    public String CustomerName;
+
+    public String getPostWareHouseNo() {
+        return PostWareHouseNo;
+    }
+
+    public void setPostWareHouseNo(String postWareHouseNo) {
+        PostWareHouseNo = postWareHouseNo;
+    }
+
+    public Float getCanReviewQty() {
+        return CanReviewQty;
+    }
+
+    public void setCanReviewQty(Float canReviewQty) {
+        CanReviewQty = canReviewQty;
+    }
+
+    public String getWareHouseNo() {
+        return WareHouseNo;
+    }
+
+    public void setWareHouseNo(String wareHouseNo) {
+        WareHouseNo = wareHouseNo;
+    }
+
+    private int WareHouseID;
+
+    public String getErpReviceNo() {
+        return ErpReviceNo;
+    }
+
+    public void setErpReviceNo(String erpReviceNo) {
+        ErpReviceNo = erpReviceNo;
+    }
+
+    public int getOutStockID() {
+        return OutStockID;
+    }
+
+    public int getReviewStatus() {
+        return ReviewStatus;
+    }
+
+    public int getIsOweClose() {
+        return IsOweClose;
+    }
+
+    public int getWareHouseID() {
+        return WareHouseID;
+    }
+
+    public void setWareHouseID(int warehouseid) {
+        this.WareHouseID = warehouseid;
+    }
+
+    public void setOutStockID(int outStockID) {
+        OutStockID = outStockID;
+    }
+
+    public void setReviewStatus(int reviewStatus) {
+        ReviewStatus = reviewStatus;
+    }
+
+    public void setIsOweClose(int isOweClose) {
+        IsOweClose = isOweClose;
+    }
+
+    public String getSubIarrSID() {
+        return SubIarrSID;
+    }
+
+    public void setSubIarrSID(String subIarrSID) {
+        SubIarrSID = subIarrSID;
+    }
 
     public String getFromErpAreaNo() {
         return FromErpAreaNo;
@@ -206,13 +307,13 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
         BatchNo = batchNo;
     }
 
-    public Float getOutStockID() {
-        return OutStockID;
-    }
-
-    public void setOutStockID(Float outStockID) {
-        OutStockID = outStockID;
-    }
+//    public Float getOutStockID() {
+//        return OutStockID;
+//    }
+//
+//    public void setOutStockID(Float outStockID) {
+//        OutStockID = outStockID;
+//    }
 
 
     public String getMaterialNo() {
@@ -327,13 +428,13 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
         FromStorageLoc = fromStorageLoc;
     }
 
-    public Float getReviewStatus() {
-        return ReviewStatus;
-    }
-
-    public void setReviewStatus(Float reviewStatus) {
-        ReviewStatus = reviewStatus;
-    }
+//    public Float getReviewStatus() {
+//        return ReviewStatus;
+//    }
+//
+//    public void setReviewStatus(Float reviewStatus) {
+//        ReviewStatus = reviewStatus;
+//    }
 
     public String getCloseOweUser() {
         return CloseOweUser;
@@ -351,13 +452,13 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
         CloseOweRemark = closeOweRemark;
     }
 
-    public Float getIsOweClose() {
-        return IsOweClose;
-    }
-
-    public void setIsOweClose(Float isOweClose) {
-        IsOweClose = isOweClose;
-    }
+//    public Float getIsOweClose() {
+//        return IsOweClose;
+//    }
+//
+//    public void setIsOweClose(Float isOweClose) {
+//        IsOweClose = isOweClose;
+//    }
 
     public String getOweRemark() {
         return OweRemark;
@@ -443,7 +544,7 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.OutStockID);
+        dest.writeInt(this.OutStockID);
         dest.writeString(this.MaterialNo);
         dest.writeString(this.MaterialDesc);
         dest.writeString(this.RowNo);
@@ -459,10 +560,10 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
         dest.writeString(this.Costcenter);
         dest.writeString(this.Wbselem);
         dest.writeString(this.FromStorageLoc);
-        dest.writeValue(this.ReviewStatus);
+        dest.writeInt(this.ReviewStatus);
         dest.writeString(this.CloseOweUser);
         dest.writeString(this.CloseOweRemark);
-        dest.writeValue(this.IsOweClose);
+        dest.writeInt(this.IsOweClose);
         dest.writeString(this.OweRemark);
         dest.writeString(this.OweRemarkUser);
         dest.writeValue(this.OKSelect);
@@ -487,11 +588,19 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
         dest.writeString(this.IsSpcBatch);
         dest.writeValue(this.IsReviewFinish);
         dest.writeInt(this.OustockStatus);
+        dest.writeString(this.ErpReviceNo);
+        dest.writeString(this.SubIarrSID);
+        dest.writeString(this.WareHouseNo);
+        dest.writeValue(this.CanReviewQty);
+        dest.writeString(this.PostWareHouseNo);
+        dest.writeString(this.CustomerCode);
+        dest.writeString(this.CustomerName);
+        dest.writeInt(this.WareHouseID);
     }
 
     protected OutStockDetailInfo_Model(Parcel in) {
         super(in);
-        this.OutStockID = (Float) in.readValue(Float.class.getClassLoader());
+        this.OutStockID = in.readInt();
         this.MaterialNo = in.readString();
         this.MaterialDesc = in.readString();
         this.RowNo = in.readString();
@@ -507,10 +616,10 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
         this.Costcenter = in.readString();
         this.Wbselem = in.readString();
         this.FromStorageLoc = in.readString();
-        this.ReviewStatus = (Float) in.readValue(Float.class.getClassLoader());
+        this.ReviewStatus = in.readInt();
         this.CloseOweUser = in.readString();
         this.CloseOweRemark = in.readString();
-        this.IsOweClose = (Float) in.readValue(Float.class.getClassLoader());
+        this.IsOweClose = in.readInt();
         this.OweRemark = in.readString();
         this.OweRemarkUser = in.readString();
         this.OKSelect = (Boolean) in.readValue(Boolean.class.getClassLoader());
@@ -535,6 +644,14 @@ public class OutStockDetailInfo_Model extends Base_Model implements Parcelable{
         this.IsSpcBatch = in.readString();
         this.IsReviewFinish = (Boolean) in.readValue(Boolean.class.getClassLoader());
         this.OustockStatus = in.readInt();
+        this.ErpReviceNo = in.readString();
+        this.SubIarrSID = in.readString();
+        this.WareHouseNo = in.readString();
+        this.CanReviewQty = (Float) in.readValue(Float.class.getClassLoader());
+        this.PostWareHouseNo = in.readString();
+        this.CustomerCode = in.readString();
+        this.CustomerName = in.readString();
+        this.WareHouseID = in.readInt();
     }
 
     public static final Creator<OutStockDetailInfo_Model> CREATOR = new Creator<OutStockDetailInfo_Model>() {

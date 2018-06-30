@@ -258,18 +258,25 @@ public class CombinPallet extends BaseActivity {
             }.getType());
             if (returnMsgModel.getHeaderStatus().equals("S")) {
                 PalletDetail_Model palletDetailModel = returnMsgModel.getModelJson().get(0);
+                if(palletDetailModel.getLstBarCode().get(0).getRowNo()==null||palletDetailModel.getLstBarCode().get(0).getRowNo()==""){
+                    MessageBox.Show(context, "扫描条码不存在行号不能做组托",1);
+                    CommonUtil.setEditFocus(edtBarcode);
+                    return;
+                }
                 //判断组托条件：批次、据点、库位、物料相同才能组托
                 if (palletDetailModels.get(0).getLstBarCode() != null) {// &&
                     for (BarCodeInfo barCodeInfo : palletDetailModel.getLstBarCode()) {
                         if (palletDetailModels.get(0).getLstBarCode().size() != 0) {
                             if(palletDetailModels.get(0).getLstBarCode().contains(barCodeInfo)){
-                                MessageBox.Show(context, getString(R.string.Error_Contain_Barcode));
+//                                MessageBox.Show(context, getString(R.string.Error_Contain_Barcode));
+                                MessageBox.Show(context, getString(R.string.Error_Contain_Barcode),1);
                                 CommonUtil.setEditFocus(edtBarcode);
                                 return;
                             }
                             String checkError = CheckPalletCondition(barCodeInfo);
                             if (!TextUtils.isEmpty(checkError)) {
-                                MessageBox.Show(context, checkError);
+//                                MessageBox.Show(context, checkError);
+                                MessageBox.Show(context, checkError,1);
                                 CommonUtil.setEditFocus(edtBarcode);
                                 return;
                             }
@@ -281,8 +288,8 @@ public class CombinPallet extends BaseActivity {
 
                             palletDetailModels.get(0).getLstBarCode().add(0, barCodeInfo);
                            // palletDetailModels.get(0).setVoucherType(999);
-                            palletDetailModels.get(0).setStrongHoldCode(barCodeInfo.getStrongHoldCode());
-                            palletDetailModels.get(0).setStrongHoldName(barCodeInfo.getStrongHoldName());
+//                            palletDetailModels.get(0).setStrongHoldCode(barCodeInfo.getStrongHoldCode());
+//                            palletDetailModels.get(0).setStrongHoldName(barCodeInfo.getStrongHoldName());
                             palletDetailModels.get(0).setCompanyCode(barCodeInfo.getCompanyCode());
                             palletDetailModels.get(0).setMaterialNo(barCodeInfo.getMaterialNo());
                             palletDetailModels.get(0).setBatchNo(barCodeInfo.getBatchNo());
@@ -291,11 +298,12 @@ public class CombinPallet extends BaseActivity {
                             palletDetailModels.get(0).setSuppliernName(barCodeInfo.getSupName());
                             palletDetailModels.get(0).setErpVoucherNo(barCodeInfo.getErpVoucherNo());
                             palletDetailModels.get(0).setAreaID(barCodeInfo.getAreaID());
+                            palletDetailModels.get(0).setRowNo(barCodeInfo.getRowNo());
                         }
                     }
                 }
                 BarCodeInfo barCodeInfo = palletDetailModel.getLstBarCode().get(0);
-                txtCompany.setText(barCodeInfo.getStrongHoldName());
+                txtCompany.setText(barCodeInfo.getDimension());
                 txtBatch.setText(barCodeInfo.getBatchNo());
                 txtStatus.setText(barCodeInfo.getStrStatus());
                 txtMaterialName.setText(barCodeInfo.getMaterialDesc());
@@ -303,10 +311,12 @@ public class CombinPallet extends BaseActivity {
                 txtCartonNum.setText(ShowNum());
                 BindListVIew(palletDetailModels.get(0).getLstBarCode());
             } else {
-                MessageBox.Show(context,returnMsgModel.getMessage());
+                MessageBox.Show(context,returnMsgModel.getMessage(),1);
+//                MessageBox.Show(context,returnMsgModel.getMessage());
             }
         }catch (Exception e){
-            MessageBox.Show(context,e.toString());
+//            MessageBox.Show(context,e.toString());
+            MessageBox.Show(context,e.toString(),1);
         }
         CommonUtil.setEditFocus(edtBarcode);
     }
@@ -327,7 +337,8 @@ public class CombinPallet extends BaseActivity {
             }
             CommonUtil.setEditFocus(edtBarcode);
         }else{
-            MessageBox.Show(context,returnMsgModel.getMessage());
+            MessageBox.Show(context,returnMsgModel.getMessage(),1);
+//            MessageBox.Show(context,returnMsgModel.getMessage());
             edtPallet.setEnabled(true);
             CommonUtil.setEditFocus(edtPallet);
         }
@@ -352,11 +363,11 @@ public class CombinPallet extends BaseActivity {
                 barcodeModel.setIP(URLModel.PrintIP);
                 ArrayList<Barcode_Model> barcodeModels=new ArrayList<>();
                 barcodeModels.add(barcodeModel);
-                String modelJson = GsonUtil.parseModelToJson(barcodeModels);
-                final Map<String, String> params = new HashMap<String, String>();
-                params.put("json", modelJson);
-                LogUtil.WriteLog(CombinPallet.class, TAG_PrintLpkPalletAndroid, modelJson);
-                RequestHandler.addRequestWithDialog(Request.Method.POST, TAG_PrintLpkPalletAndroid, getString(R.string.Msg_PrintLpkPalletAndroid), context, mHandler, RESULT_PrintLpkPalletAndroid, null,  URLModel.GetURL().PrintLpkPalletAndroid, params, null);
+//                String modelJson = GsonUtil.parseModelToJson(barcodeModels);
+//                final Map<String, String> params = new HashMap<String, String>();
+//                params.put("json", modelJson);
+//                LogUtil.WriteLog(CombinPallet.class, TAG_PrintLpkPalletAndroid, modelJson);
+//                RequestHandler.addRequestWithDialog(Request.Method.POST, TAG_PrintLpkPalletAndroid, getString(R.string.Msg_PrintLpkPalletAndroid), context, mHandler, RESULT_PrintLpkPalletAndroid, null,  URLModel.GetURL().PrintLpkPalletAndroid, params, null);
             }
         } catch (Exception ex) {
             MessageBox.Show(context, ex.getMessage());
@@ -470,12 +481,14 @@ public class CombinPallet extends BaseActivity {
 //            return getString(R.string.Error_PalletypenotMatch);//.getLstBarCode().get(0)
         if (!palletDetailModels.get(0).getMaterialNo().equals(barCodeInfo.getMaterialNo()))
             return getString(R.string.Error_materialnotMatch);
-        else if (barCodeInfo.getBatchNo()==null || !palletDetailModels.get(0).getBatchNo().equals(barCodeInfo.getBatchNo()))
-            return getString(R.string.Error_BartchnotMatch);
-        else if (barCodeInfo.getSupPrdBatch()==null || !palletDetailModels.get(0).getSupPrdBatch().equals(barCodeInfo.getSupPrdBatch()))
-            return getString(R.string.Error_ProductBartchnotMatch);
-        else if (!palletDetailModels.get(0).getStrongHoldCode().equals(barCodeInfo.getStrongHoldCode()))
-            return getString(R.string.Error_CompanynotMatch);
+            else if (barCodeInfo.getRowNo()==null || !palletDetailModels.get(0).getRowNo().equals(barCodeInfo.getRowNo()))
+        return getString(R.string.Error_rownonotMatch);
+//        else if (barCodeInfo.getBatchNo()==null || !palletDetailModels.get(0).getBatchNo().equals(barCodeInfo.getBatchNo()))
+//            return getString(R.string.Error_BartchnotMatch);
+//        else if (barCodeInfo.getSupPrdBatch()==null || !palletDetailModels.get(0).getSupPrdBatch().equals(barCodeInfo.getSupPrdBatch()))
+//            return getString(R.string.Error_ProductBartchnotMatch);
+//        else if (!palletDetailModels.get(0).getStrongHoldCode().equals(barCodeInfo.getStrongHoldCode()))
+//            return getString(R.string.Error_CompanynotMatch);
         return "";
     }
 }

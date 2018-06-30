@@ -14,7 +14,7 @@ public class UserGroupInfo implements Parcelable {
     private int UserGroupType;
     private int UserGroupStatus;
     private String Description;
-    private Float IsDel;
+    private int IsDel;
     private String StrUserGroupType;
     private String StrUserGroupStatus;
     private boolean BIsChecked;
@@ -35,11 +35,11 @@ public class UserGroupInfo implements Parcelable {
         Description = description;
     }
 
-    public Float getIsDel() {
+    public int getIsDel() {
         return IsDel;
     }
 
-    public void setIsDel(Float isDel) {
+    public void setIsDel(int isDel) {
         IsDel = isDel;
     }
 
@@ -129,7 +129,7 @@ public class UserGroupInfo implements Parcelable {
         this.UserGroupType = in.readInt();
         this.UserGroupStatus = in.readInt();
         this.Description = in.readString();
-        this.IsDel = (Float) in.readValue(Float.class.getClassLoader());
+        this.IsDel = (int) in.readValue(Float.class.getClassLoader());
         this.StrUserGroupType = in.readString();
         this.StrUserGroupStatus = in.readString();
         this.BIsChecked = in.readByte() != 0;

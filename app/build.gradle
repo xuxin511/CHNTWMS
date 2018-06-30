@@ -7,7 +7,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 26
         versionCode 1
-        versionName "1.4"
+        versionName "6.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,12 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     sourceSets {
         main {
             assets.srcDirs = ['assets']
         }
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {

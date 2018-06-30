@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     style="@style/LayoutStyle"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
@@ -11,11 +10,10 @@
         style="@style/TextViewComminStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
         android:layout_marginRight="5dp"
-        android:layout_marginStart="16dp"
         android:text="有效期"
         android:textColor="@color/brown"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/txt_unStatus"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -24,10 +22,13 @@
         style="@style/TextViewComminStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="据点"
-        android:visibility="invisible"
+        android:text="规格"
+        android:textAlignment="textStart"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline86"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +39,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:text="批次"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/txt_unCompany"
@@ -50,8 +50,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:text="已质检"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/txt_unCompany"
         app:layout_constraintLeft_toRightOf="@+id/txt_unBatch" />
 
@@ -61,6 +61,7 @@
         style="@style/TextViewComminStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -71,10 +72,16 @@
         android:textAlignment="viewStart"
         android:textColor="@color/darkblue"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_unCompany"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_unCompany" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline86"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="291dp" />
 
 </android.support.constraint.ConstraintLayout>

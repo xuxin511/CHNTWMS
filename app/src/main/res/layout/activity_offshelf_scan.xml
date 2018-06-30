@@ -41,13 +41,13 @@
         style="@style/TextViewComminStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/SplitNumber"
-        android:visibility="gone"
+        android:text="内盒条码："
+        android:visibility="invisible"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/textView31"
-        tools:text="@string/SplitNumber" />
+        tools:text="内盒条码：" />
 
     <TextView
         android:id="@+id/textView59"
@@ -61,18 +61,34 @@
         app:layout_constraintTop_toBottomOf="@+id/textView132"
         app:layout_constraintHorizontal_bias="0.0" />
 
+    <TextView
+        android:id="@+id/innerNum"
+        style="@style/TextViewComminStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_InOfStock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline17" />
+
+
     <EditText
         android:id="@+id/edt_Unboxing"
         style="@style/EditTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="16dp"
         android:ems="10"
-        android:hint="请输入拆零数量"
+        android:hint="请扫描内盒条码"
         android:inputType="textPersonName"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/txt_Unboxing"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/txt_Unboxing"
         app:layout_constraintRight_toRightOf="parent" />
@@ -90,18 +106,36 @@
     <Button
         android:id="@+id/btn_OutOfStock"
         android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/bt_selector"
         android:text="@string/outofstock"
-        app:layout_constraintBottom_toTopOf="@+id/edt_OffShelfScanbarcode"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_SugestStock"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideline17"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_height="0dp" />
+        app:layout_constraintTop_toBottomOf="@+id/include5" />
+
+    <Button
+        android:id="@+id/btn_InOfStock"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bt_selector"
+        android:text="拆箱"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toTopOf="@+id/edt_OffShelfScanbarcode" />
+
 
     <Button
         android:id="@+id/btn_PrintBox"
@@ -118,15 +152,15 @@
         android:id="@+id/edt_OffShelfScanbarcode"
         style="@style/EditTextStyle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="请扫描条码"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/textView31"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toRightOf="@+id/textView31"
         app:layout_constraintRight_toRightOf="parent" />
@@ -246,15 +280,13 @@
         android:id="@+id/tb_UnboxType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:checked="false"
         android:text="ToggleButton"
-        android:textOff="@string/unboxing"
-        android:textOn="@string/unboxing"
+        android:textOff="内盒"
+        android:textOn="内盒"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideline6"
         app:layout_constraintRight_toRightOf="parent"
@@ -268,13 +300,11 @@
         app:layout_constraintGuide_begin="97dp" />
 
     <android.support.constraint.Guideline
+        android:id="@+id/guideline17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline17"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.81"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="379dp" />
+        app:layout_constraintGuide_percent="0.76" />
 
     <ListView
         android:id="@+id/lsv_PickList"

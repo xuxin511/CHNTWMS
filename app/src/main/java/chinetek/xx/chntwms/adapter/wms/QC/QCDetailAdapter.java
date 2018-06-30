@@ -27,6 +27,7 @@ public class QCDetailAdapter extends BaseAdapter {
         public TextView txtbarcode;
         public TextView txtScanNum;
         public TextView txtMaterialDesc;
+        public TextView txtspec;
     }
 
     public QCDetailAdapter(Context context, List<StockInfo_Model> stockInfoModels) {
@@ -64,14 +65,17 @@ public class QCDetailAdapter extends BaseAdapter {
             listItemView.txtbarcode = (TextView) convertView.findViewById(R.id.txtbarcode);
             listItemView.txtScanNum = (TextView) convertView.findViewById(R.id.txtScanNum);
             listItemView.txtMaterialDesc = (TextView) convertView.findViewById(R.id.txtMaterialDesc);
+            listItemView.txtspec = (TextView) convertView.findViewById(R.id.txtspec);
+
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
         }
         StockInfo_Model stockInfoModel=stockInfoModels.get(selectID);
         listItemView.txtbarcode.setText(stockInfoModel.getMaterialNo());
-        listItemView.txtScanNum.setText("取样数："+(stockInfoModel.getPickModel()==3?stockInfoModel.getAmountQty():stockInfoModel.getQty()));
+        listItemView.txtScanNum.setText("装箱数："+(stockInfoModel.getPickModel()==3?stockInfoModel.getAmountQty():stockInfoModel.getQty()));
         listItemView.txtMaterialDesc.setText(stockInfoModel.getMaterialDesc());
+        listItemView.txtspec.setText(stockInfoModel.getSpec());
         return convertView;
     }
 

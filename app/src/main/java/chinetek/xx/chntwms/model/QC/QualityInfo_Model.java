@@ -36,7 +36,15 @@ public class QualityInfo_Model extends Base_Model implements Parcelable{
     /// </summary>
     private String QuanUserNo;
     private String StrQuanUserNo;
+    private String SubIarrSID;
 
+    public String getSubIarrSID() {
+        return SubIarrSID;
+    }
+
+    public void setSubIarrSID(String subIarrSID) {
+        SubIarrSID = subIarrSID;
+    }
 
     public String getERPStatusCode() {
         return ERPStatusCode;
@@ -234,6 +242,7 @@ public class QualityInfo_Model extends Base_Model implements Parcelable{
         dest.writeString(this.ErpInVoucherNo);
         dest.writeString(this.QuanUserNo);
         dest.writeString(this.StrQuanUserNo);
+        dest.writeString(this.SubIarrSID);
     }
 
     protected QualityInfo_Model(Parcel in) {
@@ -256,6 +265,7 @@ public class QualityInfo_Model extends Base_Model implements Parcelable{
         this.ErpInVoucherNo = in.readString();
         this.QuanUserNo = in.readString();
         this.StrQuanUserNo = in.readString();
+        this.SubIarrSID = in.readString();
     }
 
     public static final Creator<QualityInfo_Model> CREATOR = new Creator<QualityInfo_Model>() {

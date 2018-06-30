@@ -27,14 +27,22 @@
                     android:textSize="15sp"/>
         </LinearLayout>
 
+
+        <TextView
+            android:id="@+id/txtspec"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/txtMaterialDec"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:maxLines="1"
-            android:textSize="18sp"/>
-
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

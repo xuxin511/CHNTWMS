@@ -9,14 +9,15 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1">
+
         <TextView
             android:id="@+id/txtbarcode"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
             android:layout_margin="3dp"
+            android:layout_weight="0.5"
             android:textColor="@color/blue"
-            android:textSize="20sp"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/txtScanNum"
@@ -29,13 +30,23 @@
 </LinearLayout>
 
         <TextView
+            android:id="@+id/txtspec"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:textColor="@color/lime"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/txtMaterialDesc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_margin="3dp"
-            android:textColor="@color/lime"
+            android:layout_weight="1"
             android:maxLines="1"
-            android:textSize="20sp"/>
+            android:textColor="@color/lime"
+            android:textSize="20sp" />
 
 </LinearLayout>

@@ -18,7 +18,7 @@ public class ReceiptDetail_Model extends Base_Model implements Parcelable,Clonea
 
     private int InStockID;
     private String RowNo;
-    private String RowNoDel;
+//    private String RowNoDel;
     private String MaterialNo;
     private String MaterialDesc;
     private Float InStockQty;
@@ -60,7 +60,33 @@ public class ReceiptDetail_Model extends Base_Model implements Parcelable,Clonea
     private String ToBatchNo;
     private String ToErpAreaNo;
     private String ToErpWarehouse;
+    private String SubIarrSID;// U8采购订单子表ID
+    public int IsQuality;
+    private String ErpReviceNo;
 
+    public int getIsQuality() {
+        return IsQuality;
+    }
+
+    public void setIsQuality(int isQuality) {
+        IsQuality = isQuality;
+    }
+
+    public String getErpReviceNo() {
+        return ErpReviceNo;
+    }
+
+    public void setErpReviceNo(String erpReviceNo) {
+        ErpReviceNo = erpReviceNo;
+    }
+
+    public String getSubIarrSID() {
+        return SubIarrSID;
+    }
+
+    public void setSubIarrSID(String subIarrSID) {
+        SubIarrSID = subIarrSID;
+    }
 
     public String getQcCode() {
         return QcCode;
@@ -153,13 +179,13 @@ public class ReceiptDetail_Model extends Base_Model implements Parcelable,Clonea
         SupPrdBatch = supPrdBatch;
     }
 
-    public String getRowNoDel() {
-        return RowNoDel;
-    }
-
-    public void setRowNoDel(String rowNoDel) {
-        RowNoDel = rowNoDel;
-    }
+//    public String getRowNoDel() {
+//        return RowNoDel;
+//    }
+//
+//    public void setRowNoDel(String rowNoDel) {
+//        RowNoDel = rowNoDel;
+//    }
 
     public Date getArrivalDate() {
         return ArrivalDate;
@@ -442,8 +468,8 @@ public class ReceiptDetail_Model extends Base_Model implements Parcelable,Clonea
 
         ReceiptDetail_Model that = (ReceiptDetail_Model) o;
 
-        return MaterialNo.equals(that.MaterialNo) && RowNo.equals(that.RowNo) && RowNoDel.equals(that.RowNoDel);
-
+//        return MaterialNo.equals(that.MaterialNo) && RowNo.equals(that.RowNo) && RowNoDel.equals(that.RowNoDel);
+        return MaterialNo.equals(that.MaterialNo) && RowNo.equals(that.RowNo);
     }
 
     @Override
@@ -462,11 +488,16 @@ public class ReceiptDetail_Model extends Base_Model implements Parcelable,Clonea
     public ReceiptDetail_Model() {
     }
 
-    public ReceiptDetail_Model(String MaterialNo,String RowNo,String RowNoDel) {
+    public ReceiptDetail_Model(String MaterialNo,String RowNo) {
         this.MaterialNo=MaterialNo;
         this.RowNo=RowNo;
-        this.RowNoDel=RowNoDel;
     }
+
+    public ReceiptDetail_Model(String MaterialNo) {
+        this.MaterialNo=MaterialNo;
+
+    }
+
 
     @Override
     public int describeContents() {
@@ -478,7 +509,6 @@ public class ReceiptDetail_Model extends Base_Model implements Parcelable,Clonea
         super.writeToParcel(dest, flags);
         dest.writeInt(this.InStockID);
         dest.writeString(this.RowNo);
-        dest.writeString(this.RowNoDel);
         dest.writeString(this.MaterialNo);
         dest.writeString(this.MaterialDesc);
         dest.writeValue(this.InStockQty);
@@ -520,13 +550,15 @@ public class ReceiptDetail_Model extends Base_Model implements Parcelable,Clonea
         dest.writeString(this.ToBatchNo);
         dest.writeString(this.ToErpAreaNo);
         dest.writeString(this.ToErpWarehouse);
+        dest.writeString(this.SubIarrSID);
+        dest.writeInt(this.IsQuality);
+        dest.writeString(this.ErpReviceNo);
     }
 
     protected ReceiptDetail_Model(Parcel in) {
         super(in);
         this.InStockID = in.readInt();
         this.RowNo = in.readString();
-        this.RowNoDel = in.readString();
         this.MaterialNo = in.readString();
         this.MaterialDesc = in.readString();
         this.InStockQty = (Float) in.readValue(Float.class.getClassLoader());
@@ -572,6 +604,9 @@ public class ReceiptDetail_Model extends Base_Model implements Parcelable,Clonea
         this.ToBatchNo = in.readString();
         this.ToErpAreaNo = in.readString();
         this.ToErpWarehouse = in.readString();
+        this.SubIarrSID = in.readString();
+        this.IsQuality = in.readInt();
+        this.ErpReviceNo = in.readString();
     }
 
     public static final Creator<ReceiptDetail_Model> CREATOR = new Creator<ReceiptDetail_Model>() {

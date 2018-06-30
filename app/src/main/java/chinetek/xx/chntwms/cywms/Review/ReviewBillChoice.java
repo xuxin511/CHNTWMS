@@ -99,12 +99,14 @@ public class ReviewBillChoice extends BaseActivity implements SwipeRefreshLayout
     @Override
     protected void onResume() {
         super.onResume();
+        stockInfoModels=new ArrayList<StockInfo_Model>();
         InitListView();
     }
 
     @Override
     public void onRefresh() {
         outStockModels=new ArrayList<>();
+
         InitListView();
     }
 
@@ -201,7 +203,8 @@ public class ReviewBillChoice extends BaseActivity implements SwipeRefreshLayout
             }
         }else
         {
-            MessageBox.Show(context,returnMsgModel.getMessage());
+//            MessageBox.Show(context,returnMsgModel.getMessage());
+            MessageBox.Show(context,returnMsgModel.getMessage(),1);
         }
         CommonUtil.setEditFocus(edtfilterContent);
     }

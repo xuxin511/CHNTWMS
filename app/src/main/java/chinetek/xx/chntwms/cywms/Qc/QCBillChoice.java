@@ -176,7 +176,7 @@ public class QCBillChoice extends BaseActivity implements SwipeRefreshLayout.OnR
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(!edtfilterContent.getText().toString().equals(""))
-                qcBillChioceItemAdapter.getFilter().filter(edtfilterContent.getText().toString());
+                qcBillChioceItemAdapter.getFilter().filter(SubIarrSID+","+ErpInVoucherNo);
             else{
                 BindListVIew(qualityInfoModels);
             }
@@ -215,8 +215,8 @@ public class QCBillChoice extends BaseActivity implements SwipeRefreshLayout.OnR
     private void InitListView() {
         QualityInfo_Model qualityInfoModel=new QualityInfo_Model();
         qualityInfoModel.setStatus(1);
-        qualityInfoModel.setERPStatusCode("N");
-        qualityInfoModel.setQuanUserNo(BaseApplication.userInfo.getID()+"");
+        qualityInfoModel.setERPStatusCode("Y");
+//        qualityInfoModel.setQuanUserNo(BaseApplication.userInfo.getID()+"");
         GetT_QualityList(qualityInfoModel);
     }
 
@@ -234,6 +234,8 @@ public class QCBillChoice extends BaseActivity implements SwipeRefreshLayout.OnR
         }
     }
 
+    private String  ErpInVoucherNo="";
+    private String  SubIarrSID="";
     void AnalysisGetT_OutBarCodeInfoForQuanADFJson(String result){
         try {
             LogUtil.WriteLog(QCBillChoice.class, TAG_GetT_OutBarCodeInfoForQuanADF, result);
@@ -242,16 +244,20 @@ public class QCBillChoice extends BaseActivity implements SwipeRefreshLayout.OnR
             if (returnMsgModel.getHeaderStatus().equals("S")) {
                 stockInfoModel = returnMsgModel.getModelJson();
                 if(stockInfoModel!=null){
+                    SubIarrSID=stockInfoModel.getSubIarrSID();
+                    ErpInVoucherNo=stockInfoModel.getErpInVoucherNo();
                   edtfilterContent.setText(stockInfoModel.getMaterialNo());
                     CommonUtil.setEditFocus(edtfilterContent);
                 }
             } else {
                 edtfilterContent.setText("");
-                MessageBox.Show(context, returnMsgModel.getMessage());
+//                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
                 CommonUtil.setEditFocus(edtfilterContent);
             }
         }catch (Exception ex){
-            MessageBox.Show(context, ex.getMessage());
+//            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
             CommonUtil.setEditFocus(edtfilterContent);
         }
 
@@ -273,7 +279,8 @@ public class QCBillChoice extends BaseActivity implements SwipeRefreshLayout.OnR
                ToastUtil.show(returnMsgModel.getMessage());
             }
         }catch (Exception ex){
-            MessageBox.Show(context,ex.getMessage());
+            MessageBox.Show(context,ex.getMessage(),1);
+//            MessageBox.Show(context,ex.getMessage());
         }
         BindListVIew(qualityInfoModels);
     }
@@ -286,10 +293,12 @@ public class QCBillChoice extends BaseActivity implements SwipeRefreshLayout.OnR
                 isQcPrint=false;
                 initFrm();
             }else{
-                MessageBox.Show(context, returnMsgModel.getMessage());
+//                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
             }
         } catch (Exception ex) {
-            MessageBox.Show(context, ex.getMessage());
+//            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
         }
     }
 

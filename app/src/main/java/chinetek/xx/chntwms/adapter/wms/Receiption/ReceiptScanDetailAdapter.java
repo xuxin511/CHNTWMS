@@ -28,6 +28,8 @@ public class ReceiptScanDetailAdapter extends BaseAdapter {
         public TextView txtScanNum;
         public TextView txtRemainQty;
         public TextView txtMaterialDesc;
+        public TextView txtCanReviewQty;
+
     }
 
     public ReceiptScanDetailAdapter(Context context, List<ReceiptDetail_Model> receiptDetailModels) {
@@ -65,6 +67,8 @@ public class ReceiptScanDetailAdapter extends BaseAdapter {
             listItemView.txtScanNum = (TextView) convertView.findViewById(R.id.txtScanNum);
             listItemView.txtRemainQty = (TextView) convertView.findViewById(R.id.txtRemainQty);
             listItemView.txtMaterialDesc = (TextView) convertView.findViewById(R.id.txtMaterialDesc);
+            listItemView.txtCanReviewQty = (TextView) convertView.findViewById(R.id.txtCanReviewQty);
+
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
@@ -74,6 +78,7 @@ public class ReceiptScanDetailAdapter extends BaseAdapter {
         listItemView.txtScanNum.setText("扫描数："+receiptDetailModel.getScanQty());
         listItemView.txtRemainQty.setText("收货数："+receiptDetailModel.getRemainQty());
         listItemView.txtMaterialDesc.setText(receiptDetailModel.getMaterialDesc());
+        listItemView.txtCanReviewQty.setText(receiptDetailModel.getSpec());
         if (receiptDetailModel.getScanQty()!=0 &&
                 receiptDetailModel.getScanQty().compareTo(receiptDetailModel.getRemainQty())<0) {
             convertView.setBackgroundResource(R.color.khaki);

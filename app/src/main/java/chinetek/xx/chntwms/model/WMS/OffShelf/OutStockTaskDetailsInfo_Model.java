@@ -54,8 +54,9 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
     private String Unit;
     private Float UnQualityQty;
     private Float PostQty;
-    private Float PostStatus;
-    private Date PostDate;
+
+
+
     private String ReserveNumber;
     private String ReserveRowNo;
     private Float UnShelveQty;
@@ -64,7 +65,7 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
     private String ReviewUser;
     private Date ReviewDate;
     private Float ReviewStatus;
-    private String PostUser;
+
     private String Costcenter;
     private String Wbselem;
     private String ToStorageLoc;
@@ -96,9 +97,56 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
     private String PartNo;
     private String MoveType;
     private String BatchNo;
+    private int  WareHouseID;
+    public String CustomerCode;
+    public String CustomerName;
+
+    public Date getFromShipmentDate() {
+        return FromShipmentDate;
+    }
+
+    public void setFromShipmentDate(Date fromShipmentDate) {
+        FromShipmentDate = fromShipmentDate;
+    }
+
+    public Date FromShipmentDate;
 
     /// <summary>
+
+    public String getCustomerCode() {
+        return CustomerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        CustomerCode = customerCode;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        CustomerName = customerName;
+    }
+
     /// 是否指定批次
+
+    public int getWareHouseID() {
+        return WareHouseID;
+    }
+
+    public void setWareHouseID(int wareHouseID) {
+        WareHouseID = wareHouseID;
+    }
+
+    public String getToBatchNo() {
+        return ToBatchNo;
+    }
+
+    public void setToBatchNo(String toBatchNo) {
+        ToBatchNo = toBatchNo;
+    }
+
     /// </summary>
     private String IsSpcBatch;
     /// <summary>
@@ -456,13 +504,6 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
         PoRowNo = poRowNo;
     }
 
-    public Date getPostDate() {
-        return PostDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        PostDate = postDate;
-    }
 
     public Float getPostQty() {
         return PostQty;
@@ -472,21 +513,6 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
         PostQty = postQty;
     }
 
-    public Float getPostStatus() {
-        return PostStatus;
-    }
-
-    public void setPostStatus(Float postStatus) {
-        PostStatus = postStatus;
-    }
-
-    public String getPostUser() {
-        return PostUser;
-    }
-
-    public void setPostUser(String postUser) {
-        PostUser = postUser;
-    }
 
     public Float getQualityQty() {
         return QualityQty;
@@ -776,8 +802,6 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
         dest.writeString(this.Unit);
         dest.writeValue(this.UnQualityQty);
         dest.writeValue(this.PostQty);
-        dest.writeValue(this.PostStatus);
-        dest.writeLong(this.PostDate != null ? this.PostDate.getTime() : -1);
         dest.writeString(this.ReserveNumber);
         dest.writeString(this.ReserveRowNo);
         dest.writeValue(this.UnShelveQty);
@@ -786,7 +810,6 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
         dest.writeString(this.ReviewUser);
         dest.writeLong(this.ReviewDate != null ? this.ReviewDate.getTime() : -1);
         dest.writeValue(this.ReviewStatus);
-        dest.writeString(this.PostUser);
         dest.writeString(this.Costcenter);
         dest.writeString(this.Wbselem);
         dest.writeString(this.ToStorageLoc);
@@ -818,6 +841,10 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
         dest.writeString(this.PartNo);
         dest.writeString(this.MoveType);
         dest.writeString(this.BatchNo);
+        dest.writeInt(this.WareHouseID);
+        dest.writeString(this.CustomerCode);
+        dest.writeString(this.CustomerName);
+        dest.writeLong(this.FromShipmentDate != null ? this.FromShipmentDate.getTime() : -1);
         dest.writeString(this.IsSpcBatch);
         dest.writeString(this.FromBatchNo);
         dest.writeString(this.FromErpAreaNo);
@@ -855,9 +882,6 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
         this.Unit = in.readString();
         this.UnQualityQty = (Float) in.readValue(Float.class.getClassLoader());
         this.PostQty = (Float) in.readValue(Float.class.getClassLoader());
-        this.PostStatus = (Float) in.readValue(Float.class.getClassLoader());
-        long tmpPostDate = in.readLong();
-        this.PostDate = tmpPostDate == -1 ? null : new Date(tmpPostDate);
         this.ReserveNumber = in.readString();
         this.ReserveRowNo = in.readString();
         this.UnShelveQty = (Float) in.readValue(Float.class.getClassLoader());
@@ -867,7 +891,6 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
         long tmpReviewDate = in.readLong();
         this.ReviewDate = tmpReviewDate == -1 ? null : new Date(tmpReviewDate);
         this.ReviewStatus = (Float) in.readValue(Float.class.getClassLoader());
-        this.PostUser = in.readString();
         this.Costcenter = in.readString();
         this.Wbselem = in.readString();
         this.ToStorageLoc = in.readString();
@@ -899,6 +922,11 @@ public class OutStockTaskDetailsInfo_Model extends Base_Model implements Parcela
         this.PartNo = in.readString();
         this.MoveType = in.readString();
         this.BatchNo = in.readString();
+        this.WareHouseID = in.readInt();
+        this.CustomerCode = in.readString();
+        this.CustomerName = in.readString();
+        long tmpFromShipmentDate = in.readLong();
+        this.FromShipmentDate = tmpFromShipmentDate == -1 ? null : new Date(tmpFromShipmentDate);
         this.IsSpcBatch = in.readString();
         this.FromBatchNo = in.readString();
         this.FromErpAreaNo = in.readString();

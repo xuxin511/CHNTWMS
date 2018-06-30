@@ -40,6 +40,14 @@
             android:textColor="@color/darkblue"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/item_spec"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:maxLines="1"
+            android:textColor="@color/darkblue"
+            android:textSize="20sp" />
 
 
 </LinearLayout>

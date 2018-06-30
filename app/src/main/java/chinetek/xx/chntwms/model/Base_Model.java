@@ -50,6 +50,89 @@ public class Base_Model implements Parcelable {
     public String  ErpVoucherNo;
     private String  PrintIPAdress;
 
+    private Float TaxRate;//税率
+    private Float ExchRate;//汇率
+    private String ExchName;//币种
+    private Float UnitPrice;//原币单价
+    private String Spec;//规格
+    private String ENA;
+
+    private int PostStatus;
+    private Date PostDate;
+    private String PostUser;
+
+    public int getPostStatus() {
+        return PostStatus;
+    }
+
+    public void setPostStatus(int postStatus) {
+        PostStatus = postStatus;
+    }
+
+    public Date getPostDate() {
+        return PostDate;
+    }
+
+    public void setPostDate(Date postDate) {
+        PostDate = postDate;
+    }
+
+    public String getPostUser() {
+        return PostUser;
+    }
+
+    public void setPostUser(String postUser) {
+        PostUser = postUser;
+    }
+
+    public Float getTaxRate() {
+        return TaxRate;
+    }
+
+    public void setTaxRate(Float taxRate) {
+        TaxRate = taxRate;
+    }
+
+    public Float getExchRate() {
+        return ExchRate;
+    }
+
+    public void setExchRate(Float exchRate) {
+        ExchRate = exchRate;
+    }
+
+    public String getExchName() {
+        return ExchName;
+    }
+
+    public void setExchName(String exchName) {
+        ExchName = exchName;
+    }
+
+    public Float getUnitPrice() {
+        return UnitPrice;
+    }
+
+    public void setUnitPrice(Float unitPrice) {
+        UnitPrice = unitPrice;
+    }
+
+    public String getSpec() {
+        return Spec;
+    }
+
+    public void setSpec(String spec) {
+        Spec = spec;
+    }
+
+    public String getENA() {
+        return ENA;
+    }
+
+    public void setENA(String ENA) {
+        this.ENA = ENA;
+    }
+
     public String getERPVoucherType() {
         return ERPVoucherType;
     }
@@ -374,6 +457,15 @@ public class Base_Model implements Parcelable {
         dest.writeString(this.ERPVoucherType);
         dest.writeString(this.ErpVoucherNo);
         dest.writeString(this.PrintIPAdress);
+        dest.writeValue(this.TaxRate);
+        dest.writeValue(this.ExchRate);
+        dest.writeString(this.ExchName);
+        dest.writeValue(this.UnitPrice);
+        dest.writeString(this.Spec);
+        dest.writeString(this.ENA);
+        dest.writeInt(this.PostStatus);
+        dest.writeLong(this.PostDate != null ? this.PostDate.getTime() : -1);
+        dest.writeString(this.PostUser);
         dest.writeInt(this.StockType);
     }
 
@@ -413,6 +505,16 @@ public class Base_Model implements Parcelable {
         this.ERPVoucherType = in.readString();
         this.ErpVoucherNo = in.readString();
         this.PrintIPAdress = in.readString();
+        this.TaxRate = (Float) in.readValue(Float.class.getClassLoader());
+        this.ExchRate = (Float) in.readValue(Float.class.getClassLoader());
+        this.ExchName = in.readString();
+        this.UnitPrice = (Float) in.readValue(Float.class.getClassLoader());
+        this.Spec = in.readString();
+        this.ENA = in.readString();
+        this.PostStatus = in.readInt();
+        long tmpPostDate = in.readLong();
+        this.PostDate = tmpPostDate == -1 ? null : new Date(tmpPostDate);
+        this.PostUser = in.readString();
         this.StockType = in.readInt();
     }
 

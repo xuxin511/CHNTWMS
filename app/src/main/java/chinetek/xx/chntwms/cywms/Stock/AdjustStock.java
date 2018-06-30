@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.Deflater;
 
 import chinetek.xx.chntwms.base.BaseActivity;
 import chinetek.xx.chntwms.base.BaseApplication;
@@ -107,8 +108,9 @@ public class AdjustStock extends BaseActivity {
     TextView btnSubmit;
 
     Barcode_Model barcodeModel;
-    String[] QCStatus={"待检","检验合格","检验不合格"};
-    int[] QCStatusType={1,3,4};
+//    String[] QCStatus={"待检","检验合格","检验不合格"};
+    String[] QCStatus={"待检","检验合格"};
+    int[] QCStatusType={1,3};
     String[] StrongHoldCode={"CY1","CX1","FC1"};
     String[] StrongHoldName={"上海创元","上海创馨","上海甫成"};
 
@@ -339,7 +341,7 @@ public class AdjustStock extends BaseActivity {
                ArrayList<Barcode_Model> barcodeModels=returnMsgModel.getModelJson();
                 if(barcodeModels!=null && barcodeModels.size()!=0) {
                     barcodeModel = barcodeModels.get(0);
-                    txtCompany.setText(barcodeModel.getStrongHoldName());
+                    txtCompany.setText(barcodeModel.getDimension());
                     txtBatch.setText(barcodeModel.getBatchNo());
                     txtStatus.setText("");
                     txtEDate.setText(barcodeModel.getEds());
@@ -348,12 +350,13 @@ public class AdjustStock extends BaseActivity {
                     edtAdjustBatchNo.setText(barcodeModel.getBatchNo());
                     edtAdjustNum.setText(barcodeModel.getQty() + "");
                     txtchangeEData.setText(barcodeModel.getEds());
+                    barcodeModel.setSTATUS((barcodeModel.getSTATUS()!=1&&barcodeModel.getSTATUS()!=3)?3:barcodeModel.getSTATUS());
                     txtQCStatus.setText(getQCStrStatus(barcodeModel.getSTATUS()));
                     txtWarehouse.setText(barcodeModel.getWarehousename());
                     edtAdjustStock.setText(barcodeModel.getAreano());
                     boolean isInsert = barcodeModel.getAllIn().equals("0");
-                    txtStrongHold.setEnabled(!isInsert);
-                    edtAdjustBatchNo.setEnabled(!isInsert);
+//                    txtStrongHold.setEnabled(!isInsert);
+//                    edtAdjustBatchNo.setEnabled(!isInsert);
                     edtAdjustNum.setEnabled(!isInsert);
                 }
             } else
@@ -409,6 +412,8 @@ public class AdjustStock extends BaseActivity {
             case 4:
                 QCStaatus=QCStatus[2];
                 break;
+            default:QCStaatus=QCStatus[1];
+            break;
         }
         return QCStaatus;
     }

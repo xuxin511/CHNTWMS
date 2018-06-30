@@ -15,7 +15,7 @@ public class MenuInfo implements Parcelable {
     private Float IsDefault;
     private int MenuStatus;
     private String Description;
-    private Float IsDel;
+    private int IsDel;
     private Float MenuStyle;
     private String StrMenuType;
     private String StrMenuStatus;
@@ -73,11 +73,11 @@ public class MenuInfo implements Parcelable {
         IsDefault = isDefault;
     }
 
-    public Float getIsDel() {
+    public int getIsDel() {
         return IsDel;
     }
 
-    public void setIsDel(Float isDel) {
+    public void setIsDel(int isDel) {
         IsDel = isDel;
     }
 
@@ -190,7 +190,7 @@ public class MenuInfo implements Parcelable {
         this.IsDefault = (Float) in.readValue(Float.class.getClassLoader());
         this.MenuStatus = in.readInt();
         this.Description = in.readString();
-        this.IsDel = (Float) in.readValue(Float.class.getClassLoader());
+        this.IsDel = (int) in.readValue(Float.class.getClassLoader());
         this.MenuStyle = (Float) in.readValue(Float.class.getClassLoader());
         this.StrMenuType = in.readString();
         this.StrMenuStatus = in.readString();

@@ -167,11 +167,14 @@ public class DismantlePallet extends BaseActivity {
                 ClearFrm();
                 MessageBox.Show(context, "托盘条码打印成功！");
             } else {
-                MessageBox.Show(context, returnMsgModel.getMessage());
+//                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
             }
         }catch (Exception ex){
-            MessageBox.Show(context, ex.getMessage());
+//            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
         }
+
     }
 
 
@@ -247,7 +250,8 @@ public class DismantlePallet extends BaseActivity {
                     String PalletNo=txtPalletNo.getText().toString();
                     if(!TextUtils.isEmpty(PalletNo)){
                         if(!PalletNo.equals(temppalletDetailModels.get(0).getPalletNo())){
-                            MessageBox.Show(context,getString(R.string.Error_PalletNoMatch));
+//                            MessageBox.Show(context,getString(R.string.Error_PalletNoMatch));
+                            MessageBox.Show(context,getString(R.string.Error_PalletNoMatch),1);
                            CommonUtil.setEditFocus(edtBarcode);
                             return;
                         }
@@ -264,7 +268,7 @@ public class DismantlePallet extends BaseActivity {
                             palletDetailModels.get(0).setPalletNo(temppalletDetailModels.get(0).getPalletNo());
                             palletDetailModels.get(0).setPalletType(temppalletDetailModels.get(0).getPalletType());
                             palletDetailModels.get(0).getLstBarCode().add(0, barCodeInfo);
-                            txtCompany.setText(barCodeInfo.getStrongHoldName());
+                            txtCompany.setText(barCodeInfo.getDimension());
                             txtBatch.setText(barCodeInfo.getBatchNo());
                             txtStatus.setText("");
                             txtEDate.setText(CommonUtil.DateToString(barCodeInfo.getEDate()));
@@ -272,7 +276,8 @@ public class DismantlePallet extends BaseActivity {
                             txtPalletNo.setText(temppalletDetailModels.get(0).getPalletNo());
                             //BindListVIew(palletDetailModels.get(0).getLstBarCode());
                         } else {
-                            MessageBox.Show(context, getString(R.string.Error_BarcodeScaned));
+//                            MessageBox.Show(context, getString(R.string.Error_BarcodeScaned));
+                            MessageBox.Show(context, getString(R.string.Error_BarcodeScaned),1);
                         }
                         if(!SWDisPallet.isChecked()) break;
 
@@ -282,12 +287,14 @@ public class DismantlePallet extends BaseActivity {
 //                    }
                 }
             }catch (Exception ex){
-                MessageBox.Show(context, ex.getMessage());
+//                MessageBox.Show(context, ex.getMessage());
+                MessageBox.Show(context, ex.getMessage(),1);
             }
             BindListVIew(palletDetailModels.get(0).getLstBarCode());
         }else
         {
-            MessageBox.Show(context,returnMsgModel.getMessage());
+            MessageBox.Show(context,returnMsgModel.getMessage(),1);
+//            MessageBox.Show(context,returnMsgModel.getMessage());
         }
         CommonUtil.setEditFocus(edtBarcode);
     }
@@ -322,11 +329,13 @@ public class DismantlePallet extends BaseActivity {
 
             }
             else{
-                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
+//                MessageBox.Show(context, returnMsgModel.getMessage());
             }
 
         } catch (Exception ex) {
-            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
+//            MessageBox.Show(context, ex.getMessage());
         }
     }
 

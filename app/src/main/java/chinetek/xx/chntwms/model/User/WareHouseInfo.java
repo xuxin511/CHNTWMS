@@ -18,7 +18,7 @@ public class WareHouseInfo implements Parcelable {
     private String Address;
     private String LocationDesc;
     private int WareHouseStatus;
-    private Float IsDel;
+    private int IsDel;
     private String HouseNo;
     private String HouseName;
     private boolean BIsLock;
@@ -40,11 +40,11 @@ public class WareHouseInfo implements Parcelable {
         this.ID = ID;
     }
 
-    public Float getIsDel() {
+    public int getIsDel() {
         return IsDel;
     }
 
-    public void setIsDel(Float isDel) {
+    public void setIsDel(int isDel) {
         IsDel = isDel;
     }
 
@@ -262,7 +262,7 @@ public class WareHouseInfo implements Parcelable {
         this.Address = in.readString();
         this.LocationDesc = in.readString();
         this.WareHouseStatus = in.readInt();
-        this.IsDel = (Float) in.readValue(Float.class.getClassLoader());
+        this.IsDel = (int) in.readValue(Float.class.getClassLoader());
         this.HouseNo = in.readString();
         this.HouseName = in.readString();
         this.BIsLock = in.readByte() != 0;

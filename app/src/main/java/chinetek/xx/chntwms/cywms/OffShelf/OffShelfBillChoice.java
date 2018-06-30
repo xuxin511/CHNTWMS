@@ -151,10 +151,12 @@ public class OffShelfBillChoice extends BaseActivity implements SwipeRefreshLayo
                             RequestHandler.addRequestWithDialog(Request.Method.POST, TAG_GetPickUserListByUserADF, getString(R.string.Msg_GetT_GetPickUserListByUserADF), context, mHandler, RESULT_GetPickUserListByUserADF, null, URLModel.GetURL().GetPickUserListByUserADF, params, null);
                         }
                     } else {
-                        MessageBox.Show(context, getString(R.string.Msg_NoSelectOffshelfTask));
+//                        MessageBox.Show(context, getString(R.string.Msg_NoSelectOffshelfTask));
+                        MessageBox.Show(context, getString(R.string.Msg_NoSelectOffshelfTask),1);
                     }
                 } catch (Exception ex) {
-                    MessageBox.Show(context, ex.getMessage());
+//                    MessageBox.Show(context, ex.getMessage());
+                    MessageBox.Show(context, ex.getMessage(),1);
                 }
 
         }
@@ -167,7 +169,8 @@ public class OffShelfBillChoice extends BaseActivity implements SwipeRefreshLayo
                 item.setTitle(isPickingAdmin?getString(R.string.isPicking):getString(R.string.cancelPicking));
                 InitListView();
             } catch (Exception ex) {
-                MessageBox.Show(context, ex.getMessage());
+                MessageBox.Show(context, ex.getMessage(),1);
+//                MessageBox.Show(context, ex.getMessage());
             }
 
         }
@@ -205,7 +208,8 @@ public class OffShelfBillChoice extends BaseActivity implements SwipeRefreshLayo
     @Event(R.id.btn_StartPicking)
     private void btnStartPickingClick(View view){
         if(!GetSelectTask()){
-            MessageBox.Show(context,getString(R.string.Error_NotSameType));
+//            MessageBox.Show(context,getString(R.string.Error_NotSameType));
+            MessageBox.Show(context,getString(R.string.Error_NotSameType),1);
             return;
         }
         if(selectoutStockTaskInfoModels!=null  && selectoutStockTaskInfoModels.size()!=0){
@@ -256,7 +260,8 @@ public class OffShelfBillChoice extends BaseActivity implements SwipeRefreshLayo
                     RESULT_GetT_OutTaskListADF, null,  URLModel.GetURL().GetT_OutTaskListADF, params, null);
         } catch (Exception ex) {
             mSwipeLayout.setRefreshing(false);
-            MessageBox.Show(context, ex.getMessage());
+//            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
         }
     }
 
@@ -295,7 +300,8 @@ public class OffShelfBillChoice extends BaseActivity implements SwipeRefreshLayo
 
         }else
         {
-            MessageBox.Show(context,returnMsgModel.getMessage());
+//            MessageBox.Show(context,returnMsgModel.getMessage());
+            MessageBox.Show(context,returnMsgModel.getMessage(),1);
         }
     }
 
@@ -325,12 +331,14 @@ public class OffShelfBillChoice extends BaseActivity implements SwipeRefreshLayo
             if (returnMsgModel.getHeaderStatus().equals("S")) {
                 outStockTaskInfoModels = returnMsgModel.getModelJson();
             } else {
-                MessageBox.Show(context, returnMsgModel.getMessage());
+//                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
             }
             if (outStockTaskInfoModels != null)
                 BindListVIew(outStockTaskInfoModels);
         }catch (Exception ex){
-            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
+//            MessageBox.Show(context, ex.getMessage());
         }
     }
 

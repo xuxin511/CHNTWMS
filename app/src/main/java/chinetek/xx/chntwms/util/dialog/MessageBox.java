@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import chinetek.xx.chntwms.util.function.CommonUtil;
 
+import static chinetek.xx.chntwms.util.PlayVideo.PlayVoice.PlayError;
+
 
 public class MessageBox {
     /**
@@ -18,6 +20,11 @@ public class MessageBox {
      * @param message 需要弹出的消息
      */
     public static void Show(Context context, String message) {
+        new AlertDialog.Builder(context).setTitle("提示").setCancelable(false).setMessage(message).setPositiveButton("确定", null).show();
+    }
+
+    public static void Show(Context context, String message,int flag) {
+        PlayError(context);
         new AlertDialog.Builder(context).setTitle("提示").setCancelable(false).setMessage(message).setPositiveButton("确定", null).show();
     }
 

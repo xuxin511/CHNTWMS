@@ -38,6 +38,7 @@ import chinetek.xx.chntwms.model.ReturnMsgModelList;
 import chinetek.xx.chntwms.model.URLModel;
 import chinetek.xx.chntwms.util.Network.NetworkError;
 import chinetek.xx.chntwms.util.Network.RequestHandler;
+import chinetek.xx.chntwms.util.PlayVideo.PlayVoice;
 import chinetek.xx.chntwms.util.dialog.MessageBox;
 import chinetek.xx.chntwms.util.dialog.ToastUtil;
 import chinetek.xx.chntwms.util.function.CommonUtil;
@@ -231,7 +232,7 @@ public class ReceiptBillChoice extends BaseActivity implements SwipeRefreshLayou
                     params.put("BarCode", code);
                     params.put("UserJson", GsonUtil.parseModelToJson(BaseApplication.userInfo));
                     LogUtil.WriteLog(ReceiptBillChoice.class, TAG_GetT_PalletDetailByBarCode, code);
-                    RequestHandler.addRequestWithDialog(Request.Method.POST, TAG_GetT_PalletDetailByBarCode, getString(R.string.Msg_GetT_InStockListADF), context, mHandler, RESULT_GetT_PalletDetailByBarCode, null,  URLModel.GetURL().GetT_PalletDetailByBarCodeADF, params, null);
+                    RequestHandler.addRequestWithDialog(Request.Method.POST, TAG_GetT_PalletDetailByBarCode, getString(R.string.Msg_barcodeinfo), context, mHandler, RESULT_GetT_PalletDetailByBarCode, null,  URLModel.GetURL().GetT_PalletDetailByBarCodeADF, params, null);
                     return false;
                 }
             }
@@ -274,10 +275,16 @@ public class ReceiptBillChoice extends BaseActivity implements SwipeRefreshLayou
                     //  int index = receiptModels.indexOf(receiptModel);
                     //  if (index != -1) {
                     //调用GetT_InStockList 赋值ERP订单号字段，获取Receipt_Model列表，跳转到扫描界面
-                    Receipt_Model receiptModel = new Receipt_Model();
-                    receiptModel.setStatus(1);
-                    receiptModel.setErpVoucherNo(barCodeInfos.get(0).getErpVoucherNo());
-                    GetT_InStockList(receiptModel);
+                    if(barCodeInfos.get(0).getErpVoucherNo()==null||barCodeInfos.get(0).getErpVoucherNo().isEmpty()){
+                        MessageBox.Show(context,"订单号为空，请扫描或者手输订单号！");
+                        PlayVoice.PlayError(context);
+                    }else{
+                        Receipt_Model receiptModel = new Receipt_Model();
+                        receiptModel.setStatus(1);
+                        receiptModel.setErpVoucherNo(barCodeInfos.get(0).getErpVoucherNo());
+                        GetT_InStockList(receiptModel);
+                    }
+
                     //   } else {
                     //     MessageBox.Show(context, R.string.Error_BarcodeNotInList);
                     // }

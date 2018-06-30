@@ -198,10 +198,12 @@ public class IntentoryFinc extends BaseActivity {
                 inventoryScanItemAdapter=new InventoryScanItemAdapter(context,model,barcodeModels);
                 lsvIntentoryScan.setAdapter(inventoryScanItemAdapter);
             } else {
-                MessageBox.Show(context, returnMsgModel.getMessage());
+//                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
             }
         }catch (Exception ex){
-            MessageBox.Show(context, ex.getMessage());
+//            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
         }
 
         CommonUtil.setEditFocus(edtInvScanBarcode);
@@ -217,7 +219,8 @@ public class IntentoryFinc extends BaseActivity {
                 closeActiviry();
             }
         }catch (Exception ex){
-            MessageBox.Show(context, ex.getMessage());
+//            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
         }
 
         CommonUtil.setEditFocus(edtInvScanBarcode);
@@ -238,7 +241,8 @@ public class IntentoryFinc extends BaseActivity {
                     txtStockNum.setText(barcodemodel.getQty()+"");
                     int index=barcodeModels.indexOf(barcodemodel);
                     if(index==-1){
-                        MessageBox.Show(context,getString(R.string.Error_Inventory_Nomaterial));
+//                        MessageBox.Show(context,getString(R.string.Error_Inventory_Nomaterial));
+                        MessageBox.Show(context,getString(R.string.Error_Inventory_Nomaterial),1);
                         CommonUtil.setEditFocus(edtInvScanBarcode);
                         return;
                     }
@@ -249,10 +253,12 @@ public class IntentoryFinc extends BaseActivity {
                 inventoryScanItemAdapter=new InventoryScanItemAdapter(context,model,barcodeModels);
                 lsvIntentoryScan.setAdapter(inventoryScanItemAdapter);
             } else {
-                MessageBox.Show(context, returnMsgModel.getMessage());
+//                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
             }
         }catch (Exception ex){
-            MessageBox.Show(context, ex.getMessage());
+//            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
         }
 
         CommonUtil.setEditFocus(edtInvScanBarcode);

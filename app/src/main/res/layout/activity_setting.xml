@@ -17,6 +17,7 @@
         android:layout_marginStart="16dp"
         android:hint="请扫描电子称IP地址"
         android:selectAllOnFocus="true"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline45" />
@@ -30,6 +31,7 @@
         android:layout_marginStart="16dp"
         android:hint="请扫描打印机IP地址"
         android:selectAllOnFocus="true"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline45" />
@@ -129,6 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/Setting_PrintIP"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/guideline45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView255" />
@@ -140,6 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/Setting_ElecScale"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/guideline45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -179,7 +183,8 @@
             android:layout_weight="0.76"
             android:text="仓库"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="invisible" />
 
         <RadioButton
             android:id="@+id/rb_Product"
@@ -188,7 +193,8 @@
             android:layout_weight="0.65"
             android:text="车间"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="invisible" />
     </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>

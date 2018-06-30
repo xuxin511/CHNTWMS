@@ -26,13 +26,41 @@ public class Receipt_Model extends Base_Model implements Parcelable {
     private Float IsQuality;
     private Float IsReceivePost;
     private Float IsShelvePost;
-   // private int VoucherType;
+//    private int VoucherType;
     private String Plant;
     private String PlantName;
     private String MoveType;
     private List<ReceiptDetail_Model> lstDetail;
     private String Note;
     private  int  WareHouseID;
+
+    private float innum;
+    private float remainnum;
+    private Float scannum;
+
+    public Float getScannum() {
+        return scannum;
+    }
+
+    public void setScannum(Float scannum) {
+        this.scannum = scannum;
+    }
+
+    public float getInnum() {
+        return innum;
+    }
+
+    public void setInnum(int innum) {
+        this.innum = innum;
+    }
+
+    public float getRemainnum() {
+        return remainnum;
+    }
+
+    public void setRemainnum(int remainnum) {
+        this.remainnum = remainnum;
+    }
 
     public int getWareHouseID() {
         return WareHouseID;
@@ -141,6 +169,16 @@ public class Receipt_Model extends Base_Model implements Parcelable {
 
     }
 
+//    @Override
+//    public int getVoucherType() {
+//        return VoucherType;
+//    }
+//
+//    @Override
+//    public void setVoucherType(int voucherType) {
+//        VoucherType = voucherType;
+//    }
+
     @Override
     public int hashCode() {
         return VoucherNo.hashCode();
@@ -166,6 +204,9 @@ public class Receipt_Model extends Base_Model implements Parcelable {
         dest.writeTypedList(this.lstDetail);
         dest.writeString(this.Note);
         dest.writeInt(this.WareHouseID);
+        dest.writeFloat(this.innum);
+        dest.writeFloat(this.remainnum);
+        dest.writeValue(this.scannum);
     }
 
     protected Receipt_Model(Parcel in) {
@@ -182,6 +223,9 @@ public class Receipt_Model extends Base_Model implements Parcelable {
         this.lstDetail = in.createTypedArrayList(ReceiptDetail_Model.CREATOR);
         this.Note = in.readString();
         this.WareHouseID = in.readInt();
+        this.innum = in.readFloat();
+        this.remainnum = in.readFloat();
+        this.scannum = (Float) in.readValue(Float.class.getClassLoader());
     }
 
     public static final Creator<Receipt_Model> CREATOR = new Creator<Receipt_Model>() {

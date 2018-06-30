@@ -45,6 +45,7 @@ import chinetek.xx.chntwms.model.WMS.Review.OutStock_Model;
 import chinetek.xx.chntwms.model.WMS.Stock.StockInfo_Model;
 import chinetek.xx.chntwms.util.Network.NetworkError;
 import chinetek.xx.chntwms.util.Network.RequestHandler;
+import chinetek.xx.chntwms.util.PlayVideo.PlayVoice;
 import chinetek.xx.chntwms.util.dialog.MessageBox;
 import chinetek.xx.chntwms.util.dialog.ToastUtil;
 import chinetek.xx.chntwms.util.function.ArithUtil;
@@ -167,12 +168,25 @@ public class ReviewScan extends BaseActivity {
             }
             Boolean isFinishReceipt = true;
             for (OutStockDetailInfo_Model outStockDetailInfoModel : outStockDetailInfoModels) {
-                if (outStockDetailInfoModel.getScanQty().compareTo(outStockDetailInfoModel.getOutStockQty()) != 0) {
-                    MessageBox.Show(context, getString(R.string.Error_CannotReview));
-                    isFinishReceipt = false;
-                    break;
+                //  调拨：31 发货单 22 其他出：24
+//                if(outStockDetailInfoModel.getVoucherType()==24){
+//                    if (outStockDetailInfoModel.getScanQty().compareTo(outStockDetailInfoModel.getOutStockQty()) != 0) {
+//                        MessageBox.Show(context, getString(R.string.Error_CannotReview));
+//                        isFinishReceipt = false;
+//                        break;
+//                    }
+//                }
+                //  调拨：31 发货单 22 其他出：24
+//                if(outStockDetailInfoModel.getVoucherType()!=24){
+                if(outStockDetailInfoModel.getVoucherType()!=31&&outStockDetailInfoModel.getVoucherType()!=22){
+                    if (outStockDetailInfoModel.getScanQty().compareTo(outStockDetailInfoModel.getCanReviewQty()) != 0) {
+                        MessageBox.Show(context, "该单据还没有全部复核完成！");
+                        isFinishReceipt = false;
+                        return false;
+                    }
                 }
             }
+
             if (isFinishReceipt) {
                 String userJson = parseModelToJson(BaseApplication.userInfo);
                 String modelJson = parseModelToJson(outStockDetailInfoModels);
@@ -373,10 +387,15 @@ public class ReviewScan extends BaseActivity {
                 stockInfoModels=returnMsgModel.getModelJson();
                 if(stockInfoModels!=null){
                     for (StockInfo_Model stockModel:stockInfoModels) {
-                        if(!checkID(stockModel))
+                        if(!checkID(stockModel)){
+                            PlayVoice.PlayError(context);
                             break;
-                        if(!CheckBarcode(stockModel))
+                        }
+                        if(!CheckBarcode(stockModel)){
+                            PlayVoice.PlayError(context);
                             break;
+                        }
+
                     }
                     InitFrm(stockInfoModels.get(0));
                 }
@@ -384,32 +403,40 @@ public class ReviewScan extends BaseActivity {
             }else
             {
                 MessageBox.Show(context,returnMsgModel.getMessage());
+                PlayVoice.PlayError(context);
             }
         } catch (Exception ex) {
             MessageBox.Show(context, ex.getMessage());
+            PlayVoice.PlayError(context);
         }
         CommonUtil.setEditFocus(edtReviewScanBarcode);
     }
 
     void AnalysisSaveT_OutStockReviewDetailADFJson(String result){
-        LogUtil.WriteLog(ReviewScan.class, TAG_SaveT_OutStockReviewDetailADF,result);
-        ReturnMsgModelList<OutStock_Model> returnMsgModel = GsonUtil.getGsonUtil().fromJson(result, new TypeToken<ReturnMsgModelList<OutStock_Model>>() {}.getType());
-        if(returnMsgModel.getHeaderStatus().equals("S")) {
-            new AlertDialog.Builder(context).setCancelable(false).setTitle("提示").setIcon(android.R.drawable.ic_dialog_info).setMessage(returnMsgModel.getMessage())
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // TODO 自动生成的方法
-                            Intent intent = new Intent(context, TruckLoad.class);
-                            intent.putExtra("VoucherNo", txtVoucherNo.getText().toString().trim());
-                            startActivityLeft(intent);
-                            closeActiviry();
-                        }
-                    }).show();
-        }else
-        {
-           MessageBox.Show(context,returnMsgModel.getMessage());
+        try{
+            LogUtil.WriteLog(ReviewScan.class, TAG_SaveT_OutStockReviewDetailADF,result);
+            ReturnMsgModelList<OutStock_Model> returnMsgModel = GsonUtil.getGsonUtil().fromJson(result, new TypeToken<ReturnMsgModelList<OutStock_Model>>() {}.getType());
+            if(returnMsgModel.getHeaderStatus().equals("S")) {
+                new AlertDialog.Builder(context).setCancelable(false).setTitle("提示").setIcon(android.R.drawable.ic_dialog_info).setMessage(returnMsgModel.getMessage())
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // TODO 自动生成的方法
+//                                Intent intent = new Intent(context, TruckLoad.class);
+//                                intent.putExtra("VoucherNo", txtVoucherNo.getText().toString().trim());
+//                                startActivityLeft(intent);
+                                closeActiviry();
+                            }
+                        }).show();
+            }else
+            {
+                MessageBox.Show(context,returnMsgModel.getMessage());
+                PlayVoice.PlayError(context);
+            }
+        }catch(Exception ex){
+            MessageBox.Show(context,ex.getMessage().toString());
         }
+
     }
 
     void InitFrm(StockInfo_Model stockInfoModel){
@@ -453,37 +480,44 @@ public class ReviewScan extends BaseActivity {
             Boolean hasMaterial=false;
           //  Boolean isReviewFinish=true;
             for (int i = 0; i < size; i++) {
-                //制定批次
-                if(outStockDetailInfoModels.get(i).getIsSpcBatch().equals("Y")){
-                    if(!outStockDetailInfoModels.get(i).getFromBatchNo().equals(StockInfo_Model.getBatchNo())){
-                        continue;
-                    }
-                }
+//                //制定批次
+//                if(outStockDetailInfoModels.get(i).getIsSpcBatch().equals("Y")){
+//                    if(!outStockDetailInfoModels.get(i).getFromBatchNo().equals(StockInfo_Model.getBatchNo())){
+//                        continue;
+//                    }
+//                }
                 if(Qty<=0) break;
-                if (outStockDetailInfoModels.get(i).getMaterialNo().equals(StockInfo_Model.getMaterialNo())
-                        && outStockDetailInfoModels.get(i).getStrongHoldCode().equals(StockInfo_Model.getStrongHoldCode())) {
+                if (outStockDetailInfoModels.get(i).getMaterialNo().equals(StockInfo_Model.getMaterialNo())) {
                     hasMaterial=true;
                     if(!outStockDetailInfoModels.get(i).getReviewFinish()) {
-                       // isReviewFinish=false;
-                        if (outStockDetailInfoModels.get(i).getLstStock() == null)
-                            outStockDetailInfoModels.get(i).setLstStock(new ArrayList<StockInfo_Model>());
-                        try {
-                            Float remainQty = ArithUtil.sub(outStockDetailInfoModels.get(i).getOutStockQty(), outStockDetailInfoModels.get(i).getScanQty());
-                            Float addQty=remainQty > Qty ? Qty : remainQty;
-                            Float ScanQty = ArithUtil.add(addQty, outStockDetailInfoModels.get(i).getScanQty());
-                            Qty = ArithUtil.sub(Qty, remainQty);
-                            StockInfo_Model stockInfoModel = StockInfo_Model.clone();
-                            stockInfoModel.setQty(addQty);
-                            outStockDetailInfoModels.get(i).getLstStock().add(0, stockInfoModel);
-                            outStockDetailInfoModels.get(i).setToBatchno(StockInfo_Model.getBatchNo());
-                            outStockDetailInfoModels.get(i).setScanQty(ScanQty);
-                            outStockDetailInfoModels.get(i).setOustockStatus(1); //存在未组托条码
-                            if(ArithUtil.sub(outStockDetailInfoModels.get(i).getScanQty(),outStockDetailInfoModels.get(i).getOutStockQty())==0f)
-                                outStockDetailInfoModels.get(i).setReviewFinish(true);
-                        }catch (Exception ex){
-                            MessageBox.Show(context, ex.getMessage());
-                            return false;
-                        }
+                        //判断可复核数量
+//                        if(outStockDetailInfoModels.get(i).getCanReviewQty()>=ArithUtil.add(Qty, outStockDetailInfoModels.get(i).getScanQty())){
+                            // isReviewFinish=false;
+                            if (outStockDetailInfoModels.get(i).getLstStock() == null){
+                                outStockDetailInfoModels.get(i).setLstStock(new ArrayList<StockInfo_Model>());
+                            }
+                            try {
+//                                Float remainQty = ArithUtil.sub(outStockDetailInfoModels.get(i).getOutStockQty(), outStockDetailInfoModels.get(i).getScanQty());
+                                Float remainQty = ArithUtil.sub(outStockDetailInfoModels.get(i).getCanReviewQty(), outStockDetailInfoModels.get(i).getScanQty());
+                                Float addQty=remainQty > Qty ? Qty : remainQty;
+                                Float ScanQty = ArithUtil.add(addQty, outStockDetailInfoModels.get(i).getScanQty());
+                                Qty = ArithUtil.sub(Qty, remainQty);
+                                StockInfo_Model stockInfoModel = StockInfo_Model.clone();
+                                stockInfoModel.setQty(addQty);
+                                outStockDetailInfoModels.get(i).getLstStock().add(0, stockInfoModel);
+                                outStockDetailInfoModels.get(i).setToBatchno(StockInfo_Model.getBatchNo());
+                                outStockDetailInfoModels.get(i).setScanQty(ScanQty);
+                                outStockDetailInfoModels.get(i).setOustockStatus(1); //存在未组托条码
+                                if(ArithUtil.sub(outStockDetailInfoModels.get(i).getScanQty(),outStockDetailInfoModels.get(i).getOutStockQty())==0f){
+                                    outStockDetailInfoModels.get(i).setReviewFinish(true);
+                                }
+
+                            }catch (Exception ex){
+                                MessageBox.Show(context, ex.getMessage());
+                                return false;
+                            }
+//                        }
+
                     }
 
                 }
@@ -499,6 +533,8 @@ public class ReviewScan extends BaseActivity {
         }
         return true;
     }
+
+
 
 
 //    boolean CheckBarcode(StockInfo_Model StockInfo_Model){

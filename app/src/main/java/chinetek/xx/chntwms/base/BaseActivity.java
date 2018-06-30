@@ -1,6 +1,7 @@
 package chinetek.xx.chntwms.base;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,12 +10,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
+import com.chinetek.licensekeylibrary.DESEncrypt;
+import com.chinetek.licensekeylibrary.LicenseActivity;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 
 import chinetek.xx.chntwms.cywms.R;
@@ -47,9 +55,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IHandleM
         mHandler = new MyHandler<>(this);
         BaseApplication.isCloseActivity=true;
         updateVersionService = new UpdateVersionService(context);// 创建更新业务对象
+//        LicenseActivity.ValidationLicense(context);
         initViews(); //自定义的方法
         initData();
     }
+
 
     /**
      * 初始化控件

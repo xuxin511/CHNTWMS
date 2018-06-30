@@ -7,16 +7,13 @@
     tools:context="com.xx.chinetek.cyproduct.WoBillChoice">
 
 
-
     <EditText
         android:id="@+id/edt_filterContent"
         style="@style/EditTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/filter_content1"

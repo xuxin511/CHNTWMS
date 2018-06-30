@@ -4,14 +4,15 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.chinetek.licensekeylibrary.LicenseActivity;
 import com.google.gson.reflect.TypeToken;
 
 import org.xutils.view.annotation.ContentView;
@@ -44,8 +45,9 @@ import chinetek.xx.chntwms.util.log.LogUtil;
 
 
 @ContentView(R.layout.activity_login)
-public class Login extends BaseActivity {
 
+public class Login extends BaseActivity  {
+//
     String TAG="Loagin";
     String TAG_GetWareHouseByUserADF="Login_GetWareHouseByUserADF";
     private static final int RESULT_GET_LOGIN_INFO = 101;
@@ -77,6 +79,7 @@ public class Login extends BaseActivity {
     @ViewInject(R.id.edt_Password)
     EditText edtPassword;
     int SelectWareHouseID=-1;
+    String SelectWareHousecode="";
 
     Context context=Login.this;
     List<WareHouseInfo> lstWarehouse;
@@ -103,12 +106,21 @@ public class Login extends BaseActivity {
         super.initViews();
     }
 
+
+
+
+
+
+
+
     @Event(value = R.id.edt_UserName, type = View.OnKeyListener.class)
     private boolean edtUserNameOnKey(View v, int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP)// 如果为Enter键
         {
             keyBoardCancle();
             GetWareHouse();
+        }else{
+            txtWareHousName.setText("");
         }
         return false;
     }
@@ -121,14 +133,19 @@ public class Login extends BaseActivity {
 
     @Event(R.id.btn_Login)
     private  void  btnLoginClick(View view){
-        if(TextUtils.isEmpty(URLModel.PrintIP)){
-            MessageBox.Show(context,getString(R.string.Error_PrintIPNotSet));
+//        if(TextUtils.isEmpty(URLModel.PrintIP)){
+//            MessageBox.Show(context,getString(R.string.Error_PrintIPNotSet));
+//            return;
+//        }
+//        if(!URLModel.isWMS && TextUtils.isEmpty(URLModel.ElecIP)){
+//            MessageBox.Show(context,getString(R.string.Error_PrintIPNotSet));
+//            return;
+//        }
+        if(txtWareHousName.getText().equals("")){
+            MessageBox.Show(context,"先选择仓库！");
             return;
         }
-        if(!URLModel.isWMS && TextUtils.isEmpty(URLModel.ElecIP)){
-            MessageBox.Show(context,getString(R.string.Error_PrintIPNotSet));
-            return;
-        }
+
         String userName=edtUserName.getText().toString().trim();
         String password=edtPassword.getText().toString().trim();
         UserInfo user = new UserInfo();
@@ -158,18 +175,22 @@ public class Login extends BaseActivity {
         if(returnMsgModel.getHeaderStatus().equals("S")){
             BaseApplication.userInfo=returnMsgModel.getModelJson();
             BaseApplication.userInfo.setPDAPrintIP(URLModel.PrintIP);
-            if(lstWarehouse!=null && lstWarehouse.size()!=0)
+            if(lstWarehouse!=null && lstWarehouse.size()!=0){
                 BaseApplication.userInfo.setLstWarehouse(lstWarehouse);
+                BaseApplication.userInfo.setWarehouseCode(BaseApplication.userInfo.getWarehouseID()+"");
+            }
+
             BaseApplication.userInfo.setWarehouseName(txtWareHousName.getText().toString());
             if( BaseApplication.userInfo.getReceiveAreaID()<=0){
                 MessageBox.Show( context,getResources().getString(R.string.Message_No_ReceiveAreaID));
             }else if(BaseApplication.userInfo.getPickAreaID()<=0 && URLModel.isWMS){
                 MessageBox.Show( context,getResources().getString(R.string.Message_No_PickAreaID));
-            }else if(BaseApplication.userInfo.getToSampAreaNo()==null || BaseApplication.userInfo.getToSampAreaNo().equals("")){
-                MessageBox.Show( context,getResources().getString(R.string.Message_No_SampAreaNo));
-            }else if(BaseApplication.userInfo.getToSampWareHouseNo()==null || BaseApplication.userInfo.getToSampWareHouseNo().equals("")){
-                MessageBox.Show( context,getResources().getString(R.string.Message_No_QuanUserNo));
             }
+//            else if(BaseApplication.userInfo.getToSampAreaNo()==null || BaseApplication.userInfo.getToSampAreaNo().equals("")){
+//                MessageBox.Show( context,getResources().getString(R.string.Message_No_SampAreaNo));
+//            }else if(BaseApplication.userInfo.getToSampWareHouseNo()==null || BaseApplication.userInfo.getToSampWareHouseNo().equals("")){
+//                MessageBox.Show( context,getResources().getString(R.string.Message_No_QuanUserNo));
+//            }
             else if(BaseApplication.userInfo.getLstMenu()==null || BaseApplication.userInfo.getLstMenu().size()==0){
                 MessageBox.Show( context,getResources().getString(R.string.Message_No_MenuList));
             }
@@ -229,17 +250,21 @@ public class Login extends BaseActivity {
                             // TODO 自动生成的方法存根
                             String select_item = items[which].toString();
                             SelectWareHouseID = BaseApplication.userInfo.getLstWarehouse().get(which).getID();
+                            SelectWareHousecode=BaseApplication.userInfo.getLstWarehouse().get(which).getWareHouseNo();
                             txtWareHousName.setText(select_item);
                             BaseApplication.userInfo.setWarehouseID(SelectWareHouseID);
                             BaseApplication.userInfo.setWarehouseName(select_item);
+                            BaseApplication.userInfo.setWarehouseCode(SelectWareHousecode);
                          dialog.dismiss();
                         }
                     }).show();
         }else{
             SelectWareHouseID = BaseApplication.userInfo.getLstWarehouse().get(0).getID();
             txtWareHousName.setText(BaseApplication.userInfo.getLstWarehouse().get(0).getWareHouseName());
+            SelectWareHousecode=BaseApplication.userInfo.getLstWarehouse().get(0).getWareHouseNo();
             BaseApplication.userInfo.setWarehouseID(SelectWareHouseID);
             BaseApplication.userInfo.setWarehouseName(txtWareHousName.getText().toString());
+            BaseApplication.userInfo.setWarehouseCode(SelectWareHousecode);
         }
     }
 

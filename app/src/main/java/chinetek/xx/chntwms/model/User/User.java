@@ -32,7 +32,7 @@ public class User implements Parcelable {
     private String Description;
     private String LoginIP;
     private Date LoginTime;
-    private Float IsDel;
+    private int IsDel;
     private String LoginDevice;
     private String Deviceversion;
     private String StrIsPick ;
@@ -168,11 +168,11 @@ public class User implements Parcelable {
         GroupName = groupName;
     }
 
-    public Float getIsDel() {
+    public int getIsDel() {
         return IsDel;
     }
 
-    public void setIsDel(Float isDel) {
+    public void setIsDel(int isDel) {
         IsDel = isDel;
     }
 
@@ -418,7 +418,7 @@ public class User implements Parcelable {
         this.LoginIP = in.readString();
         long tmpLoginTime = in.readLong();
         this.LoginTime = tmpLoginTime == -1 ? null : new Date(tmpLoginTime);
-        this.IsDel = (Float) in.readValue(Float.class.getClassLoader());
+        this.IsDel = (int) in.readValue(Float.class.getClassLoader());
         this.LoginDevice = in.readString();
         this.Deviceversion = in.readString();
         this.StrIsPick = in.readString();

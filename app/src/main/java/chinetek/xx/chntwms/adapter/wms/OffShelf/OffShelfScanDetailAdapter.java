@@ -30,6 +30,8 @@ public class OffShelfScanDetailAdapter extends BaseAdapter {
         public TextView txtreferStock;
         public TextView txtERPVoucherNo;
         public TextView txtbatch;
+        public TextView txtspec;
+
     }
 
     public OffShelfScanDetailAdapter(Context context, ArrayList<OutStockTaskDetailsInfo_Model> outStockTaskDetailsInfoModels) {
@@ -71,6 +73,7 @@ public class OffShelfScanDetailAdapter extends BaseAdapter {
             listItemView.txtRemainQty = (TextView) convertView.findViewById(R.id.txtRemainQty);
             listItemView.txtMaterialDesc = (TextView) convertView.findViewById(R.id.txtMaterialDesc);
             listItemView.txtbatch = (TextView) convertView.findViewById(R.id.txtbatch);
+            listItemView.txtspec = (TextView) convertView.findViewById(R.id.txtspec);
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
@@ -82,6 +85,7 @@ public class OffShelfScanDetailAdapter extends BaseAdapter {
         listItemView.txtreferStock.setText(outStockTaskDetailsInfoModel.getAreaNo()+"-"+outStockTaskDetailsInfoModel.getToBatchno());
         listItemView.txtERPVoucherNo.setText(outStockTaskDetailsInfoModel.getErpVoucherNo());
         listItemView.txtMaterialDesc.setText(outStockTaskDetailsInfoModel.getMaterialDesc());
+        listItemView.txtspec.setText(outStockTaskDetailsInfoModel.getSpec());
         listItemView.txtbatch.setText((outStockTaskDetailsInfoModel.getIsSpcBatch().toUpperCase().equals("Y")?
                 "指定批：":"批：")+outStockTaskDetailsInfoModel.getFromBatchNo());
         if (outStockTaskDetailsInfoModel.getScanQty()!=0 &&

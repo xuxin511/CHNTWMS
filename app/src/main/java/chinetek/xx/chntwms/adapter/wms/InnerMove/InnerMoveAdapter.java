@@ -28,7 +28,7 @@ public class InnerMoveAdapter extends BaseAdapter {
         public TextView list_MaterialNo;
         public TextView list_SerialNo;
         public TextView list_MaterialDesc;
-       // public TextView list_qty;
+        public TextView list_spec;
     }
 
     public InnerMoveAdapter(Context context, List<StockInfo_Model> stockInfoModels) {
@@ -67,7 +67,7 @@ public class InnerMoveAdapter extends BaseAdapter {
             listItemView.list_SerialNo = (TextView) convertView.findViewById(R.id.list_SerialNo);
             listItemView.list_MaterialDesc = (TextView) convertView.findViewById(R.id.list_MaterialDesc);
             listItemView.list_MaterialNo = (TextView) convertView.findViewById(R.id.list_MaterialNo);
-            //listItemView.list_qty = (TextView) convertView.findViewById(R.id.list_qty);
+            listItemView.list_spec = (TextView) convertView.findViewById(R.id.list_spec);
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
@@ -78,6 +78,7 @@ public class InnerMoveAdapter extends BaseAdapter {
         listItemView.list_MaterialDesc.setText(stockInfoModel.getMaterialDesc()==null || stockInfoModel.getMaterialDesc().equals("")?stockInfoModel.getMaterialNo():stockInfoModel.getMaterialDesc());
         listItemView.list_MaterialNo.setText(stockInfoModel.getMaterialNo());
         listItemView.list_SerialNo.setText("合计："+stockInfoModel.getQty().toString());
+        listItemView.list_spec.setText(stockInfoModel.getSpec()==null?"":stockInfoModel.getSpec().toString());
         return convertView;
     }
 }

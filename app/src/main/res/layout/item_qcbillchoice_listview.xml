@@ -8,14 +8,15 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5">
+
                 <TextView
                     android:id="@+id/txtTaskNo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:maxLines="1"
                     android:layout_weight="0.6"
+                    android:maxLines="1"
                     android:textColor="@color/blueviolet"
-                    android:textSize="25sp"/>
+                    android:textSize="15sp" />
 
 
 

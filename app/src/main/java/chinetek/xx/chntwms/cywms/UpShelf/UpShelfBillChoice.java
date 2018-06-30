@@ -97,6 +97,7 @@ public class UpShelfBillChoice extends BaseActivity implements SwipeRefreshLayou
     @Override
     protected void onResume() {
         super.onResume();
+        stockInfoModels= new ArrayList<StockInfo_Model>();
         InitListView();
         edtfilterContent.setText("");
         CommonUtil.setEditFocus(edtfilterContent);
@@ -124,6 +125,9 @@ public class UpShelfBillChoice extends BaseActivity implements SwipeRefreshLayou
         {
             if(inStockTaskInfoModels!=null && inStockTaskInfoModels.size()>0) {
                 String code = edtfilterContent.getText().toString().trim();
+                if(code.equals("")){
+                    return false;
+                }
                 //扫描单据号、检查单据列表
                 InStockTaskInfo_Model inStockTaskInfoModel = new InStockTaskInfo_Model(code);
                 int index=inStockTaskInfoModels.indexOf(inStockTaskInfoModel);
@@ -171,7 +175,8 @@ public class UpShelfBillChoice extends BaseActivity implements SwipeRefreshLayou
             RequestHandler.addRequestWithDialog(Request.Method.POST, TAG_GetT_InTaskListADF, getString(R.string.Msg_GetT_InStockListADF), context, mHandler, RESULT_GetT_InTaskListADF, null,  URLModel.GetURL().GetT_InTaskListADF, params, null);
         } catch (Exception ex) {
             mSwipeLayout.setRefreshing(false);
-            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
+//            MessageBox.Show(context, ex.getMessage());
             CommonUtil.setEditFocus(edtfilterContent);
         }
     }
@@ -188,7 +193,8 @@ public class UpShelfBillChoice extends BaseActivity implements SwipeRefreshLayou
                 BindListVIew(inStockTaskInfoModels);
         }else
         {
-            MessageBox.Show(context,returnMsgModel.getMessage());
+//            MessageBox.Show(context,returnMsgModel.getMessage());
+            MessageBox.Show(context,returnMsgModel.getMessage(),1);
             CommonUtil.setEditFocus(edtfilterContent);
         }
     }
@@ -213,7 +219,8 @@ public class UpShelfBillChoice extends BaseActivity implements SwipeRefreshLayou
             }
         }else
         {
-            MessageBox.Show(context,returnMsgModel.getMessage());
+            MessageBox.Show(context,returnMsgModel.getMessage(),1);
+//            MessageBox.Show(context,returnMsgModel.getMessage());
             CommonUtil.setEditFocus(edtfilterContent);
         }
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="activity_login_company">chinetek 上海辰达 @2017</string>
+    <string name="activity_login_company">chinetek 上海辰达 @2018</string>
     <string name="app_name">WMS</string>
     <string name="version_msg">当前版本：1.0</string>
 
@@ -33,6 +33,7 @@
     <string name="QC_Material_subtitle">质检物料选择</string>
     <string name="query_title">查询</string>
     <string name="query_Materialtitle">物料</string>
+    <string name="query_MaterialtitleAndENA">物料或EAN</string>
     <string name="query_Stocktitle">库位</string>
     <string name="query_Bathtitle">批次</string>
     <string name="query_Suppliertitle">供应商</string>
@@ -104,7 +105,7 @@
     <string name="cancel">取消</string>
     <string name="hint">提示</string>
     <string name="config">确定</string>
-    <string name="filter">供应商筛选</string>
+    <string name="filter">提交</string>
     <string name="QCfilter">质检取样</string>
     <string name="ReportNum">报产量</string>
     <string name="StartProduct">开工</string>
@@ -213,6 +214,7 @@
     <string name="activity_QC_Label">取样标签</string>
     <string name="activity_boxing_barcode">装箱箱码：</string>
     <string name="activity_boxing_unbarcode">拆箱箱码：</string>
+    <string name="activity_boxing_barcodes">内外条码：</string>
     <string name="activity_adjust_Number">调整数量：</string>
     <string name="activity_adjust_stock">调整库位：</string>
     <string name="activity_pallet_barcode">托盘条码：</string>
@@ -226,6 +228,7 @@
 
 
     <string name="Msg_Login">用户验证...</string>
+    <string name="Msg_barcodeinfo">获取条码信息中...</string>
     <string name="Msg_Inventory_Load">盘点任务信息加载中...</string>
     <string name="Msg_GetT_InStockListADF">获取收货列表...</string>
     <string name="Msg_GetT_OutStockListADF">获取发货列表...</string>
@@ -293,7 +296,7 @@
     <string name="Hit_ScanPallet">请扫描托盘条码</string>
     <string name="Hit_Selectwohouse">点击选择仓库</string>
 
-
+    <string name="Error_rownonotMatch">该行号与托盘行号不一致！</string>
     <string name="Error_materialnotMatch">该物料与托盘物料不一致！</string>
     <string name="Error_Contain_Barcode">该物料已扫描组托</string>
     <string name="Error_Barcode_hasScan">该物料已扫描</string>
@@ -326,6 +329,7 @@
     <string name="Error_generic_error">通讯错误！</string>
     <string name="Error_Setting_IPAdressError">IP地址格式错误！</string>
     <string name="Error_isnotnum">请输入数字！</string>
+    <string name="Error_isnotnull">请扫描基本信息！</string>
     <string name="Error_isnotzero">调整数量不能为0！</string>
     <string name="Error_areanoHasScan">该库位已扫描！</string>
     <string name="Error_SelectQcStatus">请选择质检状态！</string>

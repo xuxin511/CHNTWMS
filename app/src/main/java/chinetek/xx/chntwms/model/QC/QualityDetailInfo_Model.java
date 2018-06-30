@@ -36,6 +36,16 @@ public class QualityDetailInfo_Model extends Base_Model implements Parcelable{
     private int NoticeStatus;
     private int QualityType;
 
+    public String getSubIarrSID() {
+        return SubIarrSID;
+    }
+
+    public void setSubIarrSID(String subIarrSID) {
+        SubIarrSID = subIarrSID;
+    }
+
+    private String SubIarrSID;
+
     public String getUnit() {
         return Unit;
     }
@@ -227,6 +237,7 @@ public class QualityDetailInfo_Model extends Base_Model implements Parcelable{
         dest.writeValue(this.InSQty);
         dest.writeInt(this.NoticeStatus);
         dest.writeInt(this.QualityType);
+        dest.writeString(this.SubIarrSID);
     }
 
     protected QualityDetailInfo_Model(Parcel in) {
@@ -251,6 +262,7 @@ public class QualityDetailInfo_Model extends Base_Model implements Parcelable{
         this.InSQty = (Float) in.readValue(Float.class.getClassLoader());
         this.NoticeStatus = in.readInt();
         this.QualityType = in.readInt();
+        this.SubIarrSID = in.readString();
     }
 
     public static final Creator<QualityDetailInfo_Model> CREATOR = new Creator<QualityDetailInfo_Model>() {

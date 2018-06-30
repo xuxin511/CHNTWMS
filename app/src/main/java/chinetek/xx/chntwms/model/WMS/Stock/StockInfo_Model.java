@@ -32,24 +32,24 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
     private String TMaterialDesc;
     private String PickAreaNo;
     private String CelareaNo;
-    private Float IsDel;
+    private int IsDel;
     private String BatchNo;
     private String SN;
     private String ReturnSupCode;
     private String ReturnReson;
     private String ReturnSupName;
-    private Float OldStockID;
-    private Float TaskDetailesID;
-    private Float CheckID;
-    private Float TransferDetailsID;
-    private Float ReturnType;
+    private int OldStockID;
+    private int TaskDetailesID;
+    private int CheckID;
+    private int TransferDetailsID;
+    private int ReturnType;
     private String ReturnTypeDesc;
     private String Unit;
     private String SaleName;
     private String UnitName;
     private String PalletNo;
     private Float PalletQty;
-    private Float ReceiveStatus;
+    private int ReceiveStatus;
     private String FromAreaNo;
     private String FromHouseNo;
     private String FromWareHouseNo;
@@ -79,6 +79,54 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
     private Date ProductDate;
     private String SupPrdBatch;
     private Date SupPrdDate;
+    private int BarcodeType;
+    private String ErpInVoucherNo;
+    private String SubIarrSID;
+
+    private int IsAmount;
+
+    public int getIsAmount() {
+        return IsAmount;
+    }
+
+    public void setIsAmount(int isAmount) {
+        IsAmount = isAmount;
+    }
+
+    public String getErpInVoucherNo() {
+        return ErpInVoucherNo;
+    }
+
+    public void setErpInVoucherNo(String erpInVoucherNo) {
+        ErpInVoucherNo = erpInVoucherNo;
+    }
+
+    public String getSubIarrSID() {
+        return SubIarrSID;
+    }
+
+    public void setSubIarrSID(String subIarrSID) {
+        SubIarrSID = subIarrSID;
+    }
+
+    public int getBarcodeType() {
+        return BarcodeType;
+    }
+
+    public void setBarcodeType(int barcodeType) {
+        BarcodeType = barcodeType;
+    }
+
+    public String getFserialno() {
+        return Fserialno;
+    }
+
+    public void setFserialno(String fserialno) {
+        Fserialno = fserialno;
+    }
+
+    private String Fserialno;
+
 
     public Date getProductDate() {
         return ProductDate;
@@ -344,11 +392,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         CelareaNo = celareaNo;
     }
 
-    public Float getCheckID() {
+    public int getCheckID() {
         return CheckID;
     }
 
-    public void setCheckID(Float checkID) {
+    public void setCheckID(int checkID) {
         CheckID = checkID;
     }
 
@@ -384,11 +432,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         HouseNo = houseNo;
     }
 
-    public Float getIsDel() {
+    public int getIsDel() {
         return IsDel;
     }
 
-    public void setIsDel(Float isDel) {
+    public void setIsDel(int isDel) {
         IsDel = isDel;
     }
 
@@ -408,11 +456,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         MaterialNo = materialNo;
     }
 
-    public Float getOldStockID() {
+    public int getOldStockID() {
         return OldStockID;
     }
 
-    public void setOldStockID(Float oldStockID) {
+    public void setOldStockID(int oldStockID) {
         OldStockID = oldStockID;
     }
 
@@ -432,11 +480,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         Qty = qty;
     }
 
-    public Float getReceiveStatus() {
+    public int getReceiveStatus() {
         return ReceiveStatus;
     }
 
-    public void setReceiveStatus(Float receiveStatus) {
+    public void setReceiveStatus(int receiveStatus) {
         ReceiveStatus = receiveStatus;
     }
 
@@ -464,11 +512,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         ReturnSupName = returnSupName;
     }
 
-    public Float getReturnType() {
+    public int getReturnType() {
         return ReturnType;
     }
 
-    public void setReturnType(Float returnType) {
+    public void setReturnType(int returnType) {
         ReturnType = returnType;
     }
 
@@ -504,11 +552,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         this.SN = SN;
     }
 
-    public Float getTaskDetailesID() {
+    public int getTaskDetailesID() {
         return TaskDetailesID;
     }
 
-    public void setTaskDetailesID(Float taskDetailesID) {
+    public void setTaskDetailesID(int taskDetailesID) {
         TaskDetailesID = taskDetailesID;
     }
 
@@ -528,11 +576,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         this.TMaterialNo = TMaterialNo;
     }
 
-    public Float getTransferDetailsID() {
+    public int getTransferDetailsID() {
         return TransferDetailsID;
     }
 
-    public void setTransferDetailsID(Float transferDetailsID) {
+    public void setTransferDetailsID(int transferDetailsID) {
         TransferDetailsID = transferDetailsID;
     }
 
@@ -598,24 +646,24 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         dest.writeString(this.TMaterialDesc);
         dest.writeString(this.PickAreaNo);
         dest.writeString(this.CelareaNo);
-        dest.writeValue(this.IsDel);
+        dest.writeInt(this.IsDel);
         dest.writeString(this.BatchNo);
         dest.writeString(this.SN);
         dest.writeString(this.ReturnSupCode);
         dest.writeString(this.ReturnReson);
         dest.writeString(this.ReturnSupName);
-        dest.writeValue(this.OldStockID);
-        dest.writeValue(this.TaskDetailesID);
-        dest.writeValue(this.CheckID);
-        dest.writeValue(this.TransferDetailsID);
-        dest.writeValue(this.ReturnType);
+        dest.writeInt(this.OldStockID);
+        dest.writeInt(this.TaskDetailesID);
+        dest.writeInt(this.CheckID);
+        dest.writeInt(this.TransferDetailsID);
+        dest.writeInt(this.ReturnType);
         dest.writeString(this.ReturnTypeDesc);
         dest.writeString(this.Unit);
         dest.writeString(this.SaleName);
         dest.writeString(this.UnitName);
         dest.writeString(this.PalletNo);
         dest.writeValue(this.PalletQty);
-        dest.writeValue(this.ReceiveStatus);
+        dest.writeInt(this.ReceiveStatus);
         dest.writeString(this.FromAreaNo);
         dest.writeString(this.FromHouseNo);
         dest.writeString(this.FromWareHouseNo);
@@ -645,6 +693,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         dest.writeLong(this.ProductDate != null ? this.ProductDate.getTime() : -1);
         dest.writeString(this.SupPrdBatch);
         dest.writeLong(this.SupPrdDate != null ? this.SupPrdDate.getTime() : -1);
+        dest.writeInt(this.BarcodeType);
+        dest.writeString(this.ErpInVoucherNo);
+        dest.writeString(this.SubIarrSID);
+        dest.writeInt(this.IsAmount);
+        dest.writeString(this.Fserialno);
     }
 
     protected StockInfo_Model(Parcel in) {
@@ -661,24 +714,24 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         this.TMaterialDesc = in.readString();
         this.PickAreaNo = in.readString();
         this.CelareaNo = in.readString();
-        this.IsDel = (Float) in.readValue(Float.class.getClassLoader());
+        this.IsDel = in.readInt();
         this.BatchNo = in.readString();
         this.SN = in.readString();
         this.ReturnSupCode = in.readString();
         this.ReturnReson = in.readString();
         this.ReturnSupName = in.readString();
-        this.OldStockID = (Float) in.readValue(Float.class.getClassLoader());
-        this.TaskDetailesID = (Float) in.readValue(Float.class.getClassLoader());
-        this.CheckID = (Float) in.readValue(Float.class.getClassLoader());
-        this.TransferDetailsID = (Float) in.readValue(Float.class.getClassLoader());
-        this.ReturnType = (Float) in.readValue(Float.class.getClassLoader());
+        this.OldStockID = in.readInt();
+        this.TaskDetailesID = in.readInt();
+        this.CheckID = in.readInt();
+        this.TransferDetailsID = in.readInt();
+        this.ReturnType = in.readInt();
         this.ReturnTypeDesc = in.readString();
         this.Unit = in.readString();
         this.SaleName = in.readString();
         this.UnitName = in.readString();
         this.PalletNo = in.readString();
         this.PalletQty = (Float) in.readValue(Float.class.getClassLoader());
-        this.ReceiveStatus = (Float) in.readValue(Float.class.getClassLoader());
+        this.ReceiveStatus = in.readInt();
         this.FromAreaNo = in.readString();
         this.FromHouseNo = in.readString();
         this.FromWareHouseNo = in.readString();
@@ -710,6 +763,11 @@ public class StockInfo_Model extends Base_Model implements Parcelable,Cloneable 
         this.SupPrdBatch = in.readString();
         long tmpSupPrdDate = in.readLong();
         this.SupPrdDate = tmpSupPrdDate == -1 ? null : new Date(tmpSupPrdDate);
+        this.BarcodeType = in.readInt();
+        this.ErpInVoucherNo = in.readString();
+        this.SubIarrSID = in.readString();
+        this.IsAmount = in.readInt();
+        this.Fserialno = in.readString();
     }
 
     public static final Creator<StockInfo_Model> CREATOR = new Creator<StockInfo_Model>() {

@@ -12,8 +12,8 @@ public class URLModel {
         return  new URLModel();
     }
 
-    public static String IPAdress="wmstest.beukay.com";//"wmstest.beukay.com";
-    public static int Port=9010;//9000;
+    public static String IPAdress="10.10.11.22";//"wmstest.beukay.com";
+    public static int Port=7010;//9000;
     public static String  LastContent="AndroidService.svc/";
     public static String PrintIP="10.2.32.192";
     public static String ElecIP="10.2.32.244";
@@ -25,6 +25,7 @@ public class URLModel {
     public String UserLoginADF = GetWCFAdress()+"UserLoginADF"; //用户登录
     public String GetWareHouseByUserADF = GetWCFAdress()+"GetWareHouseByUserADF"; //获取仓库列表
     public String GetT_InStockListADF = GetWCFAdress()+"GetT_InStockListADF"; //收货表头
+    public String GetT_CGInStockListADF = GetWCFAdress()+"GetT_CGInStockListADF"; //收货表头
     public String GetT_InTaskListADF = GetWCFAdress()+"GetT_InTaskListADF"; //上架表头
     public String GetCheckADF = GetWCFAdress()+"GetCheck"; //盘点表头
     public String GetCheckMing = GetWCFAdress()+"GetCheckMing"; //盘点表头
@@ -35,7 +36,9 @@ public class URLModel {
     public String GetWareHouse = GetWCFAdress()+"GetWareHouse"; //获取盘点仓库
     public String SaveCheckAndroid = GetWCFAdress()+"SaveCheckAndroid"; //提交盘点库位
     public String GetAreanobyCheckno = GetWCFAdress()+"GetAreanobyCheckno"; //获取可盘点库位
+    public String GetScanInfoChai = GetWCFAdress()+"GetScanInfoChai"; //获取可盘点库位
     public String GetMinDetail = GetWCFAdress()+"GetMinDetail"; //获取明盘明细
+    public String SaveCheckChai = GetWCFAdress()+"SaveCheckChai"; //获取盘点条码信息之前校验or拆零
     public String GetScanInfo = GetWCFAdress()+"GetScanInfo"; //获取盘点条码信息
     public String GetMinBarocde = GetWCFAdress()+"GetMinBarocde"; //获取盘点条码信息
     public String GetInfoBySerial = GetWCFAdress()+"GetInfoBySerial"; //获取盘点条码信息
@@ -43,6 +46,7 @@ public class URLModel {
     public String GetAreanobyCheckno2 = GetWCFAdress()+"GetAreanobyCheckno2"; //检查盘点库位
     public String SummitMin = GetWCFAdress()+"SummitMin"; //检查盘点库位
     public String InsertCheckDetail = GetWCFAdress()+"InsertCheckDetail"; //提交盘点条码信息
+    public String GetCkrefe = GetWCFAdress()+"GetCkrefe"; //获取盘点参照
     public String GetCheckDetail = GetWCFAdress()+"GetCheckDetail"; //获取已盘点条码信息
     public String GetMinSerialno = GetWCFAdress()+"GetMinSerialno"; //获取已盘点条码信息
     public String DeleteCheckDetail = GetWCFAdress()+"DeleteCheckDetail"; //删除盘点条码信息
@@ -79,6 +83,7 @@ public class URLModel {
     public String PrintAndroid=GetWCFAdress()+"PrintAndroid";//打印期初标签
     public String Delete_PalletORBarCodeADF=GetWCFAdress()+"Delete_PalletORBarCodeADF";//删除组托信息
     public String SaveT_BarCodeToStockADF=GetWCFAdress()+"SaveT_BarCodeToStockADF";//装箱拆箱提交
+    public String SaveT_BarCodeToStockymhADF=GetWCFAdress()+"SaveT_BarCodeToStockymhADF";//拆箱提交（单个内盒为一箱）
     public String Get_PalletDetailByVoucherNo=GetWCFAdress()+"Get_PalletDetailByVoucherNo";//复核获取托盘信息
     public String GetT_QualityListADF=GetWCFAdress()+"GetT_QualityListADF";//获取质检表头信息
     public String ScanQualityStockADF=GetWCFAdress()+"ScanQualityStockADF";//获取质检扫描条码
@@ -95,6 +100,8 @@ public class URLModel {
     public String GetPickUserListByUserADF=GetWCFAdress()+"GetPickUserListByUserADF";//获取拣货人员信息
     public String SavePickUserListADF=GetWCFAdress()+"SavePickUserListADF";//提交拣货分配人员信息
     public String GetStockByMaterialNoADF=GetWCFAdress()+"GetStockByMaterialNoADF";//获取查询信息
+    public String GetStockByENAADF=GetWCFAdress()+"GetStockByENAADF";//获取ENA查询信息
+
 
     //生产
     public String GetT_LineManageInfoModel=GetWCFAdress()+"GetT_LineManageInfoModel";//获取作业记录

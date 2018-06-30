@@ -102,11 +102,11 @@ public class QCBillChioceItemAdapter extends BaseAdapter  implements Filterable 
             listItemView = (ListItemView) convertView.getTag();
         }
         QualityInfo_Model qualityInfoModel=qualityInfoModels.get(selectID);
-        listItemView.txtTaskNo.setText(qualityInfoModel.getMaterialDesc());
+        listItemView.txtTaskNo.setText("合格数："+qualityInfoModel.getQuanQty()+"   不合格数："+qualityInfoModel.getUnQuanQty());
         listItemView.txtERPVoucherNo.setText(qualityInfoModel.getErpVoucherNo());
         listItemView.txtStrVoucherType.setText(qualityInfoModel.getMaterialNo());
-        listItemView.txtCompany.setText("");//qualityInfoModel.getStrongHoldName()
-        listItemView.txtdepartment.setText(qualityInfoModel.getBatchNo());
+        listItemView.txtCompany.setText("质检数："+qualityInfoModel.getInSQty()+"");//qualityInfoModel.getStrongHoldName()
+        listItemView.txtdepartment.setText(qualityInfoModel.getMaterialDesc());
         if (getListselected().get(position)==false) {
             convertView.setBackgroundColor(Color.TRANSPARENT);
         }
@@ -148,10 +148,16 @@ public class QCBillChioceItemAdapter extends BaseAdapter  implements Filterable 
                 for (int i = 0; i < count; i++) {
                     QualityInfo_Model pc = unfilteredValues.get(i);
                     if (pc != null) {
-
-                        if(pc.getMaterialNo().toUpperCase().startsWith(prefixString.toUpperCase())){
+                      String[] strs =  prefixString.split(",");
+                        String ErpInVoucherNo=strs[1].toUpperCase();
+                        String SubIarrSID= strs[0].toUpperCase();
+                        if(pc.getErpInVoucherNo().toUpperCase().equals(ErpInVoucherNo)&&pc.getSubIarrSID().toUpperCase().equals(SubIarrSID)){
                             newValues.add(pc);
                         }
+
+//                        if(pc.getErpVoucherNo().toUpperCase().equals("LJ1804220002")){
+//                            newValues.add(pc);
+//                        }
                     }
                 }
 

@@ -25,6 +25,11 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         this.BatchNo=BatchNo;
     }
 
+//    public InStockTaskDetailsInfo_Model(String MaterialNo,String Taskno){
+//        this.MaterialNo=MaterialNo;
+//        this.TaskNo=Taskno;
+//    }
+
 
     private String MaterialNo;
     private String MaterialDesc;
@@ -48,8 +53,6 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
     private String Unit;
     private Float UnQualityQty;
     private Float PostQty;
-    private Float PostStatus;
-    private Date PostDate;
     private String ReserveNumber;
     private String ReserveRowNo;
     private Float UnShelveQty;
@@ -58,7 +61,6 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
     private String ReviewUser;
     private Date ReviewDate;
     private Float ReviewStatus;
-    private String PostUser;
     private String Costcenter;
     private String Wbselem;
     private String ToStorageLoc;
@@ -96,6 +98,34 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
     private String ToBatchNo;
     private String ToErpAreaNo;
     private String ToErpWarehouse;
+
+    private String ErpInVoucherNo;
+    private String SubIarrSID;
+    public Float SumRemainQty;
+
+    public Float getSumRemainQty() {
+        return SumRemainQty;
+    }
+
+    public void setSumRemainQty(Float sumRemainQty) {
+        SumRemainQty = sumRemainQty;
+    }
+
+    public String getErpInVoucherNo() {
+        return ErpInVoucherNo;
+    }
+
+    public void setErpInVoucherNo(String erpInVoucherNo) {
+        ErpInVoucherNo = erpInVoucherNo;
+    }
+
+    public String getSubIarrSID() {
+        return SubIarrSID;
+    }
+
+    public void setSubIarrSID(String subIarrSID) {
+        SubIarrSID = subIarrSID;
+    }
 
     public String getBatchNo() {
         return BatchNo;
@@ -365,14 +395,6 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         PoRowNo = poRowNo;
     }
 
-    public Date getPostDate() {
-        return PostDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        PostDate = postDate;
-    }
-
     public Float getPostQty() {
         return PostQty;
     }
@@ -381,21 +403,6 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         PostQty = postQty;
     }
 
-    public Float getPostStatus() {
-        return PostStatus;
-    }
-
-    public void setPostStatus(Float postStatus) {
-        PostStatus = postStatus;
-    }
-
-    public String getPostUser() {
-        return PostUser;
-    }
-
-    public void setPostUser(String postUser) {
-        PostUser = postUser;
-    }
 
     public Float getQualityQty() {
         return QualityQty;
@@ -703,8 +710,6 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         dest.writeString(this.Unit);
         dest.writeValue(this.UnQualityQty);
         dest.writeValue(this.PostQty);
-        dest.writeValue(this.PostStatus);
-        dest.writeLong(this.PostDate != null ? this.PostDate.getTime() : -1);
         dest.writeString(this.ReserveNumber);
         dest.writeString(this.ReserveRowNo);
         dest.writeValue(this.UnShelveQty);
@@ -713,7 +718,6 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         dest.writeString(this.ReviewUser);
         dest.writeLong(this.ReviewDate != null ? this.ReviewDate.getTime() : -1);
         dest.writeValue(this.ReviewStatus);
-        dest.writeString(this.PostUser);
         dest.writeString(this.Costcenter);
         dest.writeString(this.Wbselem);
         dest.writeString(this.ToStorageLoc);
@@ -737,7 +741,7 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         dest.writeInt(this.WarehouseID);
         dest.writeInt(this.HouseID);
         dest.writeInt(this.AreaID);
-        dest.writeList(this.lstArea);
+        dest.writeTypedList(this.lstArea);
         dest.writeTypedList(this.lstStockInfo);
         dest.writeString(this.SupCusCode);
         dest.writeString(this.SupCusName);
@@ -751,6 +755,9 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         dest.writeString(this.ToBatchNo);
         dest.writeString(this.ToErpAreaNo);
         dest.writeString(this.ToErpWarehouse);
+        dest.writeString(this.ErpInVoucherNo);
+        dest.writeString(this.SubIarrSID);
+        dest.writeValue(this.SumRemainQty);
     }
 
     protected InStockTaskDetailsInfo_Model(Parcel in) {
@@ -777,9 +784,6 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         this.Unit = in.readString();
         this.UnQualityQty = (Float) in.readValue(Float.class.getClassLoader());
         this.PostQty = (Float) in.readValue(Float.class.getClassLoader());
-        this.PostStatus = (Float) in.readValue(Float.class.getClassLoader());
-        long tmpPostDate = in.readLong();
-        this.PostDate = tmpPostDate == -1 ? null : new Date(tmpPostDate);
         this.ReserveNumber = in.readString();
         this.ReserveRowNo = in.readString();
         this.UnShelveQty = (Float) in.readValue(Float.class.getClassLoader());
@@ -789,7 +793,6 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         long tmpReviewDate = in.readLong();
         this.ReviewDate = tmpReviewDate == -1 ? null : new Date(tmpReviewDate);
         this.ReviewStatus = (Float) in.readValue(Float.class.getClassLoader());
-        this.PostUser = in.readString();
         this.Costcenter = in.readString();
         this.Wbselem = in.readString();
         this.ToStorageLoc = in.readString();
@@ -813,8 +816,7 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         this.WarehouseID = in.readInt();
         this.HouseID = in.readInt();
         this.AreaID = in.readInt();
-        this.lstArea = new ArrayList<AreaInfo_Model>();
-        in.readList(this.lstArea, AreaInfo_Model.class.getClassLoader());
+        this.lstArea = in.createTypedArrayList(AreaInfo_Model.CREATOR);
         this.lstStockInfo = in.createTypedArrayList(StockInfo_Model.CREATOR);
         this.SupCusCode = in.readString();
         this.SupCusName = in.readString();
@@ -828,6 +830,9 @@ public class InStockTaskDetailsInfo_Model extends Base_Model implements Parcelab
         this.ToBatchNo = in.readString();
         this.ToErpAreaNo = in.readString();
         this.ToErpWarehouse = in.readString();
+        this.ErpInVoucherNo = in.readString();
+        this.SubIarrSID = in.readString();
+        this.SumRemainQty = (Float) in.readValue(Float.class.getClassLoader());
     }
 
     public static final Creator<InStockTaskDetailsInfo_Model> CREATOR = new Creator<InStockTaskDetailsInfo_Model>() {

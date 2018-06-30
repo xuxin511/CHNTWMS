@@ -20,10 +20,10 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         this.ErpVoucherNo=ErpVoucherNo;
     }
 
-    private Float TaskType;
+    private int TaskType;
     private String TaskNo;
     private String SupcusName;
-    private Float TaskStatus;
+    private int TaskStatus;
     private String AuditUserNo;
     private Date AuditDateTime;
   //  private Date TaskIssued;
@@ -36,11 +36,10 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
     private Float IsReceivePost;
     private String Plant;
     private String PlanName;
-    private Float PostStatus;
     private String MoveType;
     private Float IsOutStockPost;
     private Float IsUnderShelvePost;
-    private Float ReviewStatus;
+    private int ReviewStatus;
     private String MoveReasonCode;
     private String MoveReasonDesc;
     private Float PrintQty;
@@ -48,8 +47,8 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
     private Date CloseDateTime;
     private String CloseUserNo;
     private String CloseReason;
-    private Float IsOwe;
-    private Float IsUrgent;
+    private int IsOwe;
+    private int IsUrgent;
     private Date OutStockDate;
     private String TaskIsSuedUser;
     private String MaterialNo ;
@@ -123,13 +122,7 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         IsOutStockPost = isOutStockPost;
     }
 
-    public Float getIsOwe() {
-        return IsOwe;
-    }
 
-    public void setIsOwe(Float isOwe) {
-        IsOwe = isOwe;
-    }
 
     public Float getIsQuality() {
         return IsQuality;
@@ -163,13 +156,7 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         IsUnderShelvePost = isUnderShelvePost;
     }
 
-    public Float getIsUrgent() {
-        return IsUrgent;
-    }
 
-    public void setIsUrgent(Float isUrgent) {
-        IsUrgent = isUrgent;
-    }
 
     public String getMaterialNo() {
         return MaterialNo;
@@ -227,13 +214,6 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         Plant = plant;
     }
 
-    public Float getPostStatus() {
-        return PostStatus;
-    }
-
-    public void setPostStatus(Float postStatus) {
-        PostStatus = postStatus;
-    }
 
     public Float getPrintQty() {
         return PrintQty;
@@ -275,13 +255,7 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         Remark = remark;
     }
 
-    public Float getReviewStatus() {
-        return ReviewStatus;
-    }
 
-    public void setReviewStatus(Float reviewStatus) {
-        ReviewStatus = reviewStatus;
-    }
 
     public String getStrTaskIsSuedUser() {
         return StrTaskIsSuedUser;
@@ -332,20 +306,45 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         TaskNo = taskNo;
     }
 
-    public Float getTaskStatus() {
-        return TaskStatus;
-    }
 
-    public void setTaskStatus(Float taskStatus) {
-        TaskStatus = taskStatus;
-    }
-
-    public Float getTaskType() {
+    public int getTaskType() {
         return TaskType;
     }
 
-    public void setTaskType(Float taskType) {
+    public void setTaskType(int taskType) {
         TaskType = taskType;
+    }
+
+    public int getTaskStatus() {
+        return TaskStatus;
+    }
+
+    public void setTaskStatus(int taskStatus) {
+        TaskStatus = taskStatus;
+    }
+
+    public int getReviewStatus() {
+        return ReviewStatus;
+    }
+
+    public void setReviewStatus(int reviewStatus) {
+        ReviewStatus = reviewStatus;
+    }
+
+    public int getIsOwe() {
+        return IsOwe;
+    }
+
+    public void setIsOwe(int isOwe) {
+        IsOwe = isOwe;
+    }
+
+    public int getIsUrgent() {
+        return IsUrgent;
+    }
+
+    public void setIsUrgent(int isUrgent) {
+        IsUrgent = isUrgent;
     }
 
     @Override
@@ -366,10 +365,10 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.TaskType);
+        dest.writeInt(this.TaskType);
         dest.writeString(this.TaskNo);
         dest.writeString(this.SupcusName);
-        dest.writeValue(this.TaskStatus);
+        dest.writeInt(this.TaskStatus);
         dest.writeString(this.AuditUserNo);
         dest.writeLong(this.AuditDateTime != null ? this.AuditDateTime.getTime() : -1);
         dest.writeString(this.ReceiveUserNo);
@@ -381,11 +380,10 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         dest.writeValue(this.IsReceivePost);
         dest.writeString(this.Plant);
         dest.writeString(this.PlanName);
-        dest.writeValue(this.PostStatus);
         dest.writeString(this.MoveType);
         dest.writeValue(this.IsOutStockPost);
         dest.writeValue(this.IsUnderShelvePost);
-        dest.writeValue(this.ReviewStatus);
+        dest.writeInt(this.ReviewStatus);
         dest.writeString(this.MoveReasonCode);
         dest.writeString(this.MoveReasonDesc);
         dest.writeValue(this.PrintQty);
@@ -393,8 +391,8 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         dest.writeLong(this.CloseDateTime != null ? this.CloseDateTime.getTime() : -1);
         dest.writeString(this.CloseUserNo);
         dest.writeString(this.CloseReason);
-        dest.writeValue(this.IsOwe);
-        dest.writeValue(this.IsUrgent);
+        dest.writeInt(this.IsOwe);
+        dest.writeInt(this.IsUrgent);
         dest.writeLong(this.OutStockDate != null ? this.OutStockDate.getTime() : -1);
         dest.writeString(this.TaskIsSuedUser);
         dest.writeString(this.MaterialNo);
@@ -406,10 +404,10 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
 
     protected InStockTaskInfo_Model(Parcel in) {
         super(in);
-        this.TaskType = (Float) in.readValue(Float.class.getClassLoader());
+        this.TaskType = in.readInt();
         this.TaskNo = in.readString();
         this.SupcusName = in.readString();
-        this.TaskStatus = (Float) in.readValue(Float.class.getClassLoader());
+        this.TaskStatus = in.readInt();
         this.AuditUserNo = in.readString();
         long tmpAuditDateTime = in.readLong();
         this.AuditDateTime = tmpAuditDateTime == -1 ? null : new Date(tmpAuditDateTime);
@@ -422,11 +420,10 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         this.IsReceivePost = (Float) in.readValue(Float.class.getClassLoader());
         this.Plant = in.readString();
         this.PlanName = in.readString();
-        this.PostStatus = (Float) in.readValue(Float.class.getClassLoader());
         this.MoveType = in.readString();
         this.IsOutStockPost = (Float) in.readValue(Float.class.getClassLoader());
         this.IsUnderShelvePost = (Float) in.readValue(Float.class.getClassLoader());
-        this.ReviewStatus = (Float) in.readValue(Float.class.getClassLoader());
+        this.ReviewStatus = in.readInt();
         this.MoveReasonCode = in.readString();
         this.MoveReasonDesc = in.readString();
         this.PrintQty = (Float) in.readValue(Float.class.getClassLoader());
@@ -436,8 +433,8 @@ public class InStockTaskInfo_Model extends Base_Model implements Parcelable {
         this.CloseDateTime = tmpCloseDateTime == -1 ? null : new Date(tmpCloseDateTime);
         this.CloseUserNo = in.readString();
         this.CloseReason = in.readString();
-        this.IsOwe = (Float) in.readValue(Float.class.getClassLoader());
-        this.IsUrgent = (Float) in.readValue(Float.class.getClassLoader());
+        this.IsOwe = in.readInt();
+        this.IsUrgent = in.readInt();
         long tmpOutStockDate = in.readLong();
         this.OutStockDate = tmpOutStockDate == -1 ? null : new Date(tmpOutStockDate);
         this.TaskIsSuedUser = in.readString();

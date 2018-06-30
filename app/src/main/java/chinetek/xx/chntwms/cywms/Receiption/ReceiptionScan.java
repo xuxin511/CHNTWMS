@@ -26,6 +26,7 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import chinetek.xx.chntwms.adapter.wms.Receiption.ReceiptScanDetailAdapter;
@@ -42,6 +43,7 @@ import chinetek.xx.chntwms.model.ReturnMsgModelList;
 import chinetek.xx.chntwms.model.URLModel;
 import chinetek.xx.chntwms.util.Network.NetworkError;
 import chinetek.xx.chntwms.util.Network.RequestHandler;
+import chinetek.xx.chntwms.util.PlayVideo.PlayVoice;
 import chinetek.xx.chntwms.util.dialog.MessageBox;
 import chinetek.xx.chntwms.util.function.ArithUtil;
 import chinetek.xx.chntwms.util.function.CommonUtil;
@@ -179,11 +181,24 @@ public class ReceiptionScan extends BaseActivity {
                 return false;
             }
             Boolean isFinishReceipt=true;
+            //其他入库单
+            if(receiptDetailModels!=null && receiptDetailModels.get(0).getVoucherType()==23) {
+                for (ReceiptDetail_Model receiptDetail : receiptDetailModels) {
+                    if (ArithUtil.sub(receiptDetail.getScanQty(),receiptDetail.getRemainQty())!=0) {
+                        MessageBox.Show(context, "其他入库单,物料号【"+receiptDetail.getMaterialNo()+"】入库数量没有扫描齐全！");
+                        PlayVoice.PlayError(context);
+                        isFinishReceipt=false;
+                        break;
+                    }
+                }
+            }
+
             //非采购订单不能多次收货
             if(receiptDetailModels!=null && receiptDetailModels.get(0).getVoucherType()!=22) {
                 for (ReceiptDetail_Model receiptDetail : receiptDetailModels) {
-                    if (receiptDetail.getScanQty().compareTo(receiptDetail.getRemainQty()) != 0) {
-                        MessageBox.Show(context, getString(R.string.Error_CannotReceipt));
+                    if (receiptDetail.getScanQty()>receiptDetail.getRemainQty()) {
+                        MessageBox.Show(context, "扫描数量不能大于剩余数量！");
+                        PlayVoice.PlayError(context);
                         isFinishReceipt=false;
                         break;
                     }
@@ -234,7 +249,7 @@ public class ReceiptionScan extends BaseActivity {
                 BindListVIew(receiptDetailModels);
                 if (barCodeInfos != null) {
                     isDel=false;
-                    Bindbarcode(barCodeInfos);
+                    if(receiptModel.getVoucherType()==30||receiptModel.getVoucherType()==25||receiptModel.getVoucherType()==20||receiptModel.getVoucherType()==33){ BindbarcodeDB(barCodeInfos);}else{ Bindbarcode(barCodeInfos);}
                 }
             } else {
                 MessageBox.Show(context,returnMsgModel.getMessage());
@@ -256,12 +271,20 @@ public class ReceiptionScan extends BaseActivity {
             if (returnMsgModel.getHeaderStatus().equals("S")) {
                 ArrayList<BarCodeInfo> barCodeInfos = returnMsgModel.getModelJson();
                 isDel=false;
-                Bindbarcode(barCodeInfos);
+                if(receiptModel.getVoucherType()==30||receiptModel.getVoucherType()==25||receiptModel.getVoucherType()==20||receiptModel.getVoucherType()==33){
+                    BindbarcodeDB(barCodeInfos);
+                }else{
+                  Bindbarcode(barCodeInfos);
+
+                }
+//                Bindbarcode(barCodeInfos);
             } else {
                 MessageBox.Show(context,returnMsgModel.getMessage());
+                PlayVoice.PlayError(context);
             }
         }catch (Exception ex){
             MessageBox.Show(context,ex.toString());
+            PlayVoice.PlayError(context);
         }
         CommonUtil.setEditFocus(edtRecScanBarcode);
     }
@@ -275,6 +298,7 @@ public class ReceiptionScan extends BaseActivity {
             final ReturnMsgModel<Base_Model> returnMsgModel =  GsonUtil.getGsonUtil().fromJson(result, new TypeToken<ReturnMsgModel<Base_Model>>() {
             }.getType());
             if(returnMsgModel.getHeaderStatus().equals("S")){
+                linm= new ArrayList<>();
                 new AlertDialog.Builder(context).setTitle("提示").setCancelable(false).setIcon(android.R.drawable.ic_dialog_info).setMessage(returnMsgModel.getMessage())
                                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                             @Override
@@ -291,9 +315,11 @@ public class ReceiptionScan extends BaseActivity {
                                         }).show();
             }else {
                 MessageBox.Show(context, returnMsgModel.getMessage());
+                PlayVoice.PlayError(context);
             }
         } catch (Exception ex) {
             MessageBox.Show(context, ex.getMessage());
+            PlayVoice.PlayError(context);
         }
     }
 
@@ -310,16 +336,18 @@ public class ReceiptionScan extends BaseActivity {
     }
 
     boolean isDel=false;
+    boolean isGo=false;
     void Bindbarcode(final ArrayList<BarCodeInfo> barCodeInfos){
         if (barCodeInfos != null && barCodeInfos.size() != 0) {
             try {
                 for (BarCodeInfo barCodeInfo : barCodeInfos) {
                     if (barCodeInfo != null && receiptDetailModels != null) {
-                        ReceiptDetail_Model receiptDetailModel = new ReceiptDetail_Model(barCodeInfo.getMaterialNo(), barCodeInfo.getRowNo(), barCodeInfo.getRowNoDel());
+                        ReceiptDetail_Model receiptDetailModel = new ReceiptDetail_Model(barCodeInfo.getMaterialNo(), barCodeInfo.getRowNo());
                         final int index = receiptDetailModels.indexOf(receiptDetailModel);
                         if (index != -1) {
                             if(!barCodeInfo.getErpVoucherNo().equals(receiptDetailModels.get(index).getErpVoucherNo())){
                                 MessageBox.Show(context,getString(R.string.Error_ErpvoucherNoMatch) + "|" + barCodeInfo.getSerialNo());
+                                PlayVoice.PlayError(context);
                                 break;
                             }
 
@@ -327,6 +355,7 @@ public class ReceiptionScan extends BaseActivity {
                             if (receiptDetailModels.get(index).getIsSpcBatch().equals("Y")) {
                                 if (!receiptDetailModels.get(index).getFromBatchNo().equals(barCodeInfo.getBatchNo())) {
                                     MessageBox.Show(context, getString(R.string.Error_batchNONotMatch) + "|" + barCodeInfo.getSerialNo());
+                                    PlayVoice.PlayError(context);
                                     break;
                                 }
                             }
@@ -351,12 +380,119 @@ public class ReceiptionScan extends BaseActivity {
                                     break;
                                 }
                             } else {
-                                if (!CheckBarcode(barCodeInfo, index))
+                                if (!CheckBarcode(barCodeInfo, index)){
+                                    PlayVoice.PlayError(context);
                                     break;
+                                }
+
                             }
                             RefeshFrm(index);
                         } else {
                             MessageBox.Show(context, getString(R.string.Error_BarcodeNotInList) + "|" + barCodeInfo.getSerialNo());
+                            PlayVoice.PlayError(context);
+                            break;
+                        }
+                    }
+
+                }
+                InitFrm(barCodeInfos.get(0));
+            }catch (Exception ex){
+                MessageBox.Show(context,ex.getMessage());
+                CommonUtil.setEditFocus(edtRecScanBarcode);
+            }
+
+        }
+    }
+
+     ArrayList<String> linm = new ArrayList<String>();
+    void BindbarcodeDB(final ArrayList<BarCodeInfo> barCodeInfos){
+        if (barCodeInfos != null && barCodeInfos.size() != 0) {
+            try {
+                isDel=false;
+                isGo=false;
+                for (BarCodeInfo barCodeInfo : barCodeInfos) {
+                    if (barCodeInfo != null && receiptDetailModels != null) {
+                        //查找复核要求的调拨单明细行
+                        int indexL=-1;
+                        for(int i=0;i<receiptDetailModels.size();i++){
+                            if(receiptDetailModels.get(i).getMaterialNo().equals(barCodeInfo.getMaterialNo())
+                                    &&receiptDetailModels.get(i).getRemainQty()>receiptDetailModels.get(i).getScanQty()){
+                                indexL=i;
+                                break;
+                            }
+                        }
+                        if (indexL != -1) {
+                            if(receiptModel.getVoucherType()!=25&&receiptModel.getVoucherType()!=20&&receiptModel.getVoucherType()!=33){
+                                if(!barCodeInfo.getErpVoucherNo().equals(receiptDetailModels.get(indexL).getErpVoucherNo())){
+                                    MessageBox.Show(context,getString(R.string.Error_ErpvoucherNoMatch) + "|" + barCodeInfo.getSerialNo());
+                                    PlayVoice.PlayError(context);
+                                    break;
+                                }
+                            }
+
+                            //是否指定批次
+                            if (receiptDetailModels.get(indexL).getIsSpcBatch().equals("Y")) {
+                                if (!receiptDetailModels.get(indexL).getFromBatchNo().equals(barCodeInfo.getBatchNo())) {
+                                    MessageBox.Show(context, getString(R.string.Error_batchNONotMatch) + "|" + barCodeInfo.getSerialNo());
+                                    PlayVoice.PlayError(context);
+                                    break;
+                                }
+                            }
+
+                            if(linm==null||linm.size()==0){
+                                receiptDetailModels.get(indexL).setLstBarCode(new ArrayList<BarCodeInfo>());
+                                if (!CheckBarcode(barCodeInfo, indexL))
+                                    break;
+                            }else{
+                                boolean flag=false;
+                                for(int j=0;j<linm.size();j++){
+                                    if(linm.get(j).contains(barCodeInfo.getSerialNo())){
+                                        flag=true;
+                                        final int jChuan=j;
+                                        final String[] sub = linm.get(j).split(",");
+                                        final BarCodeInfo barCodeInfoChuan=barCodeInfo;
+                                        if(isGo){
+                                            break;
+                                        }
+                                        if(isDel){
+                                            linm.remove(jChuan);
+                                            int barIndexl = receiptDetailModels.get(Integer.parseInt(sub[1])).getLstBarCode().indexOf(barCodeInfoChuan);
+                                            RemoveBarcode(Integer.parseInt(sub[1]), barIndexl);
+                                            break;
+                                        }
+                                        new AlertDialog.Builder(context).setCancelable(false).setTitle("提示").setIcon(android.R.drawable.ic_dialog_info).setMessage("是否删除已扫描条码？")
+                                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        // TODO 自动生成的方法
+                                                        //RemoveBarcode(index, barIndex);
+                                                        isDel = true;
+                                                        linm.remove(jChuan);
+                                                        int barIndexl = receiptDetailModels.get(Integer.parseInt(sub[1])).getLstBarCode().indexOf(barCodeInfoChuan);
+                                                        RemoveBarcode(Integer.parseInt(sub[1]), barIndexl);
+                                                    }
+                                                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            // TODO 自动生成的方法
+                                                            isGo = true;
+                                                        }
+                                        }).show();
+//                                        break;
+                                    }
+                                }
+                                if(!flag){
+                                    if (!CheckBarcode(barCodeInfo, indexL)){
+                                        PlayVoice.PlayError(context);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            RefeshFrm(indexL);
+                        } else {
+                            MessageBox.Show(context, "收货物料行已满或者不存在该物料行！");
+                            PlayVoice.PlayError(context);
                             break;
                         }
                     }
@@ -372,6 +508,9 @@ public class ReceiptionScan extends BaseActivity {
     }
 
 
+
+
+
     boolean CheckBarcode(BarCodeInfo barCodeInfo,int index) {
         boolean isChecked = false;
         if (receiptDetailModels.get(index).getRemainQty() == 0) {
@@ -379,16 +518,16 @@ public class ReceiptionScan extends BaseActivity {
             return false;
         }
 
-        if (receiptDetailModels.get(index).getLstBarCode().size() != 0) {
-            if (!barCodeInfo.getBatchNo().equals(receiptDetailModels.get(index).getLstBarCode().get(0).getBatchNo())) {
-                MessageBox.Show(context, getString(R.string.Error_ReceivebatchError) + "|" + barCodeInfo.getSerialNo());
-                return false;
-            }
-            if (!barCodeInfo.getSupPrdBatch().equals(receiptDetailModels.get(index).getLstBarCode().get(0).getSupPrdBatch())) {
-                MessageBox.Show(context, getString(R.string.Error_ProductbatchError) + "|" + barCodeInfo.getSerialNo());
-                return false;
-            }
-        }
+//        if (receiptDetailModels.get(index).getLstBarCode().size() != 0) {
+//            if (!barCodeInfo.getBatchNo().equals(receiptDetailModels.get(index).getLstBarCode().get(0).getBatchNo())) {
+//                MessageBox.Show(context, getString(R.string.Error_ReceivebatchError) + "|" + barCodeInfo.getSerialNo());
+//                return false;
+//            }
+//            if (!barCodeInfo.getSupPrdBatch().equals(receiptDetailModels.get(index).getLstBarCode().get(0).getSupPrdBatch())) {
+//                MessageBox.Show(context, getString(R.string.Error_ProductbatchError) + "|" + barCodeInfo.getSerialNo());
+//                return false;
+//            }
+//        }
         isChecked =Addbarcode(index, barCodeInfo);
         return isChecked;
     }
@@ -407,9 +546,19 @@ public class ReceiptionScan extends BaseActivity {
                 //receiptDetailModels.get(index).getScanQty()+barCodeInfo.getQty();
 
           if(qty<=receiptDetailModels.get(index).getRemainQty()) {
+              if(receiptDetailModels.get(index).getLstBarCode()==null){
+                  receiptDetailModels.get(index).setLstBarCode(new ArrayList<BarCodeInfo>());
+              }
             receiptDetailModels.get(index).getLstBarCode().add(0, barCodeInfo);
             receiptDetailModels.get(index).setBatchNo(barCodeInfo.getBatchNo());
             receiptDetailModels.get(index).setScanQty(qty);
+
+//            if(receiptModel.getVoucherType()==30||receiptModel.getVoucherType()==25){
+              if(receiptModel.getVoucherType()==30||receiptModel.getVoucherType()==25||receiptModel.getVoucherType()==20||receiptModel.getVoucherType()==33){
+                //调拨,采购订单，销售退，生产订单用临时放条码
+                linm.add(barCodeInfo.getSerialNo()+","+index);
+            }
+
             return true;
         }else{
             MessageBox.Show(context, getString(R.string.Error_ReceiveOver));

@@ -27,6 +27,7 @@ public class PalletItemAdapter extends BaseAdapter {
         public TextView txtBarcode;
         public TextView txtMaterialName;
         public TextView txtBatch;
+        public TextView item_spec;
     }
 
     public PalletItemAdapter(Context context, List<BarCodeInfo> barCodeInfoList) {
@@ -65,6 +66,8 @@ public class PalletItemAdapter extends BaseAdapter {
             listItemView.txtBarcode = (TextView) convertView.findViewById(R.id.item_Barcode);
             listItemView.txtMaterialName = (TextView) convertView.findViewById(R.id.item_MattterialName);
             listItemView.txtBatch = (TextView) convertView.findViewById(R.id.item_Batch);
+            listItemView.item_spec = (TextView) convertView.findViewById(R.id.item_spec);
+
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
@@ -73,6 +76,7 @@ public class PalletItemAdapter extends BaseAdapter {
         listItemView.txtBarcode.setText(barCodeInfo.getSerialNo());
         listItemView.txtMaterialName.setText(barCodeInfo.getMaterialDesc());
         listItemView.txtBatch.setText(barCodeInfo.getBatchNo());
+        listItemView.item_spec.setText(barCodeInfo.getDimension());
         return convertView;
     }
 

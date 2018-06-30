@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <application
         android:name="chinetek.xx.chntwms.base.BaseApplication"
         android:allowBackup="true"
@@ -17,6 +17,8 @@
         <activity android:name="chinetek.xx.chntwms.MainActivity" />
         <activity android:name="chinetek.xx.chntwms.Setting" />
         <activity android:name=".Receiption.ReceiptBillChoice" />
+        <activity android:name=".Receiption.CGReceiptBillChoice" />
+        <activity android:name=".Receiption.CGReceiptionScan" />
         <activity android:name=".Qc.QCBillChoice" />
         <activity android:name=".Qc.QCScan" />
         <activity android:name=".Receiption.SupplierFilterActivity" />
@@ -34,9 +36,11 @@
         <activity android:name=".InnerMove.InnerMoveDetail" />
         <activity android:name=".Intentory.InventoryBillChoice" />
         <activity android:name=".Intentory.IntentoryScan" />
+        <activity android:name=".Intentory.IntentoryFinc" />
         <activity android:name="chinetek.xx.chntwms.Pallet.CombinPallet" />
         <activity android:name="chinetek.xx.chntwms.Pallet.CombinPalletSupplier" />
         <activity android:name=".Intentory.IntentoryDetial" />
+        <activity android:name=".Intentory.IntentoryCan" />
         <activity android:name="chinetek.xx.chntwms.Pallet.DismantlePallet" />
         <activity android:name="chinetek.xx.chntwms.Box.Boxing" />
         <activity android:name=".Stock.AdjustStock" />

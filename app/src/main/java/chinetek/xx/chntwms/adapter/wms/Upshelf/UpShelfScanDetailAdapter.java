@@ -31,6 +31,7 @@ public class UpShelfScanDetailAdapter extends BaseAdapter {
         public TextView txtRemainQty;
         public TextView txtMaterialDesc;
         public TextView txtreferStock;
+        public TextView txtspec;
     }
 
     public UpShelfScanDetailAdapter(Context context, List<InStockTaskDetailsInfo_Model> inStockTaskDetailsInfoModels) {
@@ -70,6 +71,8 @@ public class UpShelfScanDetailAdapter extends BaseAdapter {
             listItemView.txtreferStock = (TextView) convertView.findViewById(R.id.txtreferStock);
             listItemView.txtRemainQty = (TextView) convertView.findViewById(R.id.txtRemainQty);
             listItemView.txtMaterialDesc = (TextView) convertView.findViewById(R.id.txtMaterialDesc);
+            listItemView.txtspec = (TextView) convertView.findViewById(R.id.txtspec);
+
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
@@ -80,6 +83,7 @@ public class UpShelfScanDetailAdapter extends BaseAdapter {
         listItemView.txtRemainQty.setText("上架数："+inStockTaskDetailsInfoModel.getRemainQty());
         listItemView.txtreferStock.setText("推荐库位："+GetReferStock(inStockTaskDetailsInfoModel.getLstArea()));
         listItemView.txtMaterialDesc.setText(inStockTaskDetailsInfoModel.getMaterialDesc());
+        listItemView.txtspec.setText(inStockTaskDetailsInfoModel.getSpec());
         if (inStockTaskDetailsInfoModel.getScanQty()!=0 &&
                 inStockTaskDetailsInfoModel.getScanQty().compareTo(inStockTaskDetailsInfoModel.getRemainQty())<0) {
             convertView.setBackgroundResource(R.color.khaki);

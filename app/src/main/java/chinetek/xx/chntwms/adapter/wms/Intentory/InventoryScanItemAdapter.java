@@ -31,6 +31,8 @@ public class InventoryScanItemAdapter extends BaseAdapter {
         public TextView txtQty;
         public TextView txtMaterialDec;
         public TextView txtScanQty;
+        public TextView txtspec;
+
     }
 
     public InventoryScanItemAdapter(Context context, int model, ArrayList<Barcode_Model> barcodeModels) {
@@ -71,6 +73,8 @@ public class InventoryScanItemAdapter extends BaseAdapter {
             listItemView.txtStock = (TextView) convertView.findViewById(R.id.txtStock);
             listItemView.txtMaterialDec = (TextView) convertView.findViewById(R.id.txtMaterialDec);
             listItemView.txtScanQty = (TextView) convertView.findViewById(R.id.txtScanQty);
+            listItemView.txtspec = (TextView) convertView.findViewById(R.id.txtspec);
+
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
@@ -80,6 +84,7 @@ public class InventoryScanItemAdapter extends BaseAdapter {
         listItemView.txtStock.setText("库位："+barcodeModel.getAreano());
         listItemView.txtMaterialDec.setText(barcodeModel.getMaterialDesc());
         listItemView.txtQty.setText("数量："+barcodeModel.getQty());
+        listItemView.txtspec.setText(barcodeModel.getDimension());
         if(model==1){
             listItemView.txtScanQty.setVisibility(View.GONE);
         }else{

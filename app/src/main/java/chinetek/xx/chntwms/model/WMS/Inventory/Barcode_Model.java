@@ -32,7 +32,18 @@ public class Barcode_Model implements Parcelable{
     private Date ProductDate;
     private Date EDate;
     private String Eds;
+    private int IsTransfer;
+
+    public String getFserialno() {
+        return fserialno;
+    }
+
+    public void setFserialno(String fserialno) {
+        this.fserialno = fserialno;
+    }
+
     private int BarcodeType;
+    private String fserialno;
 
     public String getVoucherNo() {
         return VoucherNo;
@@ -58,6 +69,27 @@ public class Barcode_Model implements Parcelable{
     private String RelaWeight;//ymh相对比重
     private String StoreCondition;//
     private String SupName;//ymh 生产日期周六区分
+    private String dimension;//ymh 规格
+    private String ProtectWay;//ymh防护措施
+
+    private String VoucherNo;//ymh
+    private int VoucherType;//ymh
+
+    public int getIsTransfer() {
+        return IsTransfer;
+    }
+
+    public void setIsTransfer(int isTransfer) {
+        IsTransfer = isTransfer;
+    }
+
+    public String getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(String dimension) {
+        this.dimension = dimension;
+    }
 
     public String getSupName() {
         return SupName;
@@ -74,12 +106,6 @@ public class Barcode_Model implements Parcelable{
     public void setVoucherType(int voucherType) {
         VoucherType = voucherType;
     }
-
-    private String ProtectWay;//ymh防护措施
-
-    private String VoucherNo;//ymh
-    private int VoucherType;//ymh
-
 
     public Float getSqty() {
         return sqty;
@@ -454,7 +480,9 @@ public class Barcode_Model implements Parcelable{
         dest.writeLong(this.ProductDate != null ? this.ProductDate.getTime() : -1);
         dest.writeLong(this.EDate != null ? this.EDate.getTime() : -1);
         dest.writeString(this.Eds);
+        dest.writeInt(this.IsTransfer);
         dest.writeInt(this.BarcodeType);
+        dest.writeString(this.fserialno);
         dest.writeString(this.Creater);
         dest.writeInt(this.STATUS);
         dest.writeString(this.warehousename);
@@ -467,7 +495,11 @@ public class Barcode_Model implements Parcelable{
         dest.writeInt(this.BarcodeNo);
         dest.writeString(this.RelaWeight);
         dest.writeString(this.StoreCondition);
+        dest.writeString(this.SupName);
+        dest.writeString(this.dimension);
         dest.writeString(this.ProtectWay);
+        dest.writeString(this.VoucherNo);
+        dest.writeInt(this.VoucherType);
         dest.writeString(this.CompanyCode);
         dest.writeString(this.RowNoDel);
         dest.writeInt(this.BoxCount);
@@ -498,7 +530,9 @@ public class Barcode_Model implements Parcelable{
         long tmpEDate = in.readLong();
         this.EDate = tmpEDate == -1 ? null : new Date(tmpEDate);
         this.Eds = in.readString();
+        this.IsTransfer = in.readInt();
         this.BarcodeType = in.readInt();
+        this.fserialno = in.readString();
         this.Creater = in.readString();
         this.STATUS = in.readInt();
         this.warehousename = in.readString();
@@ -511,7 +545,11 @@ public class Barcode_Model implements Parcelable{
         this.BarcodeNo = in.readInt();
         this.RelaWeight = in.readString();
         this.StoreCondition = in.readString();
+        this.SupName = in.readString();
+        this.dimension = in.readString();
         this.ProtectWay = in.readString();
+        this.VoucherNo = in.readString();
+        this.VoucherType = in.readInt();
         this.CompanyCode = in.readString();
         this.RowNoDel = in.readString();
         this.BoxCount = in.readInt();

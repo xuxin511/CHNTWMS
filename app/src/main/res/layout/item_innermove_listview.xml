@@ -58,13 +58,25 @@
             android:textColor="@color/crimson"
             android:textSize="15sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/list_spec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:gravity="right"
+        android:maxLines="1"
+        android:textColor="@color/royalblue"
+        android:textSize="15sp" />
+
     <TextView
         android:id="@+id/list_MaterialDesc"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="right"
         android:maxLines="1"
         android:textColor="@color/royalblue"
         android:textSize="15sp" />
+
 </LinearLayout>

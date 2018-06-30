@@ -2,6 +2,7 @@ package chinetek.xx.chntwms;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -32,8 +33,10 @@ import chinetek.xx.chntwms.cywms.OffShelf.OffShelfBillChoice;
 import chinetek.xx.chntwms.cywms.Qc.QCBillChoice;
 import chinetek.xx.chntwms.cywms.Query.QueryMain;
 import chinetek.xx.chntwms.cywms.R;
+import chinetek.xx.chntwms.cywms.Receiption.CGReceiptBillChoice;
 import chinetek.xx.chntwms.cywms.Receiption.ReceiptBillChoice;
 import chinetek.xx.chntwms.cywms.Review.ReviewBillChoice;
+import chinetek.xx.chntwms.cywms.Stock.AdjustStock;
 import chinetek.xx.chntwms.cywms.UpShelf.UpShelfBillChoice;
 
 
@@ -54,6 +57,11 @@ public class MainActivity extends BaseActivity {
         List<Map<String, Object>> data_list = getData();
         adapter = new GridViewItemAdapter(context,data_list);
         gridView.setAdapter(adapter);
+        //登陆成功，去掉菜单列表
+        BaseApplication.userInfo.setLstMenu(null);
+        BaseApplication.userInfo.setLstUserGroup(null);
+        BaseApplication.userInfo.setLstWarehouse(null);
+
     }
 
 
@@ -64,6 +72,8 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent();
         if(textView.getText().toString().equals("不合格扫描"))
             intent.setClass(context, QCBillChoice.class);
+        else if(textView.getText().toString().equals("采购收货"))
+            intent.setClass(context, CGReceiptBillChoice.class);
         else if(textView.getText().toString().equals("收货"))
             intent.setClass(context, ReceiptBillChoice.class);
         else if(textView.getText().toString().equals("上架"))
@@ -92,6 +102,8 @@ public class MainActivity extends BaseActivity {
             intent.setClass(context, Boxing.class);
         else if(textView.getText().toString().equals("物料转换"))
             intent.setClass(context, MaterialChangeReceiptBillChoice.class);
+        else if(textView.getText().toString().equals("库存调整"))
+            intent.setClass(context, AdjustStock.class);
 
         if(intent!=null)
             startActivityLeft(intent);
@@ -110,6 +122,8 @@ public class MainActivity extends BaseActivity {
         ArrayList<String>  itemNamesList=new ArrayList<>();
         itemIconList.add(R.drawable.receiption);
         itemNamesList.add("收货");
+        itemIconList.add(R.drawable.receiption);
+        itemNamesList.add("采购收货");
         itemIconList.add(R.drawable.qc);
         itemNamesList.add("不合格扫描");
         itemIconList.add(R.drawable.upshelves);
@@ -130,6 +144,10 @@ public class MainActivity extends BaseActivity {
         itemNamesList.add("查询");
         itemIconList.add(R.drawable.inventory);
         itemNamesList.add("盘点");
+        itemIconList.add(R.drawable.adjustment);
+        itemNamesList.add("库存调整");
+        itemIconList.add(R.drawable.intentoryfinc);
+        itemNamesList.add("财务盘点");
 
 //        List<MenuInfo> menuInfos=BaseApplication.userInfo.getLstMenu();
 //        if(menuInfos!=null) {

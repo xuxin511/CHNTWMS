@@ -97,11 +97,21 @@ int Type=-1;
     void GetStockInfo(String barcode){
         if(!TextUtils.isEmpty(barcode)){
             final Map<String, String> params = new HashMap<String, String>();
-            params.put("MaterialNo", barcode);
-            params.put("ScanType", Type+"");
-            String para = (new JSONObject(params)).toString();
-            LogUtil.WriteLog(Query.class, TAG_GetStockByMaterialNoADF, para);
-            RequestHandler.addRequestWithDialog(Request.Method.POST,TAG_GetStockByMaterialNoADF,String.format(getString(R.string.Msg_QueryStockInfo),BaseApplication.toolBarTitle.Title), context, mHandler, RESULT_Msg_GetStockADF, null,  URLModel.GetURL().GetStockByMaterialNoADF, params, null);
+            if(barcode.length()==13&&barcode.substring(0,2).equals("69")){
+                params.put("WareHourceID",BaseApplication.userInfo.getWarehouseID()+"");
+                params.put("ENA", barcode);
+                String para = (new JSONObject(params)).toString();
+                LogUtil.WriteLog(Query.class, TAG_GetStockByMaterialNoADF, para);
+                RequestHandler.addRequestWithDialog(Request.Method.POST,TAG_GetStockByMaterialNoADF,String.format(getString(R.string.Msg_QueryStockInfo),BaseApplication.toolBarTitle.Title), context, mHandler, RESULT_Msg_GetStockADF, null,  URLModel.GetURL().GetStockByENAADF, params, null);
+            }else{
+                params.put("WareHouseID",BaseApplication.userInfo.getWarehouseID()+"");
+                params.put("MaterialNo", barcode);
+                params.put("ScanType", Type+"");
+                String para = (new JSONObject(params)).toString();
+                LogUtil.WriteLog(Query.class, TAG_GetStockByMaterialNoADF, para);
+                RequestHandler.addRequestWithDialog(Request.Method.POST,TAG_GetStockByMaterialNoADF,String.format(getString(R.string.Msg_QueryStockInfo),BaseApplication.toolBarTitle.Title), context, mHandler, RESULT_Msg_GetStockADF, null,  URLModel.GetURL().GetStockByMaterialNoADF, params, null);
+            }
+
         }
     }
 

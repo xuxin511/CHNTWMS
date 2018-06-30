@@ -68,6 +68,24 @@ public class BarCodeInfo extends Base_Model implements Parcelable{
     private String ProductClass  ; //ymh生产班组
     private String RelaWeight; //相对比重
     private String LabelMark; //标记
+    private int IsTransfer;
+    private String Dimension;
+
+    public String getDimension() {
+        return Dimension;
+    }
+
+    public void setDimension(String dimension) {
+        Dimension = dimension;
+    }
+
+    public int getIsTransfer() {
+        return IsTransfer;
+    }
+
+    public void setIsTransfer(int isTransfer) {
+        IsTransfer = isTransfer;
+    }
 
     public String getRelaWeight() {
         return RelaWeight;
@@ -496,6 +514,12 @@ public class BarCodeInfo extends Base_Model implements Parcelable{
         dest.writeString(this.Palletno);
         dest.writeValue(this.PalletQty);
         dest.writeInt(this.PalletType);
+        dest.writeString(this.Unit);
+        dest.writeString(this.ProductClass);
+        dest.writeString(this.RelaWeight);
+        dest.writeString(this.LabelMark);
+        dest.writeInt(this.IsTransfer);
+        dest.writeString(this.Dimension);
     }
 
     protected BarCodeInfo(Parcel in) {
@@ -543,6 +567,12 @@ public class BarCodeInfo extends Base_Model implements Parcelable{
         this.Palletno = in.readString();
         this.PalletQty = (Float) in.readValue(Float.class.getClassLoader());
         this.PalletType = in.readInt();
+        this.Unit = in.readString();
+        this.ProductClass = in.readString();
+        this.RelaWeight = in.readString();
+        this.LabelMark = in.readString();
+        this.IsTransfer = in.readInt();
+        this.Dimension = in.readString();
     }
 
     public static final Creator<BarCodeInfo> CREATOR = new Creator<BarCodeInfo>() {

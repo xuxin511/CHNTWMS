@@ -178,7 +178,8 @@ public class InnerMoveScan extends BaseActivity {
             String  strqty=edtReturnQty.getText().toString();
             CheckNumRefMaterial checkNumRefMaterial=CheckMaterialNumFormat(strqty,stockInfoModels.get(0).getUnitTypeCode(),stockInfoModels.get(0).getDecimalLngth());
             if(!checkNumRefMaterial.ischeck()) {
-                MessageBox.Show(context,checkNumRefMaterial.getErrMsg());
+//                MessageBox.Show(context,checkNumRefMaterial.getErrMsg());
+                MessageBox.Show(context,checkNumRefMaterial.getErrMsg(),1);
                 CommonUtil.setEditFocus(edtReturnQty);
                 return true;
             }
@@ -188,7 +189,8 @@ public class InnerMoveScan extends BaseActivity {
                     Float qty=checkNumRefMaterial.getCheckQty();
                     Float scanQty=stockInfoModels.get(index).getQty();
                     if(qty>scanQty){
-                        MessageBox.Show(context,getString(R.string.Error_PackageQtyBiger));
+//                        MessageBox.Show(context,getString(R.string.Error_PackageQtyBiger));
+                        MessageBox.Show(context,getString(R.string.Error_PackageQtyBiger),1);
                         CommonUtil.setEditFocus(edtReturnQty);
                         return true;
                     }
@@ -198,7 +200,8 @@ public class InnerMoveScan extends BaseActivity {
                     CommonUtil.setEditFocus(edtMoveScanBarcode);
                     return true;
                 }else{
-                    MessageBox.Show(context,getString(R.string.Error_BarcodeScaned));
+//                    MessageBox.Show(context,getString(R.string.Error_BarcodeScaned));
+                    MessageBox.Show(context,getString(R.string.Error_BarcodeScaned),1);
                     edtReturnQty.setText("");
                     CommonUtil.setEditFocus(edtMoveScanBarcode);
                     return true;
@@ -297,17 +300,26 @@ public class InnerMoveScan extends BaseActivity {
             }.getType());
             if (returnMsgModel.getHeaderStatus().equals("S")) {
                 currentStockInfo = returnMsgModel.getModelJson();
+                if(currentStockInfo.get(0).getAreaType()==2){
+//                    MessageBox.Show(context,"待检库位的货位不能做移库操作！");
+                    MessageBox.Show(context,"待检库位的货位不能做移库操作！",1);
+                    CommonUtil.setEditFocus(edtMoveScanBarcode);
+                    return;
+                }
+
                 if (currentStockInfo != null && currentStockInfo.size() > 0) {
                     if(FunctionType==1){
                         if(!currentStockInfo.get(0).getFromWareHouseNo().toUpperCase().equals("AD03")){
-                            MessageBox.Show(context,getString(R.string.Error_Barcode_stock));
+//                            MessageBox.Show(context,getString(R.string.Error_Barcode_stock));
+                            MessageBox.Show(context,getString(R.string.Error_Barcode_stock),1);
                             CommonUtil.setEditFocus(edtMoveScanBarcode);
                             return;
                         }
                     }
 
                     if(this.stockInfoModels.indexOf(currentStockInfo.get(0))!=-1){
-                        MessageBox.Show(context,getString(R.string.Error_Barcode_hasScan));
+//                        MessageBox.Show(context,getString(R.string.Error_Barcode_hasScan));
+                        MessageBox.Show(context,getString(R.string.Error_Barcode_hasScan),1);
                         CommonUtil.setEditFocus(edtMoveScanBarcode);
                         return;
                     }
@@ -325,7 +337,7 @@ public class InnerMoveScan extends BaseActivity {
                                 currentStockInfo.get(i).setToErpAreaNo(StockCode);
                                 currentStockInfo.get(i).setToErpWarehouse("AD03");
                             }
-                            txtCompany.setText(currentStockInfo.get(0).getStrongHoldName());
+                            txtCompany.setText(currentStockInfo.get(0).getSpec());
                             txtStatus.setText(currentStockInfo.get(0).getStrStatus());
                             txtEDate.setText(CommonUtil.DateToString(currentStockInfo.get(0).getEDate()));
                             txtBatch.setText(currentStockInfo.get(0).getBatchNo());
@@ -340,11 +352,13 @@ public class InnerMoveScan extends BaseActivity {
                 }
 
             } else {
-                MessageBox.Show(context, returnMsgModel.getMessage());
+//                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
                 CommonUtil.setEditFocus(edtMoveScanBarcode);
             }
         }catch (Exception ex){
-            MessageBox.Show(context,ex.getMessage());
+//            MessageBox.Show(context,ex.getMessage());
+            MessageBox.Show(context,ex.getMessage(),1);
             CommonUtil.setEditFocus(edtMoveScanBarcode);
         }
     }
@@ -364,11 +378,13 @@ public class InnerMoveScan extends BaseActivity {
                 BindListVIew(ShowStock);
             }
              else {
-                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
+//                MessageBox.Show(context, returnMsgModel.getMessage());
                 CommonUtil.setEditFocus(edtMoveScanBarcode);
             }
         }catch (Exception ex) {
-            MessageBox.Show(context,ex.toString());
+            MessageBox.Show(context,ex.toString(),1);
+//            MessageBox.Show(context,ex.toString());
             CommonUtil.setEditFocus(edtMoveScanBarcode);
         }
 
@@ -383,11 +399,13 @@ public class InnerMoveScan extends BaseActivity {
                 MessageBox.Show(context, returnMsgModel.getMessage());
                 intiFrm();
             } else {
-                MessageBox.Show(context, returnMsgModel.getMessage());
+//                MessageBox.Show(context, returnMsgModel.getMessage());
+                MessageBox.Show(context, returnMsgModel.getMessage(),1);
                 CommonUtil.setEditFocus(edtMoveScanBarcode);
             }
         } catch (Exception ex) {
-            MessageBox.Show(context, ex.getMessage());
+            MessageBox.Show(context, ex.getMessage(),1);
+//            MessageBox.Show(context, ex.getMessage());
             CommonUtil.setEditFocus(edtMoveScanBarcode);
         }
 
@@ -405,7 +423,7 @@ public class InnerMoveScan extends BaseActivity {
                 currentStockInfo.get(i).setToErpAreaNo(OutAreaInfoModel.getAreaNo());
                 currentStockInfo.get(i).setToErpWarehouse(OutAreaInfoModel.getWarehouseNo());
             }
-            txtCompany.setText(currentStockInfo.get(0).getStrongHoldName());
+            txtCompany.setText(currentStockInfo.get(0).getSpec());
             txtStatus.setText(currentStockInfo.get(0).getStrStatus());
             txtEDate.setText(CommonUtil.DateToString(currentStockInfo.get(0).getEDate()));
             txtBatch.setText(currentStockInfo.get(0).getBatchNo());
@@ -446,6 +464,7 @@ public class InnerMoveScan extends BaseActivity {
             stockInfoModel.setMaterialDesc(currentStockInfo.get(0).getMaterialDesc());
             stockInfoModel.setMaterialNo(currentStockInfo.get(0).getMaterialNo());
             stockInfoModel.setFromAreaNo(currentStockInfo.get(0).getFromAreaNo());
+            stockInfoModel.setSpec(currentStockInfo.get(0).getSpec());
             stockInfoModel.setQty(qty);
             ShowStock.add(0,stockInfoModel);
         }

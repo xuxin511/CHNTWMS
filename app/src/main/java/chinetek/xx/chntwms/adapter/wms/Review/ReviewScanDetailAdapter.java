@@ -28,6 +28,8 @@ public class ReviewScanDetailAdapter extends BaseAdapter {
         public TextView txtScanNum;
         public TextView txtRemainQty;
         public TextView txtMaterialDesc;
+        public TextView txtCanReviewQty;
+        public TextView txtspec;
     }
 
     public ReviewScanDetailAdapter(Context context, List<OutStockDetailInfo_Model> outStockDetailInfoModels) {
@@ -66,6 +68,9 @@ public class ReviewScanDetailAdapter extends BaseAdapter {
             listItemView.txtScanNum = (TextView) convertView.findViewById(R.id.txtScanNum);
             listItemView.txtRemainQty = (TextView) convertView.findViewById(R.id.txtRemainQty);
             listItemView.txtMaterialDesc = (TextView) convertView.findViewById(R.id.txtMaterialDesc);
+            listItemView.txtCanReviewQty = (TextView) convertView.findViewById(R.id.txtCanReviewQty);
+            listItemView.txtspec = (TextView) convertView.findViewById(R.id.txtspec);
+
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
@@ -73,13 +78,16 @@ public class ReviewScanDetailAdapter extends BaseAdapter {
         OutStockDetailInfo_Model outStockDetailInfoModel=outStockDetailInfoModels.get(selectID);
         listItemView.txtbarcode.setText(outStockDetailInfoModel.getMaterialNo());
         listItemView.txtScanNum.setText("扫描数："+outStockDetailInfoModel.getScanQty());
-        listItemView.txtRemainQty.setText("复核数："+outStockDetailInfoModel.getOutStockQty());
+        listItemView.txtRemainQty.setText("订单数："+outStockDetailInfoModel.getOutStockQty());
         listItemView.txtMaterialDesc.setText(outStockDetailInfoModel.getMaterialDesc());
+        listItemView.txtCanReviewQty.setText("可复核："+outStockDetailInfoModel.getCanReviewQty());
+        listItemView.txtspec.setText(outStockDetailInfoModel.getSpec());
         if (outStockDetailInfoModel.getScanQty()!=0 &&
                 outStockDetailInfoModel.getScanQty().compareTo(outStockDetailInfoModel.getOutStockQty())<0) {
             convertView.setBackgroundResource(R.color.khaki);
         }
-        else if (outStockDetailInfoModel.getScanQty().compareTo(outStockDetailInfoModel.getOutStockQty())==0) {
+//        else if (outStockDetailInfoModel.getScanQty().compareTo(outStockDetailInfoModel.getOutStockQty())==0) {
+        else if (outStockDetailInfoModel.getScanQty().compareTo(outStockDetailInfoModel.getCanReviewQty())==0) {
             convertView.setBackgroundResource(R.color.springgreen);
         }else{
             convertView.setBackgroundResource(R.color.trans);

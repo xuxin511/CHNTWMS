@@ -38,8 +38,8 @@ public class SharePreferUtil {
         SharedPreferences sharedPreferences=context.getSharedPreferences("Setting", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit=sharedPreferences.edit();
         edit.putString("IPAdress",IPAdress);
-        edit.putString("PrintIP",PrintIP);
-        edit.putString("ElecIP",ElecIP);
+        edit.putString("PrintIP","1.1.1.1");
+        edit.putString("ElecIP","1.1.1.1");
         edit.putInt("Port",Port);
         edit.putInt("TimeOut",TimeOut);
         edit.putBoolean("isWMS",isWMS);
